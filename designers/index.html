@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What Would Dead Designers Do?</title>
+<meta name="description" content="Ask anything about design or life. Paul Rand, Massimo Vignelli, Coco Chanel and friends answer from the afterlife. A parody by Nino Studio.">
+<meta name="theme-color" content="#161616">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23161616'/%3E%3Cellipse cx='32' cy='18' rx='13' ry='4' fill='none' stroke='%23eab49a' stroke-width='3'/%3E%3Ccircle cx='32' cy='36' r='11' fill='%23eab49a'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="What Would Dead Designers Do?">
+<meta property="og:description" content="Ask anything about design or life. Paul Rand, Massimo Vignelli, Coco Chanel and friends answer from the afterlife. A parody by Nino Studio.">
+<meta property="og:url" content="https://stilllife.nino.studio/designers">
+<meta property="og:image" content="https://stilllife.nino.studio/designers/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>html,body{margin:0;height:100%}body{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a deep green salon band holds the cast; a light sheet slides up beneath it with one rounded speech bubble per answer. */
+:root {
+  --band: #161616;
+  --band-ink: #f3efe6;
+  --band-muted: #a8a8a4;
+  --gold: #e8452f;
+  --gold-glow: rgba(232, 69, 47, 0.45);
+  --stage: #eceee9;
+  --surface: #fbfbf9;
+  --ink: #16181a;
+  --muted: #555a5e;
+  --line: #d6d9d3;
+  --scrim: rgba(10, 20, 18, 0.5);
+  --mix: 24%;
+
+  /* each artist's color: portrait background and bubble tint */
+  --c-pr: #2a62c9; --c-sb: #d4522a; --c-mv: #c8102e; --c-mg: #d98c93;
+  --c-ce: #b98a4f; --c-rl: #2f7f7a; --c-sj: #8ea3b8; --c-cc: #cfc3ad;
+
+  --thick: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --thin: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --band: #0d0d0d; --band-ink: #f3efe6; --band-muted: #a0a09c;
+    --stage: #141716; --surface: #1d2120; --ink: #f0efe9; --muted: #a8aeab; --line: #2f3533;
+    --scrim: rgba(0, 0, 0, 0.6); --mix: 30%;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --band: #0d0d0d; --band-ink: #f3efe6; --band-muted: #a0a09c;
+  --stage: #141716; --surface: #1d2120; --ink: #f0efe9; --muted: #a8aeab; --line: #2f3533;
+  --scrim: rgba(0, 0, 0, 0.6); --mix: 30%;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { background: var(--band); color: var(--ink); font-family: var(--sans); font-size: 15.5px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 12px; }
+.gut { padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+.vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.label { margin: 3px 0 0; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+.app { position: relative; height: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; background: var(--band); }
+
+/* band */
+.band { color: var(--band-ink); }
+.mast { position: relative; padding-block: 14px 0; }
+.mast .live { position: absolute; top: 14px; right: max(18px, env(safe-area-inset-right, 0px)); margin: 0; }
+.title { white-space: nowrap; }
+.title { margin: 0; line-height: .95; }
+.title .thin { display: block; font-family: var(--thin); font-style: italic; font-weight: 400; font-size: 19px; letter-spacing: -0.01em; color: var(--band-muted); margin-bottom: 9px; }
+.title .thick { font-family: var(--thick); font-weight: 800; font-size: clamp(27px, 7.6vw, 34px); letter-spacing: -0.03em; text-transform: uppercase; }
+.title .tail { font-family: var(--thin); font-style: italic; font-weight: 400; font-size: clamp(27px, 7.6vw, 34px); letter-spacing: -0.01em; color: var(--gold); }
+.title .dead { position: relative; display: inline-block; }
+.live { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; margin-bottom: 6px; border-radius: 8px; background: rgba(255,255,255,.08); font-size: 12px; font-weight: 600; color: var(--band-ink); white-space: nowrap; }
+.live i { width: 7px; height: 7px; border-radius: 50%; background: #6fd39b; box-shadow: 0 0 0 0 rgba(111,211,155,.6); animation: ping 2s infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(111,211,155,.55); } 80%, 100% { box-shadow: 0 0 0 7px rgba(111,211,155,0); } }
+
+.cast { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding-block: 16px 14px; }
+.cast::-webkit-scrollbar { display: none; }
+.who { flex: none; width: 58px; border: 0; background: none; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 7px; animation: arrive .6s cubic-bezier(.3,1.4,.5,1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes arrive { from { opacity: 0; transform: translateY(14px) scale(.9); } to { opacity: 1; transform: none; } }
+.tile { position: relative; width: 52px; height: 52px; }
+.ondot { position: absolute; right: 0; bottom: 0; width: 13px; height: 13px; border-radius: 50%; background: #6fd39b; border: 2.5px solid var(--band); z-index: 2; }
+.av { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--tc); transition: transform .25s cubic-bezier(.3,1.4,.5,1), box-shadow .2s; }
+.av svg { display: block; width: 100%; height: 100%; }
+.who:hover .av { transform: translateY(-3px) rotate(-3deg); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.who.typing .av { animation: chatter .5s ease-in-out infinite alternate; }
+@keyframes chatter { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+@keyframes spin { from { transform: translateY(-2px) rotateY(0); } to { transform: translateY(-2px) rotateY(360deg); } }
+.who .nm { font-size: 12px; font-weight: 700; letter-spacing: .02em; color: var(--band-ink); white-space: nowrap; }
+.who.away .av { filter: grayscale(.9); opacity: .45; }
+.who.away .nm { color: var(--band-muted); font-weight: 500; }
+.who.sel .av { box-shadow: 0 0 0 3px var(--band), 0 0 0 5px var(--band-ink); }
+.who.speaking .av { box-shadow: 0 0 0 3px var(--band), 0 0 0 5px var(--gold); }
+.eyes { transform-box: fill-box; transform-origin: center; animation: blink 6s infinite; animation-delay: calc(var(--i, 0) * -730ms); }
+@keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 96.5% { transform: scaleY(.1); } }
+
+/* stage: a light sheet under the band */
+.stage { flex: 1; min-height: 0; display: flex; flex-direction: column; background: var(--stage); border-radius: 16px 16px 0 0; }
+.view { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.qline { display: flex; align-items: flex-start; gap: 6px; padding-block: 16px 0; }
+.qtext { flex: 1; min-width: 0; }
+.eyebrow { font-family: var(--thick); font-weight: 800; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.asked { margin: 4px 0 0; font-family: var(--thin); font-style: italic; font-size: clamp(23px, 6.2vw, 28px); line-height: 1.08; letter-spacing: -0.01em; overflow-wrap: anywhere; text-wrap: balance; }
+.nudge { flex: none; width: 40px; height: 40px; margin-top: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); cursor: pointer; display: grid; place-items: center; }
+.nudge:hover { border-color: var(--ink); }
+
+.rounds { flex: 1; min-height: 0; position: relative; }
+.carousel {
+  position: absolute; inset: 0; display: flex; align-items: flex-start; gap: 12px;
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding-block: 16px 8px; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px));
+  scroll-padding-left: max(18px, env(safe-area-inset-left, 0px));
+}
+.carousel::-webkit-scrollbar { display: none; }
+.card {
+  position: relative; flex: 0 0 calc(100% - 34px); max-width: 540px; max-height: 100%; min-width: 0; scroll-snap-align: start;
+  display: flex; flex-direction: column; padding: 18px 20px 16px; border-radius: 14px;
+  background: color-mix(in srgb, var(--tc) var(--mix), var(--surface));
+  animation: pop .5s cubic-bezier(.3,1.35,.5,1) both;
+}
+.card::before { content: ""; position: absolute; top: -9px; left: 30px; width: 22px; height: 10px; background: inherit; clip-path: polygon(0 100%, 22% 0, 100% 100%); }
+@keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
+.card-h { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
+.mini { flex: none; width: 44px; height: 44px; }
+.card-h h3 { margin: 0; font-family: var(--thick); font-weight: 800; font-size: 21px; line-height: 1.05; letter-spacing: -0.02em; }
+.card-b { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; padding-right: 4px; padding-bottom: 18px; -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 22px), transparent); }
+.card-b p:not(.medium) { margin: 0; font-size: 15.5px; line-height: 1.6; }
+.card-b p.lede { font-size: 17px; font-weight: 600; line-height: 1.5; }
+.medium { margin: 2px 0 0; padding-top: 10px; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); font-size: 13px; color: var(--muted); }
+.medium b { font-family: var(--thick); font-weight: 800; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); margin-right: 6px; }
+.card-f { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; }
+.card.aside { background: var(--surface); border: 2px dashed color-mix(in srgb, var(--tc) 60%, var(--line)); }
+.card.aside::before { display: none; }
+.cutin { display: inline-block; margin-bottom: 5px; padding: 3px 9px; border-radius: 999px; background: var(--tc); color: #fff; font-family: var(--thick); font-weight: 800; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; }
+
+.ink { animation: show .45s ease-out both; }
+@keyframes show { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+.dots { display: inline-flex; gap: 5px; padding: 8px 0; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--tc, var(--ink)); animation: bob 1s infinite ease-in-out; }
+.dots i:nth-child(2) { animation-delay: .15s; } .dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes bob { 0%, 80%, 100% { transform: translateY(0); opacity: .45; } 40% { transform: translateY(-5px); opacity: 1; } }
+
+.btn { min-height: 40px; padding: 0 16px; border-radius: 10px; border: 1.5px solid color-mix(in srgb, var(--ink) 25%, transparent); background: transparent; cursor: pointer; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn:hover { border-color: var(--ink); }
+.btn.solid, .btn.link { background: var(--ink); color: var(--stage); border-color: var(--ink); }
+.card-f .btn:first-child { background: transparent; color: var(--ink); }
+
+.pager { display: flex; align-items: center; justify-content: center; gap: 12px; padding-block: 0 6px; }
+.pg { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; }
+.pg:hover:not(:disabled) { border-color: var(--ink); }
+.pg:disabled { opacity: .35; cursor: default; }
+.marks { display: flex; gap: 6px; align-items: center; }
+.marks button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 999px; background: var(--tc); opacity: .35; cursor: pointer; transition: width .25s, opacity .25s; }
+.marks button.on { opacity: 1; width: 26px; }
+
+/* DMs */
+.dm-h { display: flex; align-items: center; gap: 12px; padding-block: 18px 12px; border-bottom: 1px solid var(--line); }
+.dm-h .t { flex: 1; min-width: 0; }
+.dm-h h2 { margin: 0; font-family: var(--thick); font-weight: 800; font-size: 22px; line-height: 1.05; letter-spacing: -0.02em; }
+.threads { flex: 1; min-height: 0; position: relative; }
+.thread {
+  position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 10px;
+  padding-block: 16px; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px));
+}
+.msg { position: relative; max-width: 84%; min-width: 0; overflow-wrap: anywhere; padding: 11px 16px; border-radius: 14px; animation: pop .4s cubic-bezier(.3,1.35,.5,1) both; }
+.msg.them { align-self: flex-start; background: color-mix(in srgb, var(--tc) var(--mix), var(--surface)); border-bottom-left-radius: 4px; }
+.msg.them p { margin: 0; }
+.msg.me { align-self: flex-end; background: var(--band); color: var(--band-ink); border-bottom-right-radius: 4px; }
+.sysnote { align-self: center; max-width: 88%; text-align: center; font-family: var(--thin); font-style: italic; font-size: 17px; color: var(--muted); margin: 4px 0; }
+
+/* composer */
+.compose { display: flex; flex-direction: column; gap: 10px; padding-block: 10px 14px; background: var(--stage); border-top: 1px solid var(--line); }
+.starters { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.starters::-webkit-scrollbar { display: none; }
+.starters .btn { flex: none; min-height: 36px; font-weight: 600; font-size: 13.5px; background: var(--surface); border: 1px solid var(--line); }
+.starters .btn:hover { border-color: var(--ink); }
+.bar { display: flex; align-items: flex-end; gap: 8px; padding: 5px 5px 5px 16px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--surface); }
+.bar:focus-within { border-color: var(--ink); }
+.bar textarea { flex: 1; min-width: 0; border: 0; background: transparent; resize: none; outline: none; font: 16px/1.4 var(--sans); color: var(--ink); padding: 10px 0; min-height: 44px; max-height: 110px; }
+.bar textarea::placeholder { color: var(--muted); }
+.send { flex: none; width: 44px; height: 44px; border-radius: 10px; border: 0; background: var(--gold); color: #ffffff; cursor: pointer; display: grid; place-items: center; transition: transform .2s cubic-bezier(.3,1.4,.5,1); }
+.send:not(:disabled):hover { transform: rotate(-12deg) scale(1.05); }
+.send:disabled { opacity: .35; cursor: default; }
+
+/* share */
+.scrim { position: absolute; inset: 0; z-index: 20; background: var(--scrim); display: flex; align-items: flex-end; animation: fade .2s ease-out; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.sheet {
+  width: 100%; max-height: 92%; overflow-y: auto; background: var(--stage); border-radius: 16px 16px 0 0;
+  display: flex; flex-direction: column; gap: 14px; animation: pop .3s ease-out;
+  padding-block: 22px calc(20px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px));
+}
+.sheet h2 { margin: 0; font-family: var(--thick); font-weight: 800; font-size: 24px; letter-spacing: -0.02em; }
+.poster { border-radius: 14px; overflow: hidden; background: var(--band); color: var(--band-ink); display: flex; flex-direction: column; }
+.poster .top { padding: 24px 22px 18px; display: flex; flex-direction: column; gap: 8px; }
+.poster .top span { font-family: var(--thick); font-weight: 800; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.poster .q { margin: 0; font-family: var(--thin); font-style: italic; font-size: 30px; line-height: 1.04; }
+.poster .body { margin: 0 12px; padding: 18px; border-radius: 10px; background: color-mix(in srgb, var(--tc) 30%, #fbfbf9); color: #16181a; display: flex; flex-direction: column; gap: 12px; }
+.poster .a { margin: 0; font-size: 14.5px; line-height: 1.55; }
+.poster .by { display: flex; align-items: center; gap: 10px; }
+.poster .by b { display: block; font-family: var(--thick); font-weight: 800; font-size: 17px; letter-spacing: -0.01em; }
+.poster .by .label { color: #555a5e; }
+.poster .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 14px 22px 18px; font-size: 12px; font-weight: 700; color: var(--band-muted); }
+.sheet .row { display: flex; gap: 10px; flex-wrap: wrap; }
+.sheet .note { margin: 0; font-size: 12.5px; color: var(--muted); }
+.toast { position: absolute; z-index: 30; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--band); color: var(--band-ink); font-size: 14px; font-weight: 700; padding: 9px 18px; border-radius: 999px; animation: fade .2s ease-out; }
+
+/* reading mode: an eased, staggered fold. The names fade first, the portraits shrink in a left-to-right wave,
+   the title lifts away and the composer sinks; reversing plays it back the other way. */
+.app { --ease: cubic-bezier(.22, 1, .36, 1); }
+.mast { max-height: 120px; overflow: hidden; transition: max-height .55s var(--ease), padding .55s var(--ease), opacity .35s ease, transform .55s var(--ease); }
+.cast { transition: padding .55s var(--ease); }
+.who { transition: width .5s var(--ease), gap .5s var(--ease); transition-delay: calc(var(--i, 0) * 28ms); }
+.tile { transition: width .5s var(--ease), height .5s var(--ease); transition-delay: calc(var(--i, 0) * 28ms); }
+.who .nm { max-height: 18px; overflow: hidden; transition: max-height .4s var(--ease), opacity .2s ease; }
+.ondot { transition: transform .4s var(--ease); transform-origin: bottom right; }
+.qline { transition: padding .5s var(--ease); }
+.qline .eyebrow { display: block; max-height: 20px; overflow: hidden; transition: max-height .4s var(--ease), opacity .25s ease; }
+.asked { transition: font-size .5s var(--ease); }
+.compose { max-height: 220px; overflow: hidden; transition: max-height .55s var(--ease), padding .55s var(--ease), opacity .3s ease, transform .55s var(--ease), border-top-width .55s; }
+.card { transition: box-shadow .5s ease; }
+
+.app.reading .mast { max-height: 0; padding-top: 0; opacity: 0; transform: translateY(-14px); }
+.app.reading .cast { padding-block: 10px 10px; }
+.app.reading .who { width: 40px; gap: 0; }
+.app.reading .tile { width: 36px; height: 36px; }
+.app.reading .ondot { transform: scale(.75); }
+.app.reading .who .nm { max-height: 0; opacity: 0; }
+.app.reading .qline { padding-block: 10px 0; }
+.app.reading .qline .eyebrow { max-height: 0; opacity: 0; }
+.app.reading .asked { font-size: 19px; }
+.app.reading .compose { max-height: 0; padding-block: 0; opacity: 0; transform: translateY(18px); border-top-width: 0; }
+.app.reading .card { box-shadow: 0 14px 34px -18px rgba(10, 20, 18, .35); }
+/* on the way back, names and title wait for the portraits to grow before fading in */
+.app:not(.reading) .who .nm { transition-delay: .18s; }
+.app:not(.reading) .mast { transition-delay: 0s, 0s, .15s, 0s; }
+.app:not(.reading) .qline .eyebrow { transition-delay: 0s, .15s; }
+
+.card-b, .msg.them { cursor: zoom-in; }
+.app.reading .card-b, .app.reading .msg.them { cursor: zoom-out; }
+
+.fine { margin: -2px 0 0; font-size: 12px; color: var(--muted); text-align: center; }
+.fine button { border: 0; background: none; padding: 4px 2px; font: inherit; font-weight: 700; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.app.reading .fine { display: none; }
+.card.nino { background: var(--band); color: var(--band-ink); }
+.card.nino .label { color: var(--band-muted); }
+.card.nino .card-b p:not(.medium) { color: var(--band-ink); }
+.nino-av { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #161616; font-family: var(--thick); font-weight: 800; font-size: 18px; }
+.nino-links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; }
+.nino-links a { min-height: 40px; padding: 0 14px; border-radius: 10px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 700; text-decoration: none; border: 1.5px solid currentColor; color: inherit; }
+.nino-links a:first-child { background: var(--gold); border-color: var(--gold); color: #161616; }
+.about { border-radius: 14px; padding: 20px; background: var(--band); color: var(--band-ink); display: flex; flex-direction: column; gap: 10px; }
+.about p { margin: 0; line-height: 1.55; }
+.about p:first-child { font-weight: 700; font-size: 17px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<div class="app" id="app">
+  <div class="band">
+    <header class="mast gut">
+      <h1 class="title"><span class="thin">What would</span><span class="thick"><span class="dead">Dead</span> Designers</span> <span class="tail">do?</span></h1>
+      <span class="live"><i></i><span id="live-n">4</span>&nbsp;online</span>
+    </header>
+    <nav class="cast gut" id="cast" aria-label="Artists. Tap one to message them privately."></nav>
+  </div>
+
+  <section class="stage">
+    <div class="view" id="salon">
+      <div class="qline gut">
+        <button class="nudge" id="q-prev" type="button" aria-label="Earlier question" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        <div class="qtext">
+          <span class="eyebrow">You asked</span>
+          <p class="asked" id="asked"></p>
+        </div>
+        <button class="nudge" id="q-next" type="button" aria-label="Later question" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+      <div class="rounds" id="rounds" aria-live="polite"></div>
+      <div class="pager gut">
+        <button class="pg" id="pg-prev" type="button" aria-label="Previous answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        <div class="marks" id="marks"></div>
+        <button class="pg" id="pg-next" type="button" aria-label="Next answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+    </div>
+
+    <div class="view" id="dm" hidden>
+      <div class="dm-h gut" id="dm-h"></div>
+      <div class="threads" id="threads" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <form class="compose gut" id="compose">
+    <div class="starters" id="starters"></div>
+    <div class="bar">
+      <label for="q" class="vh">Your question</label>
+      <textarea id="q" rows="1" maxlength="300" placeholder="Ask the afterlife anything…"></textarea>
+      <button class="send" id="send" type="submit" aria-label="Send" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+      </button>
+    </div>
+    <p class="fine">Parody, obviously. <button type="button" id="madeby">Made by Nino Studio</button></p>
+  </form>
+</div>
+
+<script>
+(function () {
+
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function portrait(id) {
+    const s = document.createElementNS(SVGNS, 'svg');
+    s.setAttribute('viewBox', '0 0 80 80'); s.setAttribute('aria-hidden', 'true');
+    s.innerHTML = FEAT[id];
+    return s;
+  }
+  function av(id, size, i) {
+    const a = document.createElement('span');
+    a.className = 'av';
+    a.style.setProperty('--tc', 'var(--c-' + id + ')');
+    if (size) { a.style.width = size + 'px'; a.style.height = size + 'px'; }
+    if (i != null) a.style.setProperty('--i', i);
+    a.appendChild(portrait(id));
+    return a;
+  }
+
+  const A = {
+    pr: { name: 'Paul Rand', short: 'Paul', origin: 'American', years: '1914–1996', medium: 'IBM, ABC, UPS and saying no', on: 'redrawing the IBM stripes', off: 'teaching at Yale',
+      hi: 'Paul Rand. I have one answer for you. Not three options. One.' },
+    sb: { name: 'Saul Bass', short: 'Saul', origin: 'American', years: '1920–1996', medium: 'Film titles, AT&T, United Airlines', on: 'cutting paper for a title sequence', off: 'at the movies',
+      hi: 'Saul Bass. Picture this as an opening title: you, walking in, dramatic music. Now, what’s your question?' },
+    mv: { name: 'Massimo Vignelli', short: 'Massimo', origin: 'Italian-American', years: '1931–2014', medium: 'The subway map, American Airlines, five typefaces', on: 'straightening a grid', off: 'choosing between Helvetica and Helvetica',
+      hi: 'Ciao. Please, sit. Not there. That chair is badly designed.' },
+    mg: { name: 'Milton Glaser', short: 'Milton', origin: 'American', years: '1929–2020', medium: 'I ♥ NY and the Dylan poster', on: 'sketching in a taxi', off: 'drawing hearts',
+      hi: 'Hi, I’m Milton. Pull up a chair. What are we working on?' },
+    ce: { name: 'Charles & Ray Eames', short: 'Eameses', origin: 'American', years: '1907–1978 · 1912–1988', medium: 'The lounge chair, molded plywood, Powers of Ten', on: 'bending plywood', off: 'filming spinning tops',
+      hi: 'Charles: Hello from both of us. Ray: Charles is adjusting a chair. I’m adjusting Charles.' },
+    rl: { name: 'Raymond Loewy', short: 'Raymond', origin: 'French-American', years: '1893–1986', medium: 'Lucky Strike, Shell, streamlined everything', on: 'streamlining a toaster', off: 'painting Air Force One',
+      hi: 'Bonjour! Raymond Loewy. I have already redesigned this conversation. It is now 30 percent more aerodynamic.' },
+    sj: { name: 'Steve Jobs', short: 'Steve', origin: 'American', years: '1955–2011', medium: 'The Mac, the iPhone, one black turtleneck', on: 'rehearsing a keynote', off: 'in the garage',
+      hi: 'Hi. I’m Steve. I’ve got a few minutes, so let’s make this insanely great.' },
+    cc: { name: 'Coco Chanel', short: 'Coco', origin: 'French', years: '1883–1971', medium: 'The little black dress, No. 5, taking one thing off', on: 'editing an outfit', off: 'at the Ritz',
+      hi: 'Bonjour, chéri. Sit up straight. Now, what do you need?' }
+  };
+  const IDS = Object.keys(A);
+
+  // Illustrated portraits (80 x 80, shown in a circle on each designer's color)
+  const SH = 'M6 82 Q8 60 40 57 Q72 60 74 82Z';
+  const NECK = (c) => '<path d="M34 49 h12 v10 q-6 4 -12 0z" fill="' + c + '"/>';
+  const EYES = (y, a, b) => '<g class="eyes"><circle cx="' + (a || 34.5) + '" cy="' + y + '" r="1.7" fill="#161616"/><circle cx="' + (b || 45.5) + '" cy="' + y + '" r="1.7" fill="#161616"/></g>';
+  const NOSE = (y, c) => '<path d="M40 ' + y + ' L38.8 ' + (y + 5) + ' L41 ' + (y + 5.4) + '" stroke="' + (c || '#c48f6c') + '" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>';
+  const FEAT = {
+    pr: '<path d="' + SH + '" fill="#5c5f66"/><path d="M33 58 L40 67 L47 58Z" fill="#f4efe6"/><path d="M34.5 58.5 L40 61.5 L45.5 58.5 L45.5 64.5 L40 61.5 L34.5 64.5Z" fill="#c2453a"/>' + NECK('#e2b08a') +
+      '<ellipse cx="25" cy="39" rx="2.6" ry="4" fill="#e6b48e"/><ellipse cx="55" cy="39" rx="2.6" ry="4" fill="#e6b48e"/><ellipse cx="40" cy="37" rx="14.5" ry="17.5" fill="#efc19c"/>' +
+      '<path d="M26 41 Q24.5 29 29.5 24.5 Q28 33 29.2 41Z" fill="#c9c6c0"/><path d="M54 41 Q55.5 29 50.5 24.5 Q52 33 50.8 41Z" fill="#c9c6c0"/>' +
+      '<path d="M29.5 29.5 l7 -1 M43.5 28.5 l7 1" stroke="#9a968f" stroke-width="1.8" stroke-linecap="round"/>' +
+      EYES(36.5, 34, 46) + '<g fill="none" stroke="#141414" stroke-width="2.3"><circle cx="34" cy="36.5" r="5.2"/><circle cx="46" cy="36.5" r="5.2"/><path d="M39.2 36.5 h1.6"/></g>' +
+      NOSE(39) + '<path d="M36 49 Q41 50.5 44.5 48.3" stroke="#a5654c" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+    sb: '<path d="M64 18 a4 4 0 1 1 -4 -4 a7 7 0 1 1 7 7" stroke="#f3efe6" stroke-width="1.6" fill="none" opacity=".6"/>' +
+      '<path d="' + SH + '" fill="#2b2f3a"/><path d="M33.5 58 L40 66 L46.5 58Z" fill="#f4efe6"/>' + NECK('#dca983') +
+      '<ellipse cx="40" cy="38" rx="14" ry="17" fill="#e8b994"/>' +
+      '<path d="M26 37 Q25 22 34 20 Q40 19 46 20 Q55 22 54 37 Q52.5 27.5 47 26 Q40 28.5 33 26 Q27.5 27.5 26 37Z" fill="#2e2620"/>' +
+      '<path d="M29.5 31 l7.5 -0.8 M43 30.2 l7.5 0.8" stroke="#2e2620" stroke-width="2" stroke-linecap="round"/>' +
+      EYES(37, 33.5, 46.5) + '<g fill="none" stroke="#141414" stroke-width="2.1"><rect x="28.3" y="33.5" width="10.4" height="7.2" rx="2"/><rect x="41.3" y="33.5" width="10.4" height="7.2" rx="2"/><path d="M38.7 36 h2.6"/></g>' +
+      NOSE(40) + '<path d="M35.5 50 Q40 52.5 44.5 50" stroke="#9a5a45" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+    mv: '<path d="' + SH + '" fill="#151515"/><rect x="32.5" y="49" width="15" height="11" rx="3" fill="#151515"/>' +
+      '<ellipse cx="40" cy="38" rx="14" ry="17" fill="#ecc4a0"/>' +
+      '<path d="M25 37 Q24 19 40 18 Q56 19 55 37 Q53 25.5 43 24.5 Q31 24 25 37Z" fill="#ecebe7"/>' +
+      '<path d="M30 31 l6.5 -0.8 M43.5 30.2 l6.5 0.8" stroke="#bdbab3" stroke-width="1.8" stroke-linecap="round"/>' +
+      EYES(36.5, 34.2, 45.8) + '<g fill="none" stroke="#151515" stroke-width="1.4"><circle cx="34.2" cy="36.5" r="5"/><circle cx="45.8" cy="36.5" r="5"/><path d="M39.2 36.5 h1.6"/></g>' +
+      NOSE(39) + '<path d="M36 49.5 Q40 52 44 49.5" stroke="#9a5a45" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+    mg: '<path d="' + SH + '" fill="#3d4a6b"/><path d="M53 69.5 c-2.2 -3.2 -6.4 -1 -4.2 2.2 l4.2 4.2 l4.2 -4.2 c2.2 -3.2 -2 -5.4 -4.2 -2.2z" fill="#d62f3a"/>' + NECK('#e2b08a') +
+      '<ellipse cx="40" cy="38" rx="14" ry="17" fill="#efc19c"/>' +
+      '<path d="M26 38 Q24 25 31 21.5 Q33 26 30 29 Q28 33 28.5 38Z" fill="#b9b5ae"/><path d="M54 38 Q56 25 49 21.5 Q47 26 50 29 Q52 33 51.5 38Z" fill="#b9b5ae"/><path d="M33 22 Q40 20 47 22" stroke="#b9b5ae" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '<path d="M30 31 Q33.5 29 37 30.5 M43 30.5 Q46.5 29 50 31" stroke="#8f8b84" stroke-width="1.7" fill="none" stroke-linecap="round"/>' +
+      EYES(37) + '<g fill="none" stroke="#b28a3c" stroke-width="1.2"><rect x="29.3" y="33.3" width="10.4" height="7.4" rx="3.5"/><rect x="40.3" y="33.3" width="10.4" height="7.4" rx="3.5"/></g>' +
+      NOSE(39.5) + '<path d="M34.5 48.5 Q40 54 45.5 48.5" stroke="#9a5a45" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+    ce: '<path d="M34 82 Q35 63 54 61 Q73 63 74 82Z" fill="#a4442f"/><path d="M49.5 61 L53 63 L56.5 61 L56.5 65 L53 63 L49.5 65Z" fill="#f4efe6"/>' +
+      '<path d="M42 53 Q39 31 53 30.5 Q67 31 64.5 53Z" fill="#231915"/><ellipse cx="53" cy="44" rx="9.5" ry="11.5" fill="#f0c8a6"/>' +
+      '<path d="M43.5 42 Q44 32.5 53 32.5 Q62 32.5 62.5 42 Q58 37.5 53 38 Q48 37.5 43.5 42Z" fill="#231915"/>' +
+      '<g class="eyes"><circle cx="49.5" cy="45" r="1.5" fill="#161616"/><circle cx="56.5" cy="45" r="1.5" fill="#161616"/></g><path d="M51 50.5 Q53 52.2 55 50.5" stroke="#a63d3a" stroke-width="1.6" fill="none" stroke-linecap="round"/>' +
+      '<path d="M6 82 Q7 62 28 60 Q46 62 48 82Z" fill="#2f3b4a"/><path d="M24.5 59 L28 61 L31.5 59 L31.5 63 L28 61 L24.5 63Z" fill="#c2453a"/>' +
+      '<ellipse cx="28" cy="43" rx="10" ry="12" fill="#efc7a5"/><path d="M18 41 Q18 29.5 28 29.5 Q38 29.5 38 41 Q35 33.5 28 33.5 Q21 33.5 18 41Z" fill="#4a3426"/>' +
+      '<g class="eyes"><circle cx="24.5" cy="43" r="1.5" fill="#161616"/><circle cx="31.5" cy="43" r="1.5" fill="#161616"/></g><path d="M23.8 49 Q28 46.5 32.2 49 Q28 50.5 23.8 49Z" fill="#4a3426"/>',
+    rl: '<path d="M62 22 h10 M64 27 h8 M60 32 h12" stroke="#f3efe6" stroke-width="1.6" stroke-linecap="round" opacity=".5"/>' +
+      '<path d="' + SH + '" fill="#1f2430"/><path d="M33.5 58 L40 66 L46.5 58Z" fill="#f4efe6"/><path d="M38.5 60 L40 70 L41.5 60Z" fill="#c9a24a"/>' + NECK('#dca983') +
+      '<ellipse cx="40" cy="38" rx="14" ry="17" fill="#e9bb96"/>' +
+      '<path d="M26 35 Q25 19 40 19 Q55 19 54 35 Q52 25 44.5 24 Q36 23.5 30.5 26.5 Q27.5 29.5 26 35Z" fill="#1d1a17"/>' +
+      '<path d="M30 31 l7 -0.6 M43 30.4 l7 0.6" stroke="#1d1a17" stroke-width="1.8" stroke-linecap="round"/>' +
+      EYES(36.5) + NOSE(38.5) + '<path d="M35 46 Q40 44.3 45 46" stroke="#1d1a17" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M36.5 50 Q40 51.5 43.5 50" stroke="#9a5a45" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
+    sj: '<path d="' + SH + '" fill="#141416"/><rect x="32" y="48.5" width="16" height="12" rx="4" fill="#141416"/>' +
+      '<ellipse cx="40" cy="38" rx="13.5" ry="17" fill="#e7bb98"/>' +
+      '<path d="M26.5 35 Q26 22 34 21 Q40 22.5 46 21 Q54 22 53.5 35 Q51.5 27.5 46 26.5 Q40 28.5 34 26.5 Q28.5 27.5 26.5 35Z" fill="#6e655d"/>' +
+      '<path d="M27 42 Q28 56.5 40 58 Q52 56.5 53 42 Q50 50 40 51 Q30 50 27 42Z" fill="#6e655d" opacity=".55"/>' +
+      '<path d="M30 31.5 l6.5 -0.6 M43.5 30.9 l6.5 0.6" stroke="#4f4842" stroke-width="1.7" stroke-linecap="round"/>' +
+      EYES(36.5) + '<g fill="none" stroke="#7d838b" stroke-width="1.1"><circle cx="34.5" cy="36.5" r="4.8"/><circle cx="45.5" cy="36.5" r="4.8"/><path d="M39.3 36.5 h1.4"/></g>' +
+      NOSE(39) + '<path d="M36.5 48.5 Q40 50.2 43.5 48.5" stroke="#8a4f3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+    cc: '<path d="' + SH + '" fill="#151515"/><path d="M31 58.5 L36 82 M49 58.5 L44 82" stroke="#f4efe6" stroke-width="2"/>' +
+      '<path d="M24 47 Q22 24 40 22 Q58 24 56 47 Q54 52.5 50 50.5 L50 35 L30 35 L30 50.5 Q26 52.5 24 47Z" fill="#151210"/>' + NECK('#e6bfa1') +
+      '<ellipse cx="40" cy="39" rx="12.5" ry="15" fill="#f1cfb2"/>' +
+      '<path d="M27.5 37 Q28 25 40 25 Q52 25 52.5 37 Q48 30.5 40 31 Q32 30.5 27.5 37Z" fill="#151210"/>' +
+      '<path d="M31.5 34 Q34.5 32 37.5 33.5 M42.5 33.5 Q45.5 32 48.5 34" stroke="#151210" stroke-width="1.4" fill="none" stroke-linecap="round"/>' +
+      EYES(38, 35, 45) + NOSE(39.5, '#c99a7a') + '<path d="M36.5 48 Q40 50.5 43.5 48 Q40 47 36.5 48Z" fill="#b8202e"/>' +
+      '<g fill="#f7f3ea" stroke="#cfc6b6" stroke-width=".6"><circle cx="31.5" cy="57.5" r="1.8"/><circle cx="34" cy="60" r="1.8"/><circle cx="37" cy="61.6" r="1.8"/><circle cx="40" cy="62.2" r="1.8"/><circle cx="43" cy="61.6" r="1.8"/><circle cx="46" cy="60" r="1.8"/><circle cx="48.5" cy="57.5" r="1.8"/></g>'
+  };
+
+  const L = {
+    pr: {
+      quit: ['Go independent? I did, early. Clients came to me, and I told them what they were going to get.', 'Here is the secret: be so good you can say no. Until then, keep the job and make your portfolio dangerous.'],
+      pricing: ['Steve Jobs paid me one hundred thousand dollars for the NeXT logo. I showed him one design. One.', 'He asked for options. I said no. That is your pricing strategy: one solution, a firm price and the confidence to walk away.'],
+      done: ['A design is done when the client stops talking and starts nodding.', 'More seriously: when you can’t remove anything without it falling apart. Then stop. Send the invoice.'],
+      block: ['Stuck? Look at what the client actually does. The answer is almost always there.', 'I didn’t invent the IBM stripes out of nowhere. I just noticed what the letters needed to feel: fast and trustworthy.'],
+      principles: ['Don’t try to be original. Just try to be good.', 'Simplicity is not the goal. It is the result of a good idea. Also, never show the client three options.'],
+      clients: ['The client wants changes? I would say: I will solve your problem, and you will pay me. If you don’t like the solution, you don’t have to use it.', 'It worked for me. It may not work for you. Try it on a small client first.'],
+      logo: ['A logo doesn’t sell. It identifies. It gets its meaning from the quality of the thing it stands for.', 'A great logo for a bad company is just a nice drawing.'],
+      type: ['Use type like a tool, not a costume.', 'A good typeface is like good manners. Nobody notices until it’s missing.'],
+      color: ['Color is a tool. IBM is blue because IBM had to feel serious. You don’t want your bank to be orange.', 'Unless your bank is fun. Is your bank fun? Mine wasn’t.'],
+      ai: ['A machine can make a thousand logos. A designer makes one and explains why.', 'The explanation is what they pay for.'],
+      fear: ['Everyone feels like a fraud. Good designers do the work anyway.', 'Then they act like they knew all along. That is called confidence.'],
+      love: ['Love is like a good logo: simple, honest, and it should still make sense in forty years.', 'If it needs a long explanation, it is not working.'],
+      food: ['Dinner? Something simple. One dish. Not three options.', 'You don’t need a menu. You need a decision.'],
+      politics: ['I designed for IBM, ABC and UPS. I stay neutral. Corporately neutral.', 'Whatever you believe, say it clearly. Clarity is my only party.'],
+      askme: ['Fine. My question: what is the one thing your work does better than anyone else’s?', 'If you can’t answer in one sentence, that’s your homework. One sentence. No options.'],
+      about: ['Paul Rand. I designed the IBM, ABC, UPS and Westinghouse logos, and the NeXT logo for Steve Jobs.', 'I taught at Yale and wrote books telling everyone what good design is. They mostly listened.'],
+      greet: ['Hello. Paul Rand.', 'Ask me one question. I’ll give you one answer.'],
+      any: [
+        ['That is an interesting question. I have one answer. You may not like it. You don’t have to use it.', 'The answer is: make it simpler. That is usually the answer.'],
+        ['I would charge you a hundred thousand dollars for this answer, but this is a group chat in the afterlife.', 'So, for free: trust your eye.'],
+        ['When I don’t know what to do, I ask: what is this really about?', 'Strip away the decoration. What’s left is usually the answer.'],
+        ['Don’t try to be original. Just try to be good.', 'That works for design, and for whatever this question is.']
+      ]
+    },
+    sb: {
+      quit: ['I left a steady agency job in New York and moved to Los Angeles to do my own thing. Then Hollywood asked for a poster, and I gave them a whole opening sequence.', 'So yes, jump. But jump toward something specific, not just away from your boss.'],
+      pricing: ['My logos lasted forty years. Do the math. AT&T got a bargain.', 'Charge for the thinking, not the drawing. The drawing takes ten minutes. The thinking took thirty years.'],
+      done: ['When it reads in one second from across the street. If you have to explain it, it’s not done.', 'My Psycho titles were just lines. Lines! It was done when the lines made people nervous.'],
+      block: ['Go to the movies.', 'Seriously. I got more ideas in a dark theater than in any studio. And grab scissors and cut paper. Your hands figure it out before your head does.'],
+      principles: ['Design is thinking made visual.', 'If the idea is strong, the drawing can be almost nothing. A spiral. A tulip. A few lines. Weak idea, lots of decoration.'],
+      clients: ['When a client says “make it pop,” they mean “make me feel something.”', 'Don’t add pop. Add an idea. They’ll think the pop was their suggestion.'],
+      logo: ['A logo should be so simple you could draw it in the sand with your toe.', 'The AT&T globe. The United tulip. The Girl Scouts. Simple shapes, big ideas.'],
+      type: ['I drew my own letters for half my posters. Rough, cut, imperfect.', 'Perfect type is fine. Type with feeling is better.'],
+      color: ['Red, black, white. That’s half my career. Strong colors for strong ideas.', 'If you need ten colors, you don’t have an idea yet.'],
+      ai: ['If a machine can come up with the idea, it wasn’t a very good idea.', 'Use it to cut paper faster. Keep the thinking for yourself.'],
+      fear: ['I was terrified on every film. Hitchcock was in the room!', 'Use the fear. It makes you check every frame twice.'],
+      love: ['Every relationship needs a great opening title sequence.', 'Make the first five minutes count. The rest is just the movie.'],
+      food: ['Make dinner like a title sequence. Build suspense. Reveal the main course at exactly the right moment.', 'If you burn it, call it noir.'],
+      politics: ['I make opening titles, not campaign posters.', 'Whatever happens, it’ll make a dramatic movie someday. I hope the titles are good.'],
+      askme: ['If your life had an opening title sequence, what would the very first image be?', 'Think about it. That image is your brand.'],
+      about: ['Saul Bass. I made the opening titles for Vertigo, Psycho and Anatomy of a Murder.', 'And logos you see every day: AT&T, United Airlines, the Girl Scouts, Quaker Oats. I even won an Oscar, for a short film. They don’t give Oscars for logos. Yet.'],
+      greet: ['Hey there! Cue the music.', 'What are we making today?'],
+      any: [
+        ['Let me storyboard this.', 'Frame one: you ask the question. Frame two: dramatic pause. Frame three: you realize you already knew the answer. Roll credits.'],
+        ['I’d answer that with a spiral, a few cut-paper shapes and some jazz.', 'Translation: keep it simple, make it feel something, end strong.'],
+        ['Great question. Terrible title, though. Let’s rename it.', 'Every problem looks easier with a better title.'],
+        ['When in doubt, cut it out of paper.', 'I mean that literally. Grab scissors. Your hands will figure out what your head can’t.']
+      ]
+    },
+    mv: {
+      quit: ['Lella and I opened our own office in New York with nothing but a grid and strong opinions.', 'If you leave, leave with discipline. Freelance without discipline is just unemployment with a website.'],
+      pricing: ['Price is a design problem. Make it simple, make it clear, and do not use a decorative font on the invoice.', 'And never work for free, unless it is for the city. I did the subway map. They replaced it within a decade. Learn from me.'],
+      done: ['It is done when it is timeless. If it will look old in five years, it is not design. It is fashion.', 'Also check the grid. Then check it again. Then go to dinner.'],
+      block: ['Stuck? You have too many choices. Remove some.', 'One typeface, one color, one grid. Constraints are where design begins. Too much freedom is where it dies.'],
+      principles: ['Discipline. Appropriateness. Timelessness. And five typefaces. Maybe six on a wild day.', 'If you can design one thing, you can design everything. Spoons, maps, airplanes, breakfast.'],
+      clients: ['A bigger logo? No. The logo is the correct size. The client is the wrong size.', 'Explain the reasons calmly, with a grid. If they still insist, make it bigger in Helvetica. At least it will be clean.'],
+      logo: ['American Airlines: two A’s, an eagle, Helvetica, red and blue. It lasted forty-five years.', 'Then they changed it. I was not consulted. I was very calm about it. Very calm.'],
+      type: ['You need only a few typefaces. Garamond, Bodoni, Century, Futura, Helvetica. Maybe Times. That’s it.', 'Most new typefaces are just fashion. And Comic Sans is a crime. I’m joking. A little.'],
+      color: ['Red, black, white. Maybe a little blue. Everything else is decoration.', 'And never beige. My subway map had beige water. We do not discuss the beige water.'],
+      ai: ['Wonderful. Now everyone can make ugly things faster.', 'The machine needs discipline. So do you. Give it a grid.'],
+      fear: ['Doubt is fine. Bad kerning is not.', 'Fix the kerning first. Then deal with your feelings.'],
+      love: ['Lella and I worked together for more than fifty years. Same office, same table, same opinions. Mostly.', 'Find someone who shares your grid. You can argue about the typefaces.'],
+      food: ['Pasta. Al dente. Simple sauce. White plate. No garnish.', 'Garnish is decoration. We fight decoration.'],
+      politics: ['Politics is a grid nobody agrees on.', 'I will say only this: ballots should be better designed. That is my entire platform.'],
+      askme: ['Tell me: how many typefaces are installed on your computer right now?', 'Whatever the number, delete most of them. You will feel free.'],
+      about: ['Massimo Vignelli. From Milan, then New York. I designed the 1972 New York subway map, the American Airlines logo and Bloomingdale’s shopping bags.', 'Also furniture, dishes, books and my own clothes, mostly black. If you can design one thing, you can design everything.'],
+      greet: ['Ciao! Welcome.', 'Please, ask something. Clearly. Ideally in Helvetica.'],
+      any: [
+        ['That question is not on the grid.', 'Please align it and resubmit. Thank you.'],
+        ['Let me answer with discipline.', 'Yes. One word. Clean. Timeless.'],
+        ['This feels like a question set in a decorative font.', 'Ask it again in Helvetica and you’ll see the answer was obvious.'],
+        ['If you can design one thing, you can design everything.', 'That includes the answer to this. You already know it.']
+      ]
+    },
+    mg: {
+      quit: ['I once made a list of things I’d learned. Number two was: if you have a choice, never have a job.', 'I meant it. A job is what you do for money. Work is what you do for love. Try to get the second one to pay for itself.'],
+      pricing: ['I designed I ♥ NY for free. The biggest hit of my life. Made me zero dollars.', 'Then I did the Brooklyn Brewery logo and took a piece of the company instead. Learn from both.'],
+      done: ['Good is the enemy of great, people say. But great is also the enemy of done.', 'Make it good enough to surprise you. Then let it go.'],
+      block: ['I drew I ♥ NY on a scrap of paper in the back of a taxi. Ideas show up in taxis, not in meetings.', 'Get out of your chair. Go somewhere. Bring a pen.'],
+      principles: ['Less is not necessarily more. Sometimes more is more. Ask my Dylan poster.', 'My real principle: do no harm, and try to work only for people you like. Sounds simple. Took me fifty years.'],
+      clients: ['I had a rule: you can only work for people that you like.', 'If the feedback hurts every single time, it might not be the design. It might be the client. Choose them like you choose friends.'],
+      logo: ['I ♥ NY. An I, a heart, N, Y. Four symbols. I drew it in a taxi.', 'Make it so simple a kid can draw it on a notebook. That’s how you know it will live forever.'],
+      type: ['Typefaces are like people. Some are fun at parties. Some you trust with your taxes.', 'Comic Sans is the guy who shows up to a funeral in a clown nose. Not every time. But often.'],
+      color: ['The heart in I ♥ NY is red because what other color would a heart be?', 'Pick the color the idea already wants. Don’t argue with the idea.'],
+      ai: ['A tool is a tool. A pencil, a computer, this thing. The question is always the same: does it help you say something true?', 'If yes, use it. If no, go back to the taxi and the scrap of paper.'],
+      fear: ['I wrote this down once: doubt is better than certainty.', 'Certain people stop learning. Doubtful people keep getting better. You’re fine.'],
+      love: ['I love New York. I also loved my wife, Shirley, for more than sixty years.', 'The heart works for both. Simple, red, obvious. Don’t overdesign it.'],
+      food: ['A New York slice, folded. Perfect design.', 'It holds itself, it travels, it fits in one hand. Industrial design never beat the folded slice.'],
+      politics: ['I’d rather say I love New York and leave it there.', 'A heart works for everybody. That was the whole point.'],
+      askme: ['What do you love that nobody pays you for?', 'That’s usually where your best work is hiding.'],
+      about: ['Milton Glaser. I designed I ♥ NY, the Bob Dylan poster with the rainbow hair, and I co-founded New York magazine.', 'I drew for sixty years and never got tired of it.'],
+      greet: ['Hi! Nice to meet you.', 'What’s on your mind? I’ve got a pen ready.'],
+      any: [
+        ['Huh. I love that question. I don’t know the answer, which is my favorite place to be.', 'Doubt is better than certainty. Go find out and tell me.'],
+        ['Let me sketch that on a napkin.', 'Okay. It’s a heart. Most answers turn out to be a heart if you draw long enough.'],
+        ['That’s the kind of question you figure out in the back of a taxi.', 'So go for a ride. Bring a pen.'],
+        ['Do the thing you’d do for free, then figure out how to get paid for it.', 'That works for most questions. Including, probably, this one.']
+      ]
+    },
+    ce: {
+      quit: ['Charles: We left St. Louis and drove to California with almost nothing. Ray: Almost nothing, and a lot of plywood.', 'Charles: Our advice? Take your pleasure seriously. Ray: And keep your receipts.'],
+      pricing: ['Charles: We wanted to make the best for the most for the least. Ray: Mostly. The lounge chair is still a little expensive.', 'Charles: Price it so the person who loves it can almost afford it. Ray: That’s called desire.'],
+      done: ['Charles: The details are not the details. They make the design. Ray: So it’s never quite done.', 'Charles: It’s done when it’s useful and it makes you smile. Ray: And when the plywood stops cracking.'],
+      block: ['Charles: Make a toy. Ray: Toys are not as innocent as they look. They’re the prelude to serious ideas.', 'Charles: Play first. Design second. Ray: Snacks third.'],
+      principles: ['Charles: The best, for the most, for the least. Ray: And it has to be fun to look at.', 'Charles: Recognize the need. Ray: Then make it beautiful anyway.'],
+      clients: ['Charles: We treated the client like a guest. Ray: A good host anticipates what the guest needs.', 'Charles: Listen to what they’re really asking. Ray: Usually it isn’t “bigger logo.” It’s “I’m worried.”'],
+      logo: ['Charles: We didn’t make many logos. We made things people wanted to live with. Ray: That becomes the brand.', 'Charles: Your brand is how it feels to use your work. Ray: The mark is just the signature.'],
+      type: ['Charles: We liked lettering that looked like someone made it by hand, with care. Ray: Like our furniture.', 'Charles: Comic Sans? Ray: We’d prefer not to comment. Charles: That is a comment.'],
+      color: ['Charles: We loved bright primary colors, like toys. Ray: I was a painter first. Color isn’t a decision. It’s a feeling.', 'Charles: Put in one unexpected color. Ray: Just one. A red chair in a grey room.'],
+      ai: ['Charles: We loved new tools. Molded plywood was a new tool. Ray: It cracked a lot at first.', 'Charles: Try it, test it, find out what it’s really good at. Ray: Then make something people love with it.'],
+      fear: ['Charles: We failed constantly. Ray: Some of the first plywood chairs broke when you sat in them.', 'Charles: Being scared just means you care how it turns out. Ray: Now, sit down carefully.'],
+      love: ['Charles: We designed everything together. Ray: He got more of the credit. Charles: She was right about the colors.', 'Ray: Find a partner who tells you the truth about the colors.'],
+      food: ['Charles: Ray set the table like an exhibition. Ray: Every meal is a still life you get to eat.', 'Charles: Use your best plates on a Tuesday. Ray: Especially on a Tuesday.'],
+      politics: ['Charles: We designed chairs for everybody. Ray: Everyone needs somewhere to sit after the news.', 'Charles: Sit down. Have some tea. Ray: Then go make something.'],
+      askme: ['Charles: What’s the object in your house you’d grab in a fire? Ray: After the people and the pets. The object.', 'Charles: Now ask yourself why. Ray: That answer is your design philosophy.'],
+      about: ['Charles: We’re Charles and Ray Eames. Ray: We made chairs, toys, films, houses and exhibitions. Together.', 'Charles: You probably know the lounge chair. Ray: Or the film Powers of Ten. Charles: Or both, if you went to design school.'],
+      greet: ['Charles: Hello! Ray: Hello!', 'Charles: Have a seat. Ray: Not that one. It’s a prototype.'],
+      any: [
+        ['Charles: That’s a good question. Ray: Let’s build a model of it.', 'Charles: Out of plywood. Ray: It’ll crack the first few times. That’s normal.'],
+        ['Charles: We’d answer that with a short film. Ray: Start on a picnic blanket and zoom out to the edge of the universe.', 'Charles: Short version: it depends how far you zoom out. Ray: From far enough away, it’s fine.'],
+        ['Ray: Take your pleasure seriously. Charles: That answers about half of all questions.', 'Ray: The other half: get some sleep.'],
+        ['Charles: Let’s not overthink it. Ray: Let’s make a toy about it.', 'Charles: Same thing, really.']
+      ]
+    },
+    rl: {
+      quit: ['I arrived in New York in 1919 with my army uniform and about forty dollars. I worked as a window dresser.', 'Then I quit and decided to redesign America. You can do the same, perhaps on a smaller scale to start.'],
+      pricing: ['My principle: Most Advanced Yet Acceptable. Apply it to your rate.', 'Charge a little more than they expect, but not so much that they faint. Then tell them it is aerodynamic.'],
+      done: ['A design is done when it looks fast standing still.', 'I made a pencil sharpener look like it could break the sound barrier. It sat on a desk. That is done.'],
+      block: ['Look at something ugly and fix it. Anything. A toaster, a bus, a cigarette pack.', 'Inspiration is mostly being annoyed in a productive direction.'],
+      principles: ['MAYA: Most Advanced Yet Acceptable. Give people the future, but one step at a time, or they run away screaming.', 'And remember: ugliness does not sell.'],
+      clients: ['Show them the most advanced version that is still acceptable. Then show them one slightly less advanced.', 'They choose the second one. They feel brave. Everybody wins.'],
+      logo: ['I redesigned the Lucky Strike pack: white instead of green, the red target on both sides. Sales went up.', 'Also Shell. Also Exxon. If you bought gas in the last sixty years, you looked at my work.'],
+      type: ['Streamline the letters. Remove anything that slows the eye down.', 'A letter with unnecessary decoration is not elegant. It is wearing too much jewelry.'],
+      color: ['I took the green off the Lucky Strike pack and made it white. Sales went up.', 'Sometimes the best color is the one you remove.'],
+      ai: ['I designed for the future my whole life. Now the future designs for you? Most advanced, yes. Acceptable? We will see.', 'Remember MAYA. If it scares people, slow down.'],
+      fear: ['I was on the cover of Time magazine and still nervous before every presentation.', 'Wear a good suit. A good suit is half of courage.'],
+      love: ['Love is like streamlining. Remove everything that creates drag.', 'Bad habits, old grudges, that one ugly lamp. Keep only what moves you forward.'],
+      food: ['I designed a Coca-Cola dispenser, so: a Coke. And something streamlined. A baguette.', 'The baguette is the most aerodynamic bread. The French understood design.'],
+      politics: ['I designed the paint scheme for Air Force One for President Kennedy. Blue, white, elegant.', 'That is as political as Raymond Loewy gets. The plane looked good. That is nonpartisan.'],
+      askme: ['What is the ugliest thing you use every day?', 'Now redesign it. You have twenty minutes. Make it aerodynamic.'],
+      about: ['Raymond Loewy. They called me the father of industrial design. The Lucky Strike pack, the Shell and Exxon logos, Greyhound buses, Air Force One’s paint.', 'I also helped design Skylab for NASA. I insisted the astronauts get a window. You’re welcome, astronauts.'],
+      greet: ['Bonjour! Welcome, welcome.', 'I have streamlined your greeting. You may now ask your question 20 percent faster.'],
+      any: [
+        ['Ah. A difficult question. Allow me to streamline it.', 'There. It is now much shorter, and the answer is: yes, but more elegantly.'],
+        ['My answer must be Most Advanced Yet Acceptable.', 'So: try something new, but only a little new. Too much future frightens people.'],
+        ['I would answer, but I am busy painting Air Force One.', 'Short answer: make it look fast, even if it is just sitting there.'],
+        ['Never leave well enough alone. I wrote a whole book with that title.', 'Whatever this is, it can be improved. Go improve it.']
+      ]
+    },
+    sj: {
+      quit: ['I dropped out of college and slept on friends’ floors. I wouldn’t recommend the floor part.', 'But if you quit, make sure you’re running toward something you can’t stop thinking about. Your time is limited. Don’t spend it in somebody else’s meetings.'],
+      pricing: ['Don’t compete on price. Compete on something people can’t live without.', 'People paid for a computer shaped like a candy-colored egg. They weren’t buying specs. They were buying how it made them feel.'],
+      done: ['Real artists ship.', 'You can obsess over the inside of the circuit board, and I did. But at some point you walk on stage and say “one more thing.” Ship it.'],
+      block: ['Take a calligraphy class.', 'I did, at Reed, for no reason at all. Ten years later it’s why the Mac had beautiful fonts. You can’t connect the dots looking forward. Go collect some dots.'],
+      principles: ['Design isn’t just what it looks like and feels like. Design is how it works.', 'And focus means saying no to a thousand things. I said no to almost everything. Very effective. Very annoying.'],
+      clients: ['People often don’t know what they want until you show it to them.', 'So stop asking them to design it. Show them the thing. If they don’t get it, show them again, in a keynote, with music.'],
+      logo: ['Paul Rand made the NeXT logo. One option. A hundred thousand dollars. I said yes.', 'A brand is a promise. Then you have to keep it. The logo is the easy part.'],
+      type: ['I took a calligraphy class at Reed, and that’s a big reason the Mac had proportionally spaced fonts.', 'Typography is how a product talks. Bad fonts, and the product mumbles.'],
+      color: ['We made computers in Bondi Blue, tangerine and grape. People thought we were crazy. They bought millions.', 'Then we made everything white. Then aluminum. Color is a story, and the story changes.'],
+      ai: ['Technology alone isn’t enough. It has to be married with the liberal arts, with the humanities.', 'A machine can make the pixels. Taste still matters. It matters more now.'],
+      fear: ['Remembering that you’re going to die is the best way I know to avoid thinking you have something to lose.', 'You’re in a group chat with dead designers. What exactly are you afraid of?'],
+      love: ['You’ve got to find what you love. That goes for your work and your partner.', 'Don’t settle. As with all matters of the heart, you’ll know when you find it.'],
+      food: ['I ate a lot of fruit and the same few things over and over. Simplicity.', 'Fewer decisions at dinner, more energy for the stuff that matters.'],
+      politics: ['I’m going to skip this one.', 'Focus means saying no to a thousand things. Today I’m saying no to politics.'],
+      askme: ['If today were the last day of your life, would you want to do what you’re about to do today?', 'If the answer has been no for too many days in a row, change something.'],
+      about: ['I’m Steve. I started Apple in a garage, got fired from it, started NeXT, helped build Pixar, then came back to Apple.', 'The Mac, the iPod, the iPhone. And the same black turtleneck every day, so I’d have one less decision to make.'],
+      greet: ['Hi. Good to see you.', 'So, what are you working on?'],
+      any: [
+        ['Good question. Imagine the simplest possible answer.', 'Now make it simpler. That’s the one.'],
+        ['One more thing.', 'Actually, there’s no more thing. I just like saying that. Trust your gut.'],
+        ['Stay hungry. Stay foolish.', 'I borrowed that from the back of a catalog. It still works for almost any question.'],
+        ['Let me think about it on a walk.', 'Okay, I walked. The answer is focus. Pick the one thing that matters and say no to everything else.']
+      ]
+    },
+    cc: {
+      quit: ['Chéri, I started with a little hat shop. Then clothes. Then perfume. Then the world.', 'Start small, but dress like it is already big.'],
+      pricing: ['Chéri, the most expensive thing is to look cheap.', 'Charge what you are worth, then add a little, then wear pearls to the meeting.'],
+      done: ['Before you leave the house, look in the mirror and take one thing off.', 'Same with design. When you take one thing off and it gets better, keep going. When it gets worse, put it back. Then you are done.'],
+      block: ['Stuck? Go look in your boyfriend’s closet. I borrowed half my ideas from menswear.', 'Jersey was for underwear. I made it elegant. Find the boring material nobody respects and make it beautiful.'],
+      principles: ['Simplicity is the keynote of all true elegance.', 'Fashion fades. Style remains. Design for the style, chéri.'],
+      clients: ['When a client asks for more, give them less, beautifully.', 'They will think they wanted that all along.'],
+      logo: ['Two interlocking Cs. That is it. That is the brand.', 'When it is right, chéri, you only need your initials.'],
+      type: ['Type is like a dress. It should fit the body of the words.', 'Papyrus is wearing a costume to a dinner party. Take it off.'],
+      color: ['Black. It has everything. White too. Together, perfection.', 'I made black elegant when it was only for funerals. Choose a color and make it yours.'],
+      ai: ['A machine can copy my jacket. It cannot be me wearing it.', 'Style cannot be copied, chéri. Only clothes can.'],
+      fear: ['Chéri, I was an orphan who learned to sew from nuns. Nobody expected anything from me.', 'Do not wait to feel ready. Put on the pearls and walk in.'],
+      love: ['I never married, chéri. I had very interesting company.', 'My advice: be the most elegant version of yourself, and let them catch up.'],
+      food: ['Something light, chéri. Champagne, perhaps.', 'Eat slowly. Elegance is never in a hurry.'],
+      politics: ['Chéri, I never discuss politics at dinner. It ruins the champagne.', 'Dress well and be kind to people. That is my position.'],
+      askme: ['Chéri, look in the mirror right now. What one thing would you take off?', 'Not clothes. In your life. Take it off.'],
+      about: ['Coco Chanel. I took women out of corsets and put them in jersey, tweed and the little black dress.', 'Chanel No. 5, quilted bags, pearls with everything. I lived at the Ritz in Paris for more than thirty years. Room service, chéri.'],
+      greet: ['Bonjour, chéri.', 'You look wonderful. Maybe take one thing off. Now, tell me.'],
+      any: [
+        ['Chéri, that question is wearing too many accessories.', 'Take a few off. The real question is underneath, and it is much prettier.'],
+        ['Fashion fades. Only style remains.', 'Whatever you decide, decide it with style.'],
+        ['I would answer, but I am late for lunch at the Ritz.', 'In short: be elegant, be brief, be gone.'],
+        ['Elegance is refusal.', 'Say no to whatever is unnecessary. That answers most things.']
+      ]
+    }
+  };
+
+  const TOPICS = [
+    ['crisis', /suicid|kill (my|him|her)self|end (my life|it all)|self[- ]?harm|hurt myself|want to die|don'?t want to live/i],
+    ['askme', /ask me|question for me|quiz me|your turn to ask/i],
+    ['about', /who are you|tell me about (you|yourself)|introduce yourself|what do you do|who('| i)?s this/i],
+    ['politics', /elect|vote|voting|president|democrat|republican|congress|politic|midterm|senat|governor|party/i],
+    ['principles', /principles?|rules of (art|design|composition)|less is more|minimalis|composition|your process|design advice/i],
+    ['ai', /\bai\b|artificial intelligence|robots?|chatgpt|computers?|midjourney|machines?/i],
+    ['clients', /client|feedback|revision|make it pop|bigger|\bboss\b|meeting|stakeholder/i],
+    ['logo', /logo|branding|\bbrand\b|identity|rebrand|mark\b/i],
+    ['type', /font|typeface|typograph|comic sans|helvetica|papyrus|serif|kerning|lettering/i],
+    ['color', /colou?rs?\b|palette|pantone/i],
+    ['pricing', /price|pricing|charge|\brates?\b|money|paid|budget|free work|spec work|\bsell/i],
+    ['quit', /quit|freelance|day job|full[- ]?time|my job|career|agency|start my own/i],
+    ['done', /\bdone\b|finish|overwork|perfect|\bship\b/i],
+    ['block', /stuck|block|inspir|motivat|bored|procrastinat/i],
+    ['fear', /scared|afraid|\bfear|imposter|impostor|nervous|anxious|confiden|not good enough/i],
+    ['love', /love|dating|\bdate\b|crush|relationship|marr|partner|breakup/i],
+    ['food', /dinner|\beat\b|lunch|breakfast|food|cook|hungry/i]
+  ];
+  const GREET = /^\s*(hi|hello|hey|hiya|yo|hola|bonjour|ciao|howdy|good (morning|afternoon|evening))\b/i;
+  const topicOf = (t) => { for (const [k, re] of TOPICS) if (re.test(t)) return k; if (GREET.test(t) && t.length < 40) return 'greet'; return 'any'; };
+  const bag = {};
+  const REPEAT = {"pr": "I already gave you one answer. I don’t do options.", "sb": "We’ve seen this scene already. Let’s cut to something new.", "mv": "You asked this already. Consistency is good. Repetition is not.", "mg": "We drew this one already. Here’s a fresh napkin.", "ce": "Charles: You asked us this. Ray: He remembers everything. I remember the colors.", "rl": "This question has already been streamlined.", "sj": "We covered this. Let’s move on to one more thing.", "cc": "Chéri, never wear the same answer twice."};
+  const seenT = {};
+  function wild(id) {
+    if (!bag[id] || !bag[id].length) bag[id] = L[id].any.map((_, i) => i).sort(() => Math.random() - .5);
+    return L[id].any[bag[id].pop()];
+  }
+  function linesFor(id, topic) {
+    if (topic === 'crisis') return [
+      'I’m stepping out of the joke for a second. What you just said matters more than any design.',
+      'If you’re thinking about hurting yourself, please reach out to someone right now. In the US you can call or text 988, any time. Anywhere else, contact local emergency services or someone you trust.'
+    ];
+    const v = L[id][topic];
+    if (topic === 'any' || !v) return wild(id);
+    const key = id + ':' + topic;
+    if (!seenT[key]) { seenT[key] = true; return v; }
+    return [REPEAT[id]].concat(wild(id));
+  }
+
+  const BANTER = [
+    ['pr', 'sj', 'Steve, I made your NeXT logo. One option. A hundred thousand dollars. Best client I ever had.'],
+    ['sj', 'pr', 'Paul gave me one logo and said take it or leave it. I respected that. I’d have fired anyone else.'],
+    ['mg', 'mv', 'Massimo, you used about five typefaces your whole life. That’s not a principle, that’s a diet.'],
+    ['cc', 'sj', 'Steve, darling, the same black turtleneck every day? I invented the little black dress. We should have lunch.'],
+    ['rl', 'sj', 'Steve, I streamlined pencil sharpeners. You made a computer that fit in an envelope. We are basically the same man.'],
+    ['mv', 'sb', 'Saul, beautiful logos. Too many typefaces in your posters. But beautiful.'],
+    ['sb', 'mg', 'Milton, you drew the most famous logo in the world in a taxi. I needed a whole studio. Show-off.'],
+    ['ce', null, 'Charles: We agree. Ray: Also, we’d like to make a chair about it.'],
+    ['mv', null, 'Correct. Also, use Helvetica.'],
+    ['sb', null, 'Fine answer. Needs better opening titles.'],
+    ['sj', null, 'One more thing: that answer was insanely great.'],
+    ['cc', null, 'Lovely, chéri. Now take one sentence off.']
+  ];
+
+  const STARTERS = [
+    'The client wants the logo bigger.',
+    'Should I go freelance?',
+    'How much should I charge?',
+    'Is Comic Sans ever okay?',
+    'Will AI replace designers?',
+    'What color should my brand be?',
+    'How do I know a design is done?',
+    'What are your design principles?',
+    'Any dating advice?'
+  ];
+
+  // ---------- helpers ----------
+  const $ = (s) => document.querySelector(s);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  function el(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function btn(label, cls, onClick) { const b = el('button', 'btn' + (cls ? ' ' + cls : ''), label); b.type = 'button'; b.onclick = onClick; return b; }
+  function tint(node, id) { node.style.setProperty('--tc', 'var(--c-' + id + ')'); return node; }
+  function mini(id) { const m = av(id, 44); m.classList.add('mini'); return m; }
+
+  const order = IDS.slice().sort(() => Math.random() - .5);
+  const online = new Set(order.slice(0, 4));
+  const castOrder = order.slice(0, 4).concat(IDS.filter((id) => !online.has(id)));
+  $('#live-n').textContent = online.size;
+
+  const state = { view: 'group', busy: false };
+  const rounds = []; let cur = -1;
+  const threads = {};
+
+  // ---------- cast ----------
+  const castEl = $('#cast');
+  function buildCast() {
+    const ev = el('button', 'who sel'); ev.type = 'button'; ev.dataset.id = 'group';
+    ev.setAttribute('aria-label', 'Everyone: the group chat');
+    const t = el('span', 'tile');
+    const ea = el('span', 'av'); ea.style.background = '#2a2a2a';
+    ea.innerHTML = '<svg viewBox="0 0 80 80" aria-hidden="true">' +
+      '<circle cx="24" cy="34" r="8" fill="#8a8a86"/><path d="M8 66 Q9 46 24 45 Q39 46 40 66Z" fill="#8a8a86"/>' +
+      '<circle cx="56" cy="34" r="8" fill="#e8452f"/><path d="M40 66 Q41 46 56 45 Q71 46 72 66Z" fill="#e8452f"/>' +
+      '<circle cx="40" cy="38" r="9.5" fill="#f3efe6"/><path d="M20 80 Q21 53 40 52 Q59 53 60 80Z" fill="#f3efe6"/></svg>';
+    t.appendChild(ea);
+    ev.append(t, el('span', 'nm', 'Everyone'));
+    ev.onclick = () => go('group');
+    castEl.appendChild(ev);
+    castOrder.forEach((id, k) => {
+      const b = tint(el('button', 'who' + (online.has(id) ? '' : ' away')), id); b.type = 'button'; b.dataset.id = id;
+      b.setAttribute('aria-label', A[id].name + (online.has(id) ? ', online, ' + A[id].on : ', away') + '. Message privately.');
+      const tile = el('span', 'tile');
+      if (online.has(id)) tile.appendChild(el('span', 'ondot'));
+      tile.appendChild(av(id, null, k + 1)); b.style.setProperty('--i', k + 1);
+      b.append(tile, el('span', 'nm', A[id].short));
+      b.onclick = () => go(id);
+      castEl.appendChild(b);
+    });
+  }
+  function updateCast() {
+    let speaking = null;
+    if (state.view === 'group' && rounds[cur] && rounds[cur].cards.length) speaking = rounds[cur].cards[activeIdx(rounds[cur])].id;
+    castEl.querySelectorAll('.who').forEach((b) => {
+      b.classList.toggle('sel', b.dataset.id === state.view);
+      b.classList.toggle('speaking', b.dataset.id === speaking);
+      b.setAttribute('aria-pressed', b.dataset.id === state.view ? 'true' : 'false');
+    });
+  }
+  function scrollCastTo(id) {
+    const b = castEl.querySelector('[data-id="' + id + '"]'); if (!b) return;
+    castEl.scrollTo({ left: Math.max(0, b.offsetLeft - castEl.clientWidth / 2 + b.offsetWidth / 2), behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function setTyping(id, on) { const b = castEl.querySelector('[data-id="' + id + '"]'); if (b) b.classList.toggle('typing', on); }
+
+  // ---------- salon ----------
+  const roundsEl = $('#rounds');
+  function newRound(q) {
+    const car = el('div', 'carousel'); car.setAttribute('aria-label', 'Answers. Swipe for more.');
+    let tick = 0;
+    car.addEventListener('scroll', () => { cancelAnimationFrame(tick); tick = requestAnimationFrame(() => { updatePager(); updateCast(); }); }, { passive: true });
+    roundsEl.appendChild(car);
+    const r = { q, car, cards: [] };
+    rounds.push(r); showRound(rounds.length - 1);
+    return r;
+  }
+  function showRound(i) {
+    cur = i;
+    rounds.forEach((r, j) => { r.car.hidden = j !== i; });
+    $('#asked').textContent = rounds[i].q;
+    $('#q-prev').hidden = i === 0;
+    $('#q-next').hidden = i >= rounds.length - 1;
+    updatePager(); updateCast();
+  }
+  const padL = (car) => parseFloat(getComputedStyle(car).paddingLeft) || 0;
+  function activeIdx(r) {
+    const pl = padL(r.car); let best = 0, bd = Infinity;
+    r.cards.forEach((c, i) => { const d = Math.abs(c.el.offsetLeft - pl - r.car.scrollLeft); if (d < bd) { bd = d; best = i; } });
+    if (r.cards.length && r.car.scrollLeft + r.car.clientWidth >= r.car.scrollWidth - 4) best = r.cards.length - 1;
+    return best;
+  }
+  function goCard(r, i) { const c = r.cards[i]; if (c) r.car.scrollTo({ left: c.el.offsetLeft - padL(r.car), behavior: reduce ? 'auto' : 'smooth' }); }
+  function updatePager() {
+    const r = rounds[cur]; if (!r) return;
+    const n = r.cards.length, i = n ? activeIdx(r) : 0;
+    const marks = $('#marks'); marks.innerHTML = '';
+    r.cards.forEach((c, j) => {
+      const m = tint(el('button', j === i ? 'on' : ''), c.id); m.type = 'button';
+      m.setAttribute('aria-label', 'Answer ' + (j + 1) + ' of ' + n + ', ' + (A[c.id] ? A[c.id].name : 'Nino Yuniardi'));
+      m.onclick = () => goCard(r, j);
+      marks.appendChild(m);
+    });
+    $('#pg-prev').disabled = i <= 0;
+    $('#pg-next').disabled = i >= n - 1;
+  }
+
+  function addCard(r, id, opts) {
+    opts = opts || {};
+    const a = A[id];
+    const card = tint(el('article', 'card' + (opts.aside ? ' aside' : '')), id);
+    const head = el('header', 'card-h');
+    const t = el('div');
+    if (opts.aside) t.appendChild(el('span', 'cutin', 'Cutting in'));
+    t.appendChild(el('h3', null, a.name));
+    t.appendChild(el('p', 'label', a.origin + ', ' + a.years));
+    head.append(mini(id), t);
+    const body = el('div', 'card-b');
+    const foot = el('div'); foot.hidden = true;
+    card.append(head, body, foot);
+    r.car.appendChild(card);
+    const c = { id, el: card, body, foot, lines: [], q: r.q, aside: !!opts.aside };
+    r.cards.push(c); updatePager();
+    return c;
+  }
+  function finishCard(c) {
+    if (c.aside || c.done) return;
+    c.done = true;
+    const md = el('p', 'medium'); md.appendChild(el('b', null, 'Known for')); md.appendChild(document.createTextNode(A[c.id].medium)); c.body.appendChild(md);
+    const f = el('div', 'card-f');
+    f.append(btn('Share', '', () => openShare(c)), btn('DM ' + A[c.id].short + ' →', 'solid', () => go(c.id)));
+    c.foot.appendChild(f);
+    c.foot.hidden = false;
+  }
+  function addPara(box, text, animate) {
+    const first = !box.querySelector('p');
+    const p = el('p', (first && box.classList.contains('card-b') ? 'lede ' : '') + (animate ? 'ink' : ''), text);
+    box.appendChild(p); return p;
+  }
+  function dotsEl() { const d = el('span', 'dots'); d.setAttribute('aria-label', 'typing'); d.innerHTML = '<i></i><i></i><i></i>'; return d; }
+
+  function fillCard(c, lines) {
+    if (c.dots) { c.dots.remove(); c.dots = null; }
+    setTyping(c.id, false);
+    lines.forEach((line) => { addPara(c.body, line, true); c.lines.push(line); });
+    c.body.scrollTop = 0;
+    finishCard(c); updatePager();
+  }
+  async function typeCard(c, lines) {
+    setTyping(c.id, true);
+    for (let i = 0; i < lines.length; i++) {
+      const d = dotsEl(); c.body.appendChild(d); c.body.scrollTop = c.body.scrollHeight;
+      await wait(650 + Math.min(lines[i].length * 8, 1400));
+      d.remove(); addPara(c.body, lines[i], true); c.lines.push(lines[i]);
+      c.body.scrollTop = c.body.scrollHeight;
+      if (i < lines.length - 1) await wait(300);
+    }
+    setTyping(c.id, false); finishCard(c);
+  }
+
+  // ---------- DMs ----------
+  const threadsEl = $('#threads');
+  function thread(id) {
+    if (threads[id]) return threads[id];
+    const t = el('div', 'thread'); t.hidden = true; threadsEl.appendChild(t); threads[id] = t;
+    t.appendChild(el('p', 'sysnote', 'A private audience with ' + A[id].name + '. Still parody.'));
+    if (online.has(id)) { themBubble(t, id, A[id].hi, false); t._greeted = true; }
+    return t;
+  }
+  function themBubble(t, id, text, animate) {
+    const m = tint(el('div', 'msg them'), id);
+    if (text != null) addPara(m, text, animate);
+    t.appendChild(m); t.scrollTop = t.scrollHeight; return m;
+  }
+  function meBubble(t, text) { t.appendChild(el('div', 'msg me', text)); t.scrollTop = t.scrollHeight; }
+  function renderDmHead(id) {
+    const h = $('#dm-h'); h.innerHTML = '';
+    const t = el('div', 't');
+    t.appendChild(el('h2', null, A[id].name));
+    t.appendChild(el('p', 'label', A[id].origin + ', ' + A[id].years + ' · ' + (online.has(id) ? 'Online, ' + A[id].on : 'Away, ' + A[id].off)));
+    h.append(mini(id), t, btn('← Everyone', '', () => go('group')));
+  }
+
+  // ---------- live presence: artists drift in and out, but never the ones you're talking to ----------
+  let chipT = 0;
+  function chip(msg) {
+    const live = $('#live-n').parentNode;
+    live.lastChild.textContent = msg ? '' : '\u00a0online';
+    $('#live-n').textContent = msg || online.size;
+    clearTimeout(chipT);
+    if (msg) chipT = setTimeout(() => chip(null), 3200);
+  }
+  function setOnline(id, on, note) {
+    if (online.has(id) === on) return;
+    if (on) online.add(id); else online.delete(id);
+    const b = castEl.querySelector('[data-id="' + id + '"]');
+    if (b) {
+      b.classList.toggle('away', !on);
+      const tile = b.querySelector('.tile'), dot = tile.querySelector('.ondot');
+      if (on && !dot) tile.appendChild(el('span', 'ondot')); else if (!on && dot) dot.remove();
+      b.setAttribute('aria-label', A[id].name + (on ? ', online, ' + A[id].on : ', away, ' + A[id].off) + '. Message privately.');
+    }
+    chip(note === false ? null : (on ? A[id].short + ' just arrived' : A[id].short + ' stepped out'));
+    if (state.view === id) renderDmHead(id);
+  }
+  function engaged() {
+    const set = new Set();
+    if (state.view !== 'group') set.add(state.view);
+    if (rounds[cur]) rounds[cur].cards.forEach((c) => set.add(c.id));
+    castEl.querySelectorAll('.who.typing').forEach((b) => set.add(b.dataset.id));
+    return set;
+  }
+  function presenceTick() {
+    const busy = engaged();
+    const canLeave = [...online].filter((id) => !busy.has(id));
+    const away = IDS.filter((id) => !online.has(id));
+    const leave = online.size > 3 && canLeave.length && (online.size >= 6 || Math.random() < 0.5);
+    if (leave) setOnline(canLeave[Math.floor(Math.random() * canLeave.length)], false);
+    else if (away.length) setOnline(away[Math.floor(Math.random() * away.length)], true);
+    setTimeout(presenceTick, 9000 + Math.random() * 8000);
+  }
+  setTimeout(presenceTick, 7000);
+
+  function go(view) {
+    state.view = view; setFocus(false);
+    if (view !== 'group' && !online.has(view)) {
+      setTimeout(() => {
+        if (state.view !== view || online.has(view)) return;
+        setOnline(view, true);
+        const t = thread(view); t.appendChild(el('p', 'sysnote', A[view].short + ' saw you knocking and came online.'));
+        if (!t._greeted) { t._greeted = true; setTimeout(() => themBubble(t, view, A[view].hi, true), 500); }
+        t.scrollTop = t.scrollHeight;
+      }, 1100);
+    }
+    const group = view === 'group';
+    $('#salon').hidden = !group; $('#dm').hidden = group;
+    if (!group) {
+      renderDmHead(view);
+      const t = thread(view);
+      Object.keys(threads).forEach((k) => { threads[k].hidden = k !== view; });
+      t.scrollTop = t.scrollHeight;
+    } else requestAnimationFrame(updatePager);
+    $('#q').placeholder = group ? 'Ask the afterlife anything…' : 'Message ' + A[view].short + '…';
+    updateCast(); scrollCastTo(view); closeSheets();
+  }
+
+  // ---------- asking ----------
+  const ALIAS = { pr: /\brand\b|paul/i, sb: /saul|\bbass\b/i, mv: /vignelli|massimo/i, mg: /glaser|milton/i, ce: /eames|charles|\bray\b/i, rl: /loewy|raymond/i, sj: /jobs|steve/i, cc: /chanel|coco/i };
+  function responders(text) {
+    const out = IDS.filter((id) => ALIAS[id].test(text)).slice(0, 3);
+    for (const id of [...online].sort(() => Math.random() - .5)) { if (out.length >= 2) break; if (!out.includes(id)) out.push(id); }
+    return out;
+  }
+  function pickBanter(answered) {
+    const ok = BANTER.filter(([from, to]) => online.has(from) && !answered.includes(from) && (to === null || answered.includes(to)));
+    return ok.length ? ok[Math.floor(Math.random() * ok.length)] : null;
+  }
+  async function ask(textIn) {
+    const q = $('#q');
+    const text = (textIn != null ? textIn : q.value).trim();
+    if (!text || state.busy) return;
+    q.value = ''; autosize(); $('#send').disabled = true; state.busy = true;
+    const topic = topicOf(text);
+    if (state.view === 'group') {
+      const r = newRound(text), who = responders(text);
+      who.forEach((id) => setOnline(id, true));
+      const cards = who.map((id) => addCard(r, id));
+      cards.forEach((c) => { c.dots = dotsEl(); c.body.appendChild(c.dots); setTyping(c.id, true); });
+      goCard(r, 0);
+      for (let i = 0; i < cards.length; i++) {
+        await wait(i === 0 ? 700 : 250);
+        fillCard(cards[i], linesFor(cards[i].id, topic));
+      }
+      if (topic !== 'crisis' && topic !== 'greet' && Math.random() < 0.65) {
+        const b = pickBanter(who);
+        if (b) { await wait(300); fillCard(addCard(r, b[0], { aside: true }), [b[2]]); }
+      }
+      roundsAsked++;
+      if (roundsAsked === 2 && !ninoShown) { ninoShown = true; await wait(500); addNinoCard(r); }
+    } else {
+      const id = state.view, t = thread(id);
+      meBubble(t, text); t._greeted = true; setOnline(id, true); setTyping(id, true);
+      const m = themBubble(t, id, null, false);
+      const d = dotsEl(); m.appendChild(d); t.scrollTop = t.scrollHeight;
+      await wait(800);
+      m.remove(); setTyping(id, false);
+      const lines = linesFor(id, topic);
+      let firstNew = null;
+      for (let i = 0; i < lines.length; i++) { const nb = themBubble(t, id, lines[i], true); if (!firstNew) firstNew = nb; await wait(90); }
+      if (firstNew) t.scrollTop = Math.max(0, firstNew.offsetTop - 70);
+    }
+    state.busy = false; $('#send').disabled = !q.value.trim();
+  }
+
+  // ---------- share ----------
+  function closeSheets() { document.querySelectorAll('.scrim').forEach((s) => s.remove()); }
+  function openShare(c) {
+    closeSheets();
+    const a = A[c.id], text = c.lines.join(' ');
+    const scrim = el('div', 'scrim'); scrim.onclick = (e) => { if (e.target === scrim) scrim.remove(); };
+    const s = el('div', 'sheet'); s.setAttribute('role', 'dialog'); s.setAttribute('aria-modal', 'true'); s.setAttribute('aria-label', 'Share this answer');
+    s.appendChild(el('h2', null, 'Share this answer'));
+    const p = tint(el('div', 'poster'), c.id);
+    const top = el('div', 'top'); top.append(el('span', null, 'I asked the design legends'), el('p', 'q', c.q));
+    const body = el('div', 'body');
+    body.appendChild(el('p', 'a', '\u201c' + text + '\u201d'));
+    const by = el('div', 'by'), bt = el('div');
+    bt.append(el('b', null, a.name), el('span', 'label', a.origin + ', ' + a.years));
+    by.append(mini(c.id), bt); body.appendChild(by);
+    const foot = el('div', 'foot'); foot.append(el('span', null, 'What Would Dead Designers Do'), el('span', null, 'by Nino Studio'));
+    p.append(top, body, foot); s.appendChild(p);
+    const row = el('div', 'row');
+    row.append(
+      btn('Copy text', 'solid', async () => {
+        const out = 'I asked the design legends: ' + c.q + '\n\n' + a.name + ': “' + text + '”\n\nstilllife.nino.studio';
+        try { await navigator.clipboard.writeText(out); toast('Copied'); } catch (e) { toast('Copy didn’t work here'); }
+      }),
+      btn('Done', '', closeSheets)
+    );
+    s.appendChild(row);
+    s.appendChild(el('p', 'note', 'In the real app this saves as an image sized for Instagram.'));
+    scrim.appendChild(s); $('#app').appendChild(scrim);
+    s.querySelector('button').focus();
+  }
+  function toast(t) { const n = el('div', 'toast', t); $('#app').appendChild(n); setTimeout(() => n.remove(), 1600); }
+
+  // ---------- reading mode: tap a reply to expand it, tap again to bring everything back ----------
+  const appEl = $('#app');
+  function setFocus(on) { appEl.classList.toggle('reading', on); }
+  function onReplyTap(e) {
+    if (e.target.closest('button, a')) return;
+    if (!e.target.closest('.card-b, .msg.them')) return;
+    const sel = window.getSelection && window.getSelection();
+    if (sel && String(sel).length > 0) return; // they were selecting text, not tapping
+    setFocus(!appEl.classList.contains('reading'));
+  }
+  $('#rounds').addEventListener('click', onReplyTap);
+  $('#threads').addEventListener('click', onReplyTap);
+  $('.qline').addEventListener('click', (e) => { if (!e.target.closest('button')) setFocus(false); });
+
+  // ---------- the living one: Nino ----------
+  const NINO = {"eyebrow": "Living designer · Seattle", "lines": ["Hi, I’m Nino. The only designer in this chat with a pulse.", "Nearly 30 years designing products, at Microsoft, Amazon and Oracle among others. Also a painter in Seattle.", "Curious what a living designer is making?"], "links": [["See my design work", "https://nino.studio/pages/design"], ["LinkedIn", "https://www.linkedin.com/in/ninoy"], ["My art", "https://nino.studio"]]};
+  function ninoLinks() {
+    const box = el('div', 'nino-links');
+    NINO.links.forEach(([label, href]) => { const a = el('a', null, label); a.href = href; a.target = '_blank'; a.rel = 'noopener'; box.appendChild(a); });
+    return box;
+  }
+  let roundsAsked = 0, ninoShown = false;
+  function addNinoCard(r) {
+    const card = el('article', 'card nino');
+    card.style.setProperty('--tc', 'var(--gold)');
+    const head = el('header', 'card-h'), t = el('div');
+    t.append(el('h3', null, 'Nino Yuniardi'), el('p', 'label', NINO.eyebrow));
+    head.append(el('span', 'nino-av', 'N'), t);
+    const body = el('div', 'card-b');
+    NINO.lines.forEach((line, i) => addPara(body, line, true));
+    card.append(head, body, ninoLinks());
+    r.car.appendChild(card);
+    r.cards.push({ id: 'nino', el: card, body, lines: [], aside: true });
+    updatePager();
+  }
+  function openAbout() {
+    closeSheets();
+    const scrim = el('div', 'scrim'); scrim.onclick = (e) => { if (e.target === scrim) scrim.remove(); };
+    const s2 = el('div', 'sheet'); s2.setAttribute('role', 'dialog'); s2.setAttribute('aria-modal', 'true'); s2.setAttribute('aria-label', 'About Nino Studio');
+    s2.appendChild(el('h2', null, 'Made by Nino Studio'));
+    const box = el('div', 'about');
+    NINO.lines.forEach((line) => box.appendChild(el('p', null, line)));
+    box.appendChild(ninoLinks());
+    s2.appendChild(box);
+    s2.appendChild(btn('Back to the chat', '', closeSheets));
+    scrim.appendChild(s2); $('#app').appendChild(scrim);
+    s2.querySelector('a, button').focus();
+  }
+  $('#madeby').addEventListener('click', openAbout);
+
+  // ---------- composer ----------
+  const q = $('#q');
+  function autosize() { q.style.height = 'auto'; q.style.height = Math.min(q.scrollHeight, 110) + 'px'; }
+  q.addEventListener('input', () => { autosize(); $('#send').disabled = !q.value.trim() || state.busy; });
+  q.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(); } });
+  $('#compose').addEventListener('submit', (e) => { e.preventDefault(); ask(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheets(); });
+  STARTERS.forEach((s) => $('#starters').appendChild(btn(s, '', () => ask(s))));
+  $('#pg-prev').onclick = () => { const r = rounds[cur]; goCard(r, activeIdx(r) - 1); };
+  $('#pg-next').onclick = () => { const r = rounds[cur]; goCard(r, activeIdx(r) + 1); };
+  $('#q-prev').onclick = () => showRound(cur - 1);
+  $('#q-next').onclick = () => showRound(cur + 1);
+
+  // ---------- opening state: an example round ----------
+  buildCast();
+  const sampleQ = 'The client wants the logo bigger. What do I do?';
+  const r0 = newRound(sampleQ);
+  const firstTwo = castOrder.slice(0, 2);
+  firstTwo.forEach((id) => { const c = addCard(r0, id); L[id].clients.forEach((line) => { addPara(c.body, line, false); c.lines.push(line); }); finishCard(c); });
+  const b0 = pickBanter(firstTwo);
+  if (b0) { const c = addCard(r0, b0[0], { aside: true }); addPara(c.body, b0[2], false); c.lines.push(b0[2]); }
+  updatePager(); updateCast();
+})();
+</script>
+</body>
+</html>
