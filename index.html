@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <style>html,body{margin:0;height:100%}body{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap">
 <style>
 /* Layout: the cast sits up in a soft Seattle sky (clouds drifting, a little sun peeking in); a light sheet below holds one rounded speech bubble per answer. */
 :root {
@@ -358,6 +358,33 @@ button { font: inherit; color: inherit; }
 .stage, .compose { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
 .cloud.c4, .cloud.c6 { display: none; }
 .card { box-shadow: 0 1px 2px rgba(20, 35, 45, 0.04), 0 8px 24px -14px rgba(20, 35, 45, 0.18); }
+/* tone-on-tone outline on each speech bubble, tail included */
+.card { --edge: color-mix(in srgb, var(--tc) 42%, var(--surface)); border: 1px solid var(--edge); }
+.card::before { top: -10px; left: 29px; width: 24px; height: 11px; background: var(--edge); }
+.card::after { content: ""; position: absolute; top: -8.4px; left: 30.6px; width: 20.8px; height: 9.6px; background: inherit; border: 0; clip-path: polygon(0 100%, 22% 0, 100% 100%); pointer-events: none; }
+.card.aside::after { display: none; }
+.card.nino { --edge: color-mix(in srgb, var(--gold) 34%, var(--surface)); }
+
+/* "Made by Nino Studio" sheet, in nino.studio's own style */
+.ns { --ns-bg: #f2efea; --ns-ink: #121212; --ns-body: #625c56; --ns-olive: #5c6a3a; --ns-line: #ddd6cc;
+  position: relative; background: var(--ns-bg); color: var(--ns-ink); gap: 0; padding-block: 34px calc(26px + env(safe-area-inset-bottom, 0px)); padding-inline: 28px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ns { --ns-bg: #1a1816; --ns-ink: #f2efea; --ns-body: #b9b1a7; --ns-olive: #a9b884; --ns-line: #34302b; } }
+:root[data-theme="dark"] .ns { --ns-bg: #1a1816; --ns-ink: #f2efea; --ns-body: #b9b1a7; --ns-olive: #a9b884; --ns-line: #34302b; }
+.ns .ns-eyebrow { margin: 0 0 14px; font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--ns-olive); }
+.ns h2 { margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 300; font-size: clamp(32px, 9vw, 40px); line-height: 1.04; letter-spacing: -0.02em; text-transform: none; }
+.ns .ns-sub { margin: 10px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 300; font-style: italic; font-size: 19px; color: var(--ns-body); }
+.ns .ns-body { margin: 18px 0 0; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ns-body); }
+.ns .ns-body + .ns-body { margin-top: 10px; }
+.ns .ns-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.ns .ns-ctas a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 17px; border-radius: 8px; border: 1px solid var(--ns-ink); text-decoration: none; color: var(--ns-ink);
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; transition: background .2s, color .2s; }
+.ns .ns-ctas a:first-child, .ns .ns-ctas a:hover { background: var(--ns-ink); color: var(--ns-bg); }
+.ns .ns-fine { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--ns-line); }
+.ns .ns-fine .ns-eyebrow { margin-bottom: 10px; }
+.ns .ns-fine p:not(.ns-eyebrow) { margin: 0 0 8px; font-family: Inter, system-ui, sans-serif; font-size: 13.5px; line-height: 1.6; color: var(--ns-body); }
+.ns .ns-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--ns-ink); cursor: pointer; display: grid; place-items: center; }
+.ns .ns-close:hover { background: color-mix(in srgb, var(--ns-ink) 8%, transparent); }
+
 @media (max-width: 719px) {
   .pg { display: none; }
   .pager { padding-block: 2px 8px; }
@@ -1580,7 +1607,7 @@ button { font: inherit; color: inherit; }
   $('.qline').addEventListener('click', (e) => { if (!e.target.closest('button')) setFocus(false); });
 
   // ---------- the living one: Nino ----------
-  const NINO = {"eyebrow": "Living artist · Seattle", "lines": ["Hi, I’m Nino. The only one in this chat with a pulse.", "I’m a painter in Seattle. I made this because the greats figured out creative life the hard way. You don’t have to.", "Want feedback from a living artist? Come paint with us."], "links": [["See my art", "https://nino.studio"], ["Spice Art Club", "https://lab.nino.studio/spiceartclub"], ["@ninoyuniardi", "https://www.instagram.com/ninoyuniardi"]]};
+  const NINO = {"eyebrow": "Living artist · Seattle", "lines": ["Hi, I’m Nino. The only one in this chat with a pulse.", "I’m a painter in Seattle. I made this because the greats figured out creative life the hard way. You don’t have to.", "Want feedback from a living artist? Come paint with us."], "links": [["See my art", "https://nino.studio"], ["Spice Art Club", "https://nino.studio/pages/spice-art-club"], ["@ninoyuniardi", "https://www.instagram.com/ninoyuniardi"]]};
   function ninoLinks() {
     const box = el('div', 'nino-links');
     NINO.links.forEach(([label, href]) => { const a = el('a', null, label); a.href = href; a.target = '_blank'; a.rel = 'noopener'; box.appendChild(a); });
@@ -1603,21 +1630,27 @@ button { font: inherit; color: inherit; }
   function openAbout() {
     closeSheets();
     const scrim = el('div', 'scrim'); scrim.onclick = (e) => { if (e.target === scrim) scrim.remove(); };
-    const s2 = el('div', 'sheet'); s2.setAttribute('role', 'dialog'); s2.setAttribute('aria-modal', 'true'); s2.setAttribute('aria-label', 'About Nino Studio');
-    s2.appendChild(el('h2', null, 'Made by Nino Studio'));
-    const box = el('div', 'about');
-    NINO.lines.forEach((line) => box.appendChild(el('p', null, line)));
-    box.appendChild(ninoLinks());
-    s2.appendChild(box);
-    const fine = el('div', 'disclaim');
-    fine.appendChild(el('h3', null, 'The fine print'));
+    const s2 = el('div', 'sheet ns'); s2.setAttribute('role', 'dialog'); s2.setAttribute('aria-modal', 'true'); s2.setAttribute('aria-label', 'About Nino Studio');
+    const x = el('button', 'ns-close'); x.type = 'button'; x.setAttribute('aria-label', 'Back to the chat'); x.onclick = closeSheets;
+    x.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+    s2.appendChild(x);
+    s2.appendChild(el('p', 'ns-eyebrow', 'Nino Studio · Seattle'));
+    s2.appendChild(el('h2', null, 'Made by a living artist.'));
+    s2.appendChild(el('p', 'ns-sub', 'The only one in this chat with a pulse.'));
+    s2.appendChild(el('p', 'ns-body', 'I’m Nino, a painter in Seattle. I made this because the greats figured out creative life the hard way. You don’t have to.'));
+    s2.appendChild(el('p', 'ns-body', 'Want feedback from a living artist? Come paint with us.'));
+    const ctas = el('div', 'ns-ctas');
+    [['Explore the art', 'https://nino.studio'], ['Spice Art Club', 'https://nino.studio/pages/spice-art-club'], ['Instagram', 'https://www.instagram.com/ninoyuniardi']].forEach(([label, href]) => {
+      const a = el('a', null, label); a.href = href; a.target = '_blank'; a.rel = 'noopener'; ctas.appendChild(a);
+    });
+    s2.appendChild(ctas);
+    const fine = el('div', 'ns-fine');
+    fine.appendChild(el('p', 'ns-eyebrow', 'The fine print'));
     fine.appendChild(el('p', null, 'This is a comedy. These artists never said any of this. The jokes are built on real facts from their lives, but every word is made up.'));
     fine.appendChild(el('p', null, 'Please don’t quit your job, cut off an ear or tape fruit to a wall because a dead painter told you to. Nothing here is professional, financial, legal or medical advice.'));
-    fine.appendChild(el('p', null, 'Painted in Seattle by a living artist.'));
     s2.appendChild(fine);
-    s2.appendChild(btn('Back to the chat', '', closeSheets));
     scrim.appendChild(s2); $('#app').appendChild(scrim);
-    s2.querySelector('a, button').focus();
+    ctas.querySelector('a').focus();
   }
   $('#madeby').addEventListener('click', openAbout);
 
