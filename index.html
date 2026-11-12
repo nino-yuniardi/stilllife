@@ -391,6 +391,14 @@ button { font: inherit; color: inherit; }
 .meta .fine button { font-weight: 600; padding: 0; line-height: 1; text-underline-offset: 2px; }
 .meta .pager, .meta .marks { align-items: center; }
 .meta .pager { padding: 0 !important; }
+.meta { --tone: #2f4c62; --tone-soft: #67839a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .meta { --tone: #c3d5e2; --tone-soft: #8ea6b8; } }
+:root[data-theme="dark"] .meta { --tone: #c3d5e2; --tone-soft: #8ea6b8; }
+.meta .marks button { height: 5px; border-radius: 999px; background: var(--tone); opacity: .22; margin-block: 7px; }
+.meta .marks button.on { background: var(--tone); opacity: .9; }
+.meta .fine { color: var(--tone-soft); }
+.meta .fine button { color: var(--tone); text-decoration-color: color-mix(in srgb, var(--tone) 45%, transparent); }
+.meta .pg { color: var(--tone); background: color-mix(in srgb, var(--tone) 9%, transparent); }
 /* simpler lockup: pager lines, then a + and the chips, all left-aligned */
 .compose { gap: 12px; }
 .pager { justify-content: flex-start; gap: 10px; padding: 0; }
