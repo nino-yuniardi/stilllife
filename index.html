@@ -241,17 +241,17 @@ button { font: inherit; color: inherit; }
 
 /* reading mode: an eased, staggered fold. The names fade first, the portraits shrink in a left-to-right wave,
    the title lifts away and the composer sinks; reversing plays it back the other way. */
-.app { --ease: cubic-bezier(.2, .9, .3, 1); --bounce: cubic-bezier(.34, 1.5, .6, 1); }
-.mast { max-height: 120px; overflow: hidden; transition: max-height .4s var(--ease), padding .4s var(--ease), opacity .25s ease, transform .45s var(--bounce); }
-.cast { transition: padding .4s var(--ease); }
-.who { transition: width .45s var(--bounce), gap .4s var(--ease); transition-delay: calc(var(--i, 0) * 22ms); }
-.tile { transition: width .45s var(--bounce), height .45s var(--bounce); transition-delay: calc(var(--i, 0) * 22ms); }
+.app { --ease: cubic-bezier(.22, 1, .36, 1); --bounce: cubic-bezier(.3, 1.22, .45, 1); --dur: .48s; }
+.mast { max-height: var(--h, 120px); overflow: hidden; transition: max-height var(--dur) var(--ease), padding var(--dur) var(--ease), opacity .3s ease, transform var(--dur) var(--ease); }
+.cast { transition: padding var(--dur) var(--ease); }
+.who { transition: width var(--dur) var(--bounce), gap var(--dur) var(--ease); transition-delay: calc(var(--i, 0) * 16ms); }
+.tile { transition: width var(--dur) var(--bounce), height var(--dur) var(--bounce); transition-delay: calc(var(--i, 0) * 16ms); }
 .who .nm { max-height: 18px; overflow: hidden; transition: max-height .4s var(--ease), opacity .2s ease; }
-.ondot { transition: transform .4s var(--bounce); transform-origin: bottom right; }
-.qline { transition: padding .4s var(--ease); }
+.ondot { transition: transform var(--dur) var(--bounce); transform-origin: bottom right; }
+.qline { transition: padding var(--dur) var(--ease); }
 .qline .eyebrow { display: block; max-height: 20px; overflow: hidden; transition: max-height .4s var(--ease), opacity .25s ease; }
-.asked { transition: font-size .42s var(--bounce); }
-.compose { max-height: 240px; overflow: hidden; transition: max-height .4s var(--ease), padding .4s var(--ease), opacity .25s ease, transform .45s var(--bounce), border-top-width .4s; }
+.asked { transition: font-size var(--dur) var(--ease); }
+.compose { max-height: var(--h, 240px); overflow: hidden; transition: max-height var(--dur) var(--ease), padding var(--dur) var(--ease), opacity .3s ease, transform var(--dur) var(--ease); }
 .card { transition: box-shadow .5s ease; }
 
 .app.reading .mast { max-height: 0; padding-top: 0; opacity: 0; transform: translateY(-14px); }
@@ -1637,7 +1637,11 @@ button { font: inherit; color: inherit; }
 
   // ---------- reading mode: tap a reply to expand it, tap again to bring everything back ----------
   const appEl = $('#app');
-  function setFocus(on) { appEl.classList.toggle('reading', on); if (on && perched) doveLeave(); }
+  function setFocus(on) {
+    if (on) ['.mast', '.compose'].forEach((sel) => { const e = $(sel); e.style.setProperty('--h', e.scrollHeight + 'px'); });
+    appEl.classList.toggle('reading', on); if (on && perched) doveLeave();
+    if (!on) setTimeout(() => { if (!appEl.classList.contains('reading')) ['.mast', '.compose'].forEach((sel) => $(sel).style.removeProperty('--h')); }, 600);
+  }
   function onReplyTap(e) {
     if (e.target.closest('button, a')) return;
     if (!e.target.closest('.card-b, .msg.them')) return;
