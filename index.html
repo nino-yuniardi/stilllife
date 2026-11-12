@@ -17,12 +17,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: a deep green salon band holds the cast; a light sheet slides up beneath it with one rounded speech bubble per answer. */
+/* Layout: the cast sits up in a soft Seattle sky (clouds drifting, a little sun peeking in); a light sheet below holds one rounded speech bubble per answer. */
 :root {
-  --band: #2a1d18;
-  --band-ink: #f6eee6;
-  --band-muted: #d3c2b6;
-  --gold: #eab49a;
+  --sky-a: #f5d9c2;
+  --sky-b: #eee6df;
+  --sky-c: #e4e8ea;
+  --cloud: #fdfbf8;
+  --cloud-shade: #e8dfd7;
+  --sun: rgba(247, 196, 150, 0.85);
+  --chip: rgba(42, 29, 24, 0.07);
+  --band: #eee6df;
+  --band-ink: #2a1d18;
+  --band-muted: #7a6156;
+  --deep: #2a1d18;
+  --deep-ink: #f6eee6;
+  --deep-muted: #d3c2b6;
+  --gold: #c46f50;
   --gold-glow: rgba(234, 180, 154, 0.45);
   --stage: #f3f1ed;
   --surface: #fcfbf9;
@@ -43,14 +53,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --band: #160f0c; --band-ink: #f3ebe2; --band-muted: #c4b3a7;
+    --sky-a: #3a2a28; --sky-b: #221917; --sky-c: #161110; --cloud: #3a2f2c; --cloud-shade: #2b2220; --sun: rgba(234, 180, 154, 0.22); --chip: rgba(255, 255, 255, 0.1);
+    --band: #221917; --band-ink: #f3ebe2; --band-muted: #c4b3a7; --deep: #33241e; --deep-ink: #f3ebe2; --deep-muted: #c4b3a7; --gold: #eab49a;
     --stage: #151312; --surface: #1f1b19; --ink: #f2ece6; --muted: #b2aaa3; --line: #35302c;
     --scrim: rgba(0, 0, 0, 0.6); --mix: 30%;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --band: #160f0c; --band-ink: #f3ebe2; --band-muted: #c4b3a7;
+  --sky-a: #3a2a28; --sky-b: #221917; --sky-c: #161110; --cloud: #3a2f2c; --cloud-shade: #2b2220; --sun: rgba(234, 180, 154, 0.22); --chip: rgba(255, 255, 255, 0.1);
+    --band: #221917; --band-ink: #f3ebe2; --band-muted: #c4b3a7; --deep: #33241e; --deep-ink: #f3ebe2; --deep-muted: #c4b3a7; --gold: #eab49a;
   --stage: #151312; --surface: #1f1b19; --ink: #f2ece6; --muted: #b2aaa3; --line: #35302c;
   --scrim: rgba(0, 0, 0, 0.6); --mix: 30%;
   color-scheme: dark;
@@ -59,17 +71,17 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { height: 100%; }
-body { background: var(--band); color: var(--ink); font-family: var(--sans); font-size: 15.5px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body { background: var(--sky-c); color: var(--ink); font-family: var(--sans); font-size: 15.5px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 12px; }
 .gut { padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
 .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .label { margin: 3px 0 0; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
-.app { position: relative; height: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; background: var(--band); }
+.app { position: relative; height: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; background: transparent; z-index: 1; }
 
 /* band */
-.band { color: var(--band-ink); }
+.band { position: relative; color: var(--band-ink); }
 .mast { position: relative; padding-block: 14px 0; }
 .mast .live { position: absolute; top: 14px; right: max(18px, env(safe-area-inset-right, 0px)); margin: 0; }
 .title { white-space: nowrap; }
@@ -78,7 +90,7 @@ button { font: inherit; color: inherit; }
 .title .thick { font-family: var(--thick); font-weight: 800; font-size: clamp(27px, 7.6vw, 34px); letter-spacing: -0.03em; text-transform: uppercase; }
 .title .tail { font-family: var(--thin); font-style: italic; font-weight: 400; font-size: clamp(27px, 7.6vw, 34px); letter-spacing: -0.01em; color: var(--gold); }
 .title .dead { position: relative; display: inline-block; }
-.live { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; margin-bottom: 6px; border-radius: 8px; background: rgba(255,255,255,.1); font-size: 12px; font-weight: 600; color: var(--band-ink); white-space: nowrap; }
+.live { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; margin-bottom: 6px; border-radius: 8px; background: var(--chip); font-size: 12px; font-weight: 600; color: var(--band-ink); white-space: nowrap; }
 .live i { width: 7px; height: 7px; border-radius: 50%; background: #9cbf8f; box-shadow: 0 0 0 0 rgba(156,191,143,.6); animation: ping 2s infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(156,191,143,.55); } 80%, 100% { box-shadow: 0 0 0 7px rgba(156,191,143,0); } }
 
@@ -174,7 +186,7 @@ button { font: inherit; color: inherit; }
 .msg { position: relative; max-width: 84%; min-width: 0; overflow-wrap: anywhere; padding: 11px 16px; border-radius: 14px; animation: pop .4s cubic-bezier(.3,1.35,.5,1) both; }
 .msg.them { align-self: flex-start; background: color-mix(in srgb, var(--tc) var(--mix), var(--surface)); border-bottom-left-radius: 4px; }
 .msg.them p { margin: 0; }
-.msg.me { align-self: flex-end; background: var(--band); color: var(--band-ink); border-bottom-right-radius: 4px; }
+.msg.me { align-self: flex-end; background: var(--deep); color: var(--deep-ink); border-bottom-right-radius: 4px; }
 .sysnote { align-self: center; max-width: 88%; text-align: center; font-family: var(--thin); font-style: italic; font-size: 17px; color: var(--muted); margin: 4px 0; }
 
 /* composer */
@@ -201,7 +213,7 @@ button { font: inherit; color: inherit; }
   padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px));
 }
 .sheet h2 { margin: 0; font-family: var(--thick); font-weight: 800; font-size: 24px; letter-spacing: -0.02em; }
-.poster { border-radius: 14px; overflow: hidden; background: var(--band); color: var(--band-ink); display: flex; flex-direction: column; }
+.poster { border-radius: 14px; overflow: hidden; background: var(--deep); color: var(--deep-ink); display: flex; flex-direction: column; }
 .poster .top { padding: 24px 22px 18px; display: flex; flex-direction: column; gap: 8px; }
 .poster .top span { font-family: var(--thick); font-weight: 800; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
 .poster .q { margin: 0; font-family: var(--thin); font-style: italic; font-size: 30px; line-height: 1.04; }
@@ -210,10 +222,10 @@ button { font: inherit; color: inherit; }
 .poster .by { display: flex; align-items: center; gap: 10px; }
 .poster .by b { display: block; font-family: var(--thick); font-weight: 800; font-size: 17px; letter-spacing: -0.01em; }
 .poster .by .label { color: #555a5e; }
-.poster .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 14px 22px 18px; font-size: 12px; font-weight: 700; color: var(--band-muted); }
+.poster .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 14px 22px 18px; font-size: 12px; font-weight: 700; color: var(--deep-muted); }
 .sheet .row { display: flex; gap: 10px; flex-wrap: wrap; }
 .sheet .note { margin: 0; font-size: 12.5px; color: var(--muted); }
-.toast { position: absolute; z-index: 30; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--band); color: var(--band-ink); font-size: 14px; font-weight: 700; padding: 9px 18px; border-radius: 999px; animation: fade .2s ease-out; }
+.toast { position: absolute; z-index: 30; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--deep); color: var(--deep-ink); font-size: 14px; font-weight: 700; padding: 9px 18px; border-radius: 999px; animation: fade .2s ease-out; }
 
 /* reading mode: an eased, staggered fold. The names fade first, the portraits shrink in a left-to-right wave,
    the title lifts away and the composer sinks; reversing plays it back the other way. */
@@ -252,25 +264,100 @@ button { font: inherit; color: inherit; }
 .fine { margin: -2px 0 0; font-size: 12px; color: var(--muted); text-align: center; }
 .fine button { border: 0; background: none; padding: 4px 2px; font: inherit; font-weight: 700; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .app.reading .fine { display: none; }
-.card.nino { background: var(--band); color: var(--band-ink); }
-.card.nino .label { color: var(--band-muted); }
-.card.nino .card-b p:not(.medium) { color: var(--band-ink); }
+.card.nino { background: var(--deep); color: var(--deep-ink); }
+.card.nino .label { color: var(--deep-muted); }
+.card.nino .card-b p:not(.medium) { color: var(--deep-ink); }
 .nino-av { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #161616; font-family: var(--thick); font-weight: 800; font-size: 18px; }
 .nino-links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; }
 .nino-links a { min-height: 40px; padding: 0 14px; border-radius: 10px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 700; text-decoration: none; border: 1.5px solid currentColor; color: inherit; }
 .nino-links a:first-child { background: var(--gold); border-color: var(--gold); color: #161616; }
-.about { border-radius: 14px; padding: 20px; background: var(--band); color: var(--band-ink); display: flex; flex-direction: column; gap: 10px; }
+.about { border-radius: 14px; padding: 20px; background: var(--deep); color: var(--deep-ink); display: flex; flex-direction: column; gap: 10px; }
 .about p { margin: 0; line-height: 1.55; }
 .about p:first-child { font-weight: 700; font-size: 17px; }
 
+/* the sky: a soft gradient, a sun peeking in at the corner, clouds drifting behind everything */
+.sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: linear-gradient(200deg, var(--sky-a) 0%, var(--sky-b) 38%, var(--sky-c) 78%); }
+.sun { position: absolute; top: -130px; right: -90px; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, var(--sun) 0%, transparent 64%); }
+.sun::after { content: ""; position: absolute; inset: -80px; border-radius: 50%; opacity: .45;
+  background: repeating-conic-gradient(from 0deg, var(--sun) 0deg 3deg, transparent 3deg 15deg);
+  -webkit-mask: radial-gradient(circle, #000 12%, transparent 60%); mask: radial-gradient(circle, #000 12%, transparent 60%);
+  animation: rays 140s linear infinite; }
+@keyframes rays { to { transform: rotate(360deg); } }
+.cloud { position: absolute; left: -280px; height: auto; animation: drift linear infinite; }
+.cloud.c1 { top: 14px; width: 220px; animation-duration: 150s; animation-delay: -30s; opacity: .95; }
+.cloud.c2 { top: 78px; width: 150px; animation-duration: 115s; animation-delay: -85s; opacity: .8; }
+.cloud.c3 { top: 128px; width: 260px; animation-duration: 190s; animation-delay: -140s; opacity: .9; }
+.cloud.c4 { top: -6px; width: 120px; animation-duration: 100s; animation-delay: -55s; opacity: .7; }
+.cloud.c5 { top: 200px; width: 210px; animation-duration: 170s; animation-delay: -10s; opacity: .85; }
+.cloud.c6 { top: 46px; width: 180px; animation-duration: 210s; animation-delay: -175s; opacity: .75; }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 320px)); } }
+.stage { position: relative; box-shadow: 0 -10px 34px rgba(42, 29, 24, 0.06); }
+.compose { position: relative; }
+
+/* the dove: flies in, perches on an artist for a moment, flies off */
+.dove { position: absolute; left: 0; top: 0; width: 58px; height: 43px; z-index: 6; pointer-events: none; opacity: 0; will-change: transform; }
+.dove svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 3px rgba(42, 29, 24, 0.18)); }
+.dove .wing { transform-box: view-box; transform-origin: 31px 21px; }
+.dove .folded, .dove .legs { display: none; }
+.dove.flying .wing.near { animation: flap .26s ease-in-out infinite alternate; }
+.dove.flying .wing.far { animation: flapfar .26s ease-in-out infinite alternate; }
+@keyframes flap { from { transform: rotate(-18deg); } to { transform: rotate(62deg) scaleY(.55); } }
+@keyframes flapfar { from { transform: rotate(-28deg); } to { transform: rotate(48deg) scaleY(.6); } }
+.dove.perched .wing { display: none; }
+.dove.perched .folded, .dove.perched .legs { display: inline; }
+.dove .head { transform-box: view-box; transform-origin: 44px 22px; }
+.dove.perched .head { animation: peck 3.2s ease-in-out infinite; }
+@keyframes peck { 0%, 62%, 100% { transform: rotate(0); } 70% { transform: rotate(16deg); } 76% { transform: rotate(-4deg); } 84% { transform: rotate(12deg); } 90% { transform: rotate(0); } }
+.dove.perched .body-group { animation: settle-in .5s ease-out; }
+@keyframes settle-in { 0% { transform: translateY(-3px); } 60% { transform: translateY(1px); } 100% { transform: none; } }
+
+/* tablets and desktop: more room, more bubbles side by side */
+@media (min-width: 720px) {
+  .app { max-width: 980px; }
+  .card { flex-basis: calc(50% - 6px); }
+  .card.aside { flex-basis: calc(50% - 6px); }
+}
+@media (min-width: 1000px) {
+  .app { max-width: 1200px; }
+  .mast { padding-top: 30px; }
+  .title .thin { font-size: 23px; }
+  .title .thick, .title .tail { font-size: 46px; }
+  .cast { justify-content: safe center; gap: 18px; padding-block: 26px 22px; }
+  .stage { border-radius: 22px 22px 0 0; margin-inline: 24px; }
+  .qline { width: 100%; max-width: 900px; margin-inline: auto; }
+  .card, .card.aside { flex-basis: calc(33.333% - 8px); max-width: none; }
+  .compose { margin-inline: 24px; }
+  .compose > * { width: 100%; max-width: 900px; margin-inline: auto; }
+  .starters { justify-content: safe center; }
+  .thread { padding-left: max(24px, calc((100% - 760px) / 2)); padding-right: max(24px, calc((100% - 760px) / 2)); }
+  .dm-h { padding-left: max(24px, calc((100% - 760px) / 2)); padding-right: max(24px, calc((100% - 760px) / 2)); }
+  .scrim { align-items: center; justify-content: center; }
+  .sheet { max-width: 560px; border-radius: 18px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .dove { display: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="cl" viewBox="0 0 200 80"><path style="fill:var(--cloud)" d="M30 72 C10 72 6 52 26 47 C22 29 46 19 62 31 C70 10 106 6 118 29 C128 16 154 21 156 41 C174 38 190 52 182 67 C180 71 174 72 168 72 Z"/><path style="fill:var(--cloud-shade)" d="M24 63 C62 72 138 74 182 62 C181 69 175 72 168 72 L30 72 C21 72 17 68 24 63 Z"/><path style="fill:var(--cloud);opacity:.7" d="M70 30 C74 22 86 20 92 26 C84 24 76 26 70 30 Z"/></symbol></defs></svg>
+<div class="sky" aria-hidden="true"><div class="sun"></div><svg class="cloud c1" viewBox="0 0 200 80"><use href="#cl"/></svg><svg class="cloud c2" viewBox="0 0 200 80"><use href="#cl"/></svg><svg class="cloud c3" viewBox="0 0 200 80"><use href="#cl"/></svg><svg class="cloud c4" viewBox="0 0 200 80"><use href="#cl"/></svg><svg class="cloud c5" viewBox="0 0 200 80"><use href="#cl"/></svg><svg class="cloud c6" viewBox="0 0 200 80"><use href="#cl"/></svg></div>
 <div class="app" id="app">
+  <div class="dove" id="dove" aria-hidden="true"><svg viewBox="0 0 60 44">
+    <g class="wing far"><path d="M31 21 C27 9 19 3 9 3 C15 9 19 15 23 22 Z" fill="#ddd4ca"/></g>
+    <g class="body-group">
+      <path d="M17 27 L3 21 L5 27 L2 33 L17 31 Z" fill="#efe9e2"/><path d="M5 27 L16 28 M4 32 L16 30" stroke="#d8cfc5" stroke-width=".8" fill="none"/>
+      <path d="M14 27 C14 19 24 15 34 17 C40 18 44 21 46 25 C44 31 36 35 26 35 C20 35 15 32 14 27 Z" fill="#fdfcfa" stroke="#e3dad0" stroke-width=".7"/>
+      <path d="M18 31 C24 35 34 35 43 29 C40 33 32 36 26 36 C21 36 18 34 18 31 Z" fill="#e6ded5"/>
+      <g class="legs"><path d="M27 35 L26 40 M33 35 L34 40" stroke="#c98f6a" stroke-width="1.6" stroke-linecap="round"/></g>
+      <g class="folded"><path d="M17 25 C23 19 35 18 41 23 C36 29 25 31 16 29 Z" fill="#ebe4dc"/><path d="M22 26 C28 25 34 25 38 24 M24 28 C29 27.5 33 27 36 26" stroke="#d8cfc5" stroke-width=".8" fill="none"/></g>
+      <g class="head"><path d="M40 18 C42 14 46 13 48 14 L45 25 Z" fill="#fdfcfa"/><circle cx="46" cy="19" r="6" fill="#fdfcfa"/><circle cx="48.2" cy="18" r="1.15" fill="#2a1d18"/><path d="M51.6 19 L56 20.2 L51.6 21.6 Z" fill="#d49a6a"/></g>
+    </g>
+    <g class="wing near"><path d="M33 22 C29 8 21 0 9 0 C15 6 19 12 21 18 C17 18 14 20 13 22 C19 24 27 25 33 22 Z" fill="#fefdfb" stroke="#e2d9cf" stroke-width=".8"/><path d="M13 4 L19 10 M11 9 L18 14 M14 14 L20 17" stroke="#e2d9cf" stroke-width=".8" fill="none"/></g>
+  </svg></div>
   <div class="band">
     <header class="mast gut">
       <h1 class="title"><span class="thin">What would</span><span class="thick"><span class="dead">Dead</span> Artists</span> <span class="tail">do?</span></h1>
@@ -747,12 +834,174 @@ button { font: inherit; color: inherit; }
   };
   Object.keys(WILD).forEach((id) => { L[id].any = L[id].any.concat(WILD[id]); });
 
+  // ---------- Round 3: new topics people love to ask, plus second versions of the most-asked ones ----------
+  const NEW = {
+    death: {
+      vg: ["The afterlife? Wonderful. Finally everyone loves my paintings. I still cannot sell any, which honestly feels familiar.", "Also, the stars up here are exactly as swirly as I painted them. I was right. Please tell the critics."],
+      pp: ["Being dead is very boring. No new periods. I have been in my Ghost Period for fifty years.", "But the dinner parties are excellent. Everyone is here. I sit very far away from my exes."],
+      cm: ["The light here is perfect. Every hour, perfect light.", "It is terrible. I have nothing to wait for. I have started complaining about the clouds just to feel normal."],
+      fk: ["Mi amor, heaven is very blue, like my house. I approved of it immediately.", "The monkeys followed me here. The parrot complains. Diego arrived later and asked for a bigger studio. Some things never change."],
+      aw: ["Gee. Being dead is a lot like being famous. Everybody talks about you and you don’t have to go anywhere.", "There’s no soup up here, though. I brought my own. 32 cans."],
+      sd: ["Dalí is not dead. Dalí is taking a very long surrealist nap.", "When they opened Dalí’s tomb in 2017, the mustache was still pointing up. Ten past ten. Exactly as Dalí left it."],
+      jp: ["It’s quiet. Big floors, though. Lots of floor up here.", "I miss the barn."],
+      br: ["Oh, it’s real nice up here, friend. Lots of happy little clouds, and I get to paint every one of them.", "All my squirrel friends are here too. Peapod says hi."]
+    },
+    regret: {
+      vg: ["Regrets? I wish I had eaten more lunch and argued with fewer roommates.", "But I would paint every one of those 900 paintings again. Even the potatoes. Especially the potatoes."],
+      pp: ["Regret is for people who finish things. I never finished anything. I just started the next one.", "Okay, one regret: I should have kept more of those restaurant napkins. Very valuable now."],
+      cm: ["I regret burning some of my water lily paintings when I was frustrated. Dozens of them, into the fire.", "Today one of those would buy a castle. Lesson: never make big decisions in bad light."],
+      fk: ["I don’t believe in regrets, mi amor. Everything I lived went into a painting, even the bad parts. Especially the bad parts.", "Maybe one: I should have charged Diego rent."],
+      aw: ["I wish I’d said less in interviews. Wait. I already said very little.", "Okay. I wish I’d made 33 soup cans. 32 feels like I missed one."],
+      sd: ["Dalí regrets nothing. Dalí once regretted something, but Dalí painted an elephant over it.", "Now it is a masterpiece. That is what regret is for."],
+      jp: ["Yeah. A few. Mostly I wish I’d been easier on myself and on the people around me.", "Paint was the easy part. People were harder."],
+      br: ["Well, I spent a lot of years yelling in the Air Force. I don’t miss that part.", "But no regrets about the painting. Every one was a happy little accident, and I’d do them all again."]
+    },
+    modernart: {
+      vg: ["Is it art? In my day they asked that about my paintings. Too bright, too thick, too wild.", "Now my paintings are on umbrellas. So give it a hundred years, then ask again."],
+      pp: ["People said a child could paint my pictures. Painting like a professional took me four years. Painting like a child took me a lifetime.", "So yes, it’s art. Probably. Look at it from the side and decide."],
+      cm: ["When I showed my blurry sunrise, critics said it wasn’t finished. Not real art. Just an impression.", "Now it hangs in a museum with guards. If people mock it today, it might be art tomorrow."],
+      fk: ["Art is whatever is honest, mi amor. A banana taped to a wall? If it means something to you, fine.", "If it doesn’t, eat the banana. That is also honest."],
+      aw: ["Art is what you can get away with. Somebody said that. Maybe it was me. I said a lot of things quietly.", "And a banana on the wall? I put a banana on a record cover in 1967. I was early."],
+      sd: ["Dalí made a telephone with a lobster on it. It is in museums. So yes, everything is art if Dalí says so.", "Dalí is not there to say so about your thing. Dalí will allow it anyway."],
+      jp: ["People looked at my paintings and said, my kid could do that.", "Sure. Your kid didn’t. That’s the difference."],
+      br: ["If it brings you joy, friend, it’s art. That’s my whole opinion.", "Some folks didn’t think my paintings were real art either. That’s alright. They made a lot of people happy."]
+    },
+    rivals: {
+      vg: ["The best painter? Gauguin thought it was Gauguin. That is partly why he left after nine weeks.", "I admired so many: Millet, Rembrandt, the Japanese printmakers. I copied them to learn. Steal from the people you love."],
+      pp: ["The best painter is Picasso. Next question.", "Fine. Matisse was very good. We were rivals and friends. He made me better by being annoying."],
+      cm: ["My friend Renoir and I once set up side by side at the same riverside spot, same view, same day.", "His painting was more cheerful. Mine had better light. We were both right."],
+      fk: ["Diego always said I was a better painter than him. He was right, and I let him say it often.", "Picasso gave me earrings shaped like little hands when I was in Paris. Very good taste, that man. In jewelry."],
+      aw: ["Gee. Everybody’s great. I mean that. Mostly.", "I liked Basquiat. We painted together. People said it was weird. It was weird. It was great."],
+      sd: ["The best painter is Dalí. Second best: also Dalí, from a different angle.", "Dalí admired Velázquez and Vermeer very much. Dalí also once met Freud. Freud was impressed. By the mustache, presumably."],
+      jp: ["Picasso. I was mad at him for years because he’d already done everything.", "So I put the canvas on the floor. He hadn’t done that."],
+      br: ["Oh, every painter is my favorite, friend. Even the ones who think I’m silly.", "I learned wet-on-wet from a fella named Bill Alexander on TV. Always be grateful to the folks who taught you."]
+    },
+    beginner: {
+      vg: ["Start with drawing. I drew for years before I let myself use much color. Peasants, hands, chairs, boots.", "Draw ugly things, a lot. Then one day, add yellow."],
+      pp: ["Make a lot. A lot. I made tens of thousands of works. Quantity teaches you quality.", "And copy the masters. Then break them. That’s the whole school."],
+      cm: ["Go outside. Paint what you see in twenty minutes, before the light changes.", "Small canvas, quick strokes, no fussing. Fifty quick sketches will teach you more than one perfect painting."],
+      fk: ["Start with yourself. A mirror, a pencil, your face. You are always available as a model.", "Paint what you feel, not what you think is “good.” Good comes later. Honest comes first."],
+      aw: ["Copy things you like. Ads, packaging, magazines. That’s how I started.", "Then do it again. And again. Repetition is how you find your style."],
+      sd: ["Learn classical technique perfectly. Dalí could paint like the old masters.", "Then use it to paint a melting clock. Skill first, madness second."],
+      jp: ["Get cheap paint and a big surface. Don’t be precious about it.", "Move your whole body. Make a mess. You learn by doing a lot of bad ones."],
+      br: ["All you need is a little paint, a brush and a dream, friend.", "Start with a sky, add a mountain, then a happy little tree. Don’t worry about mistakes. We don’t make mistakes here."]
+    },
+    fame: {
+      vg: ["Fame came to me after I died. Excellent timing, as always.", "Make the work for the people in front of you now. Fame is a slow train."],
+      pp: ["Fame is wonderful. I recommend it. It makes restaurants accept your doodles as payment.", "But it’s a side effect. Make the work. Fame finds the ones who don’t stop."],
+      cm: ["I was mocked for years, then famous for decades. I preferred the second part.", "Be patient. Keep painting the same pond. Eventually people notice the pond."],
+      fk: ["For years I was “Diego’s wife.” Now my face is on socks.", "Fame is funny, mi amor. Be yourself first. The socks will follow."],
+      aw: ["Everybody gets fifteen minutes of fame. That’s what people say I said.", "I’ve been famous for about sixty years now. I think I’m using somebody else’s minutes."],
+      sd: ["Dalí became famous by behaving as if Dalí were already famous.", "Wear the cape before anyone asks. The world catches up."],
+      jp: ["Life magazine made me famous. Then everybody wanted to know what the drips meant.", "Fame’s loud. Painting’s quiet. I liked the painting better."],
+      br: ["I never set out to be famous. I just wanted to show folks they could paint.", "Somewhere along the way the hair got famous on its own."]
+    },
+    coffee: {
+      vg: ["Coffee, bread and paint. That was my diet in Paris. Do not copy me.", "But I did paint a lovely café at night. Go sit in one. Watch the light. Order something to eat, too."],
+      pp: ["In Paris we lived in cafés. Arguing, drawing, drinking coffee until the waiter gave up.", "A café is an art school with better snacks."],
+      cm: ["Coffee in the morning, early, while the light is still pink. Then out to paint.", "Never drink it inside. Drink it near water."],
+      fk: ["Mexican hot chocolate, mi amor, with cinnamon. Coffee is fine, but chocolate has more drama.", "And sit in the garden while you drink it."],
+      aw: ["I like the same thing every day. Same coffee, same soup.", "Consistency saves energy for art. And I never had to think about what to order."],
+      sd: ["Dalí takes his coffee upside down, with a small lobster on the saucer.", "Dalí is joking. Dalí takes it with a spoon that is slightly melting."],
+      jp: ["Black. Strong. In a cup with paint on it.", "Every cup in my barn had paint on it."],
+      br: ["A cup of coffee, a sunny window and a fresh canvas. Now that’s a good morning, friend.", "Maybe save a crumb for the squirrel."]
+    },
+    weather: {
+      vg: ["Rain? I painted in wind and cold, with my easel tied down with rope.", "Grey days have the best colors if you look. The greens in the rain are unbelievable."],
+      pp: ["Bad weather is excellent. Nobody goes outside, so you paint all day.", "My Blue Period was basically one long rainy afternoon."],
+      cm: ["Fog, snow, rain: these are gifts. I went to London on purpose for the fog.", "Grey is not one color. Grey is a hundred colors arguing politely."],
+      fk: ["Rainy day? Paint something with a lot of color. Make your own sunshine, mi amor.", "And wear the brightest dress you own. The rain will be embarrassed."],
+      aw: ["I didn’t go outside much. Indoors the weather is always the same.", "That’s why I liked it."],
+      sd: ["On rainy days Dalí paints sunshine. On sunny days Dalí paints melting clocks. Balance.", "Weather is just the sky being surreal."],
+      jp: ["Rain on the barn roof is good for painting. Steady.", "Long Island winters were cold, though. Paint gets thick. So do you."],
+      br: ["Some of my favorite paintings are rainy ones, friend. Misty mountains, soft skies.", "Every cloud has a little light in it if you look. Even the grey ones. Especially those."]
+    },
+    sleep: {
+      vg: ["Tired? Some months I painted almost a painting a day. I do not recommend my schedule.", "Rest, my friend. The wheat field will still be there tomorrow."],
+      pp: ["I worked at night and slept late. Artists are owls.", "But even Picasso napped. Rest is part of the painting. The canvas needs time to think."],
+      cm: ["I woke before dawn every day to catch the light, so I went to bed early. Very early.", "Protect your mornings. Go to sleep."],
+      fk: ["I spent so much time in bed, mi amor, that I made it my studio.", "So rest. Rest is not giving up. Sometimes it is where the best paintings come from."],
+      aw: ["Those late nights at The Factory. I slept less than I should have.", "Get some sleep. The party will still be there. Probably."],
+      sd: ["Dalí’s nap trick: sit in a chair holding a key over a plate. When you drift off, the key drops and wakes you.", "The idea arrives in that tiny moment between asleep and awake. Very efficient. Very loud."],
+      jp: ["Burned out? Yeah. I know about that.", "Step away. Walk outside. The painting can wait a day. You can’t paint when you’re empty."],
+      br: ["Take a rest, friend. Even a painter needs to clean his brushes and sit a while.", "Tomorrow is a whole new canvas."]
+    },
+    colorfav: {
+      vg: ["Yellow. Chrome yellow. Sunflower yellow. Café-at-night yellow.", "I would paint the whole world yellow if Theo could afford enough tubes."],
+      pp: ["Blue, for a few years. Then pink. Then everything at once.", "Changing your favorite color is healthy. I recommend doing it every decade."],
+      cm: ["Violet. People laughed when I said the air is violet. Look at a shadow on snow and tell me I’m wrong.", "And never black. I banned black from my palette."],
+      fk: ["Blue, like my house. Mexican pink. Green, like the garden. I can’t choose, mi amor. Life is not one color.", "But the eyebrows are always black."],
+      aw: ["Pink. Silver. Whatever color the soup can was.", "Gee, I don’t know. All of them, printed 32 times."],
+      sd: ["Dalí’s favorite color is gold. Everything gold looks important.", "If you cannot decide, paint it gold. Then add a mustache."],
+      jp: ["Whatever was in the can. House paint. Black, white, silver, a little red.", "Didn’t matter much. What mattered was how it landed."],
+      br: ["Phthalo blue and titanium white, friend. Mix them and you can make any sky in the world.", "And a little Van Dyke brown for those happy trees."]
+    },
+    music: {
+      vg: ["I tried piano lessons once and kept comparing every note to a color. The teacher thought I was crazy.", "Listen to music while you paint. Let the brush follow the rhythm."],
+      pp: ["Guitars! I painted so many guitars. I couldn’t play one, but I could paint one in pieces.", "Music is like Cubism: many notes at once, and somehow it still makes sense."],
+      cm: ["The sound of water, the wind in the poplars. That was my music.", "Paint outside and listen. Nature has a better playlist than you think."],
+      fk: ["Mexican folk songs, mi amor, loud, while I painted. Diego sang badly.", "Put on music that makes you feel alive. Then paint that feeling."],
+      aw: ["I managed a band, The Velvet Underground. I made their banana album cover.", "So, yes. Music is great. Put a banana on it."],
+      sd: ["Dalí listens to Wagner, very loudly.", "Dalí recommends something dramatic. You should feel like you are in a film."],
+      jp: ["Jazz. All day, loud, in the barn. I painted to the rhythm.", "You can see the beat in the drips if you look."],
+      br: ["Just the soft sound of the brush, friend. And maybe a little squirrel chatter.", "Find what calms you down. A calm heart paints happy trees."]
+    }
+  };
+  Object.keys(NEW).forEach((topic) => Object.keys(NEW[topic]).forEach((id) => { L[id][topic] = NEW[topic][id]; }));
+
+  // Second versions: asking the same artist the same thing again gets a fresh answer before any repeat joke
+  const V2 = {
+    quit: {
+      vg: ["Another thought. Before painting I tried selling art, teaching and preaching. I failed at all of them, honestly.", "Every failure pushed me toward the easel. So if you hate your job, that might be a sign. A loud one. With sunflowers."],
+      pp: ["Make a deal with yourself: paint every morning before work for one year. One year.", "If you still want to quit after a year, you’ll have a portfolio to quit with."],
+      cm: ["I almost gave up when I was broke. My friends lent me money. Bazille, Manet, all of them.", "So build your circle before you jump. Friends are the best safety net."],
+      fk: ["Mi amor, ask yourself: what would you paint if nobody ever paid you?", "If the answer makes your heart beat faster, start painting it tonight. The quitting can come later."],
+      aw: ["I kept doing commercial work even after I was famous. Covers, ads. Money is money.", "Who says you have to choose? Do both. Then let the art slowly eat the job."],
+      sd: ["Dalí says: quit only when your art is ready to make a scene.", "Until then, rehearse. Dalí rehearsed being Dalí for years."],
+      jp: ["I worked a lot of odd jobs. Janitor, teacher, other stuff.", "Do what you have to. Keep painting at night. The job ends when the work’s ready."],
+      br: ["It took me years to go full time, and every one of those years taught me something.", "No rush, friend. Happy little steps get you there."]
+    },
+    sell: {
+      vg: ["Another idea: trade! I traded paintings for meals, for paint, for friendship.", "Not every sale needs money. Sometimes the right person owning your painting is the payment. Theo would disagree."],
+      pp: ["Get yourself a good dealer. I had Vollard, Kahnweiler, Rosenberg. They sold. I painted.", "You paint, someone else talks about money. Division of labor."],
+      cm: ["My dealer, Durand-Ruel, nearly went bankrupt believing in us. Then he took us to America, and America bought.", "Find your believer. One person who won’t stop showing your work."],
+      fk: ["My first big sale: the movie star Edward G. Robinson bought four paintings at once.", "So, mi amor, put the work where people with money can see it. And be very charming."],
+      aw: ["Make it easy to buy. Prints, posters, editions. Big ones, small ones.", "Have a little something for everyone. I even painted dollar bills. Money painting money."],
+      sd: ["Dalí once signed thousands of blank sheets of paper so other people could print on them.", "Dalí does not recommend this. It caused a very big mess. But it did sell."],
+      jp: ["Peggy Guggenheim paid me a monthly stipend so I could paint.", "Find someone who believes in you before the market does."],
+      br: ["I sold little paintings on gold-mining pans to tourists in Alaska. They sold better than my big ones.", "Sometimes small and affordable gets your work into more homes. That feels good, friend."]
+    },
+    block: {
+      vg: ["When I was stuck, I copied paintings I loved. Millet, Delacroix, Japanese prints.", "Copy something you love. Your own voice sneaks in while your hands are busy."],
+      pp: ["Change your tools. A new medium wakes you up. I made pottery, sculpture, prints, plates.", "Can’t paint? Make a plate. Can’t make a plate? Break one and glue it into a sculpture."],
+      cm: ["When I was stuck, I planted flowers. Then I painted the flowers I planted.", "Grow your own inspiration. It takes a season. It’s worth it."],
+      fk: ["When you can’t paint, write. I kept a diary full of drawings and words.", "Mi amor, a page of scribbles is still a page. Fill one today."],
+      aw: ["Ask somebody what to paint. A friend told me to paint what I loved most. Money. So I painted money.", "She also suggested soup. That worked out too."],
+      sd: ["Stare at a cloud until it becomes something else. Dalí called this the paranoiac-critical method.", "Very scientific. Also an excellent way to waste an afternoon productively."],
+      jp: ["Do something else for a while. I stopped painting for stretches. It came back.", "Don’t force it. Just don’t quit."],
+      br: ["Paint a sky. Any sky. Skies are forgiving, friend.", "Once there’s a sky, the mountain shows up. Then the trees. Then you’re painting again."]
+    }
+  };
+  Object.keys(V2).forEach((topic) => Object.keys(V2[topic]).forEach((id) => { L[id][topic] = [L[id][topic], V2[topic][id]]; }));
+
+
   const TOPICS = [
     ['crisis', /suicid|kill (my|him|her)self|end (my life|it all)|self[- ]?harm|hurt myself|want to die|don'?t want to live/i],
     ['principles', /principles?|rules of (art|design|composition|painting)|composition|color theory|colour theory|technique|how (do|to) (i |you )?(paint|draw|design)|your process|tips for (painting|art)/i],
     ['askme', /ask me|question for me|quiz me|your turn to ask/i],
     ['about', /who are you|tell me about (you|yourself)|introduce yourself|what do you do|who('| i)?s this/i],
     ['politics', /elect|vote|voting|president|democrat|republican|congress|politic|midterm|senat|governor|party/i],
+    ['death', /afterlife|heaven|being dead|you('| a)re (all )?dead|life after death|what('| i)?s it like (up there|being dead|in heaven|there)|ghosts?\b/i],
+    ['regret', /regret|do (it )?over|if you could go back|biggest mistake|wish you (had|did)/i],
+    ['modernart', /is (this|that|it) (really )?art|modern art|contemporary art|banana|duct tape|my kid could|what (is|counts as) art|abstract art/i],
+    ['rivals', /best (artist|painter)|greatest (artist|painter)|who('?s| is) better|favou?rite (artist|painter)|rival|jealous of|what do you think (of|about) (picasso|van gogh|vincent|monet|frida|warhol|dal|pollock|bob)/i],
+    ['beginner', /how (do|should|can) i (start|begin|get better|learn|improve)|beginner|first painting|new to (art|painting)|getting started|learn to (paint|draw)|what supplies|which paints?/i],
+    ['fame', /famous|\bfame\b|celebrity|get noticed|recognition/i],
+    ['coffee', /coffee|espresso|latte|\btea\b|caffeine|cappuccino/i],
+    ['weather', /\brain|weather|grey day|gray day|cloudy|seattle|winter|snow|gloomy|sunny/i],
+    ['sleep', /tired|sleep|exhausted|burn ?out|burnt out|insomnia|\bnaps?\b|need rest/i],
+    ['colorfav', /favou?rite colou?r|what colou?r|which colou?r|best colou?r/i],
+    ['music', /music|songs?\b|playlist|listen to|jazz|dance|\bband\b/i],
     ['quit', /quit|day job|full[- ]?time|career|resign|my job/i],
     ['sell', /sell|selling|sold|price|buyer|collector|money|income|rich|broke/i],
     ['done', /\bdone\b|finish|finished|overwork|keep going/i],
@@ -786,8 +1035,9 @@ button { font: inherit; color: inherit; }
     ];
     const v = L[id][topic];
     if (topic === 'any' || !v) return wild(id);
-    const key = id + ':' + topic;
-    if (!seenT[key]) { seenT[key] = true; return v; }
+    const variants = Array.isArray(v[0]) ? v : [v];
+    const key = id + ':' + topic, n = seenT[key] || 0;
+    if (n < variants.length) { seenT[key] = n + 1; return variants[n]; }
     return [REPEAT[id]].concat(wild(id));
   }
 
@@ -807,14 +1057,17 @@ button { font: inherit; color: inherit; }
 
   const STARTERS = [
     'Should I quit my job to paint full time?',
+    'What’s it like being dead?',
     'My art isn’t selling. What do I do?',
-    'How do I know a painting is done?',
-    'Is it too late to start at 50?',
-    'What should I make for dinner?',
-    'I’m stuck. No inspiration.',
-    'My family thinks art is a hobby.',
+    'Is a banana taped to a wall art?',
+    'Who’s the best painter?',
+    'How do I start painting?',
     'Any dating advice?',
-    'What are your design principles?'
+    'Any regrets?',
+    'What’s your favorite color?',
+    'I’m stuck. No inspiration.',
+    'It’s raining again.',
+    'I’m so tired.'
   ];
 
   // ---------- helpers ----------
@@ -1138,7 +1391,7 @@ button { font: inherit; color: inherit; }
 
   // ---------- reading mode: tap a reply to expand it, tap again to bring everything back ----------
   const appEl = $('#app');
-  function setFocus(on) { appEl.classList.toggle('reading', on); }
+  function setFocus(on) { appEl.classList.toggle('reading', on); if (on && perched) doveLeave(); }
   function onReplyTap(e) {
     if (e.target.closest('button, a')) return;
     if (!e.target.closest('.card-b, .msg.them')) return;
@@ -1186,6 +1439,62 @@ button { font: inherit; color: inherit; }
   }
   $('#madeby').addEventListener('click', openAbout);
 
+  // ---------- the dove: drops in on a random artist now and then ----------
+  const doveEl = $('#dove');
+  let doveBusy = false, lastPerch = null, perchT = 0, perched = null;
+  const DW = 58, DH = 43;
+  const T = (x, y, r, s) => 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scaleX(' + s + ') rotate(' + r + 'deg)';
+  function scheduleDove(ms) { setTimeout(doveVisit, ms != null ? ms : 12000 + Math.random() * 14000); }
+  function doveAnimate(frames, opts) { const old = doveEl.getAnimations(); const a = doveEl.animate(frames, Object.assign({ fill: 'forwards' }, opts)); old.forEach((o) => o.cancel()); return a; }
+  function doveTargets() {
+    const cr = castEl.getBoundingClientRect();
+    return [...castEl.querySelectorAll('.who')].filter((b) => {
+      if (b.dataset.id === 'group' || !online.has(b.dataset.id) || b.dataset.id === lastPerch) return false;
+      const r = b.querySelector('.tile').getBoundingClientRect();
+      return r.left >= cr.left + 2 && r.right <= cr.right - 2;
+    });
+  }
+  function doveVisit() {
+    if (reduce || doveBusy || document.hidden || appEl.classList.contains('reading')) return scheduleDove();
+    const ts = doveTargets();
+    if (!ts.length) return scheduleDove();
+    const b = ts[Math.floor(Math.random() * ts.length)];
+    lastPerch = b.dataset.id; doveBusy = true;
+    const ar = appEl.getBoundingClientRect(), tr = b.querySelector('.tile').getBoundingClientRect();
+    const tx = tr.left - ar.left + tr.width / 2 - DW / 2 + 3, ty = tr.top - ar.top - DH * 0.82;
+    const fromLeft = Math.random() < 0.5, dir = fromLeft ? 1 : -1;
+    const sx = fromLeft ? -90 : ar.width + 90, sy = -50 + Math.random() * 40;
+    doveEl.classList.remove('perched'); doveEl.classList.add('flying'); doveEl.style.opacity = 1;
+    const a = doveAnimate([
+      { transform: T(sx, sy, -8, dir) },
+      { transform: T((sx + tx) / 2, Math.min(sy, ty) - 34, -12, dir), offset: 0.55 },
+      { transform: T(tx - dir * 6, ty - 12, 6, dir), offset: 0.88 },
+      { transform: T(tx, ty, 0, dir) }
+    ], { duration: 2300, easing: 'cubic-bezier(.33,.1,.3,1)' });
+    a.onfinish = () => {
+      doveEl.classList.remove('flying'); doveEl.classList.add('perched');
+      perched = { tx, ty, dir };
+      perchT = setTimeout(doveLeave, 4500 + Math.random() * 4000);
+    };
+  }
+  function doveLeave() {
+    if (!perched) return;
+    clearTimeout(perchT);
+    const { tx, ty } = perched; perched = null;
+    const ar = appEl.getBoundingClientRect();
+    const out = Math.random() < 0.5 ? 1 : -1, ex = out > 0 ? ar.width + 100 : -100;
+    doveEl.classList.remove('perched'); doveEl.classList.add('flying');
+    const a = doveAnimate([
+      { transform: T(tx, ty, 0, out) },
+      { transform: T(tx + out * 30, ty - 26, -14, out), offset: 0.22 },
+      { transform: T(ex, -80, -8, out) }
+    ], { duration: 2000, easing: 'cubic-bezier(.45,0,.6,1)' });
+    a.onfinish = () => { doveEl.style.opacity = 0; doveEl.classList.remove('flying'); doveBusy = false; scheduleDove(); };
+  }
+  castEl.addEventListener('scroll', () => { if (perched) doveLeave(); }, { passive: true });
+  window.addEventListener('resize', () => { if (perched) doveLeave(); });
+  if (!reduce) scheduleDove(3500);
+
   // ---------- composer ----------
   const q = $('#q');
   function autosize() { q.style.height = 'auto'; q.style.height = Math.min(q.scrollHeight, 110) + 'px'; }
@@ -1204,7 +1513,7 @@ button { font: inherit; color: inherit; }
   const sampleQ = 'Should I quit my job to paint full time?';
   const r0 = newRound(sampleQ);
   const firstTwo = castOrder.slice(0, 4);
-  firstTwo.forEach((id) => { const c = addCard(r0, id); L[id].quit.forEach((line) => { addPara(c.body, line, false); c.lines.push(line); }); finishCard(c); });
+  firstTwo.forEach((id) => { const c = addCard(r0, id); seenT[id + ':quit'] = 1; L[id].quit[0].forEach((line) => { addPara(c.body, line, false); c.lines.push(line); }); finishCard(c); });
   const b0 = pickBanter(firstTwo);
   if (b0) { const c = addCard(r0, b0[0], { aside: true }); addPara(c.body, b0[2], false); c.lines.push(b0[2]); }
   updatePager(); updateCast();
