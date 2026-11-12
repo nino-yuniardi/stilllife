@@ -385,6 +385,9 @@ button { font: inherit; color: inherit; }
 .ns .ns-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--ns-ink); cursor: pointer; display: grid; place-items: center; }
 .ns .ns-close:hover { background: color-mix(in srgb, var(--ns-ink) 8%, transparent); }
 
+.meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; }
+.meta .fine { margin: 0 0 0 auto; font-size: 11.5px; white-space: nowrap; text-align: right; color: var(--muted); }
+.meta .fine button { font-weight: 600; padding: 4px 0; }
 /* simpler lockup: pager lines, then a + and the chips, all left-aligned */
 .compose { gap: 12px; }
 .pager { justify-content: flex-start; gap: 10px; padding: 0; }
@@ -488,11 +491,14 @@ button { font: inherit; color: inherit; }
   </section>
 
   <div class="compose gut" id="compose">
+    <div class="meta">
     <div class="pager" id="pager">
         <button class="pg" id="pg-prev" type="button" aria-label="Previous answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
         <div class="marks" id="marks"></div>
         <button class="pg" id="pg-next" type="button" aria-label="Next answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
       </div>
+      <p class="fine">Parody, not advice · <button type="button" id="madeby">Nino Studio</button></p>
+    </div>
     <div class="starters" id="starters"></div>
     <div class="bar-home" id="bar-home" hidden>
     <div class="bar">
@@ -503,7 +509,6 @@ button { font: inherit; color: inherit; }
       </button>
     </div>
     </div>
-    <p class="fine">Parody. Made-up quotes, not real advice. <button type="button" id="madeby">Made by Nino Studio</button></p>
   </div>
 </div>
 
