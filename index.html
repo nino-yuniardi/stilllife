@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>What Would Dead Artists Do?</title>
 <meta name="description" content="Ask anything about art or life. Van Gogh, Frida, Picasso, Monet and friends answer from the afterlife. A parody by Nino Studio, painted in Seattle.">
-<meta name="theme-color" content="#d9e3e9">
+<meta name="theme-color" content="#c5d3dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232a1d18'/%3E%3Cellipse cx='32' cy='18' rx='13' ry='4' fill='none' stroke='%23eab49a' stroke-width='3'/%3E%3Ccircle cx='32' cy='36' r='11' fill='%23eab49a'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What Would Dead Artists Do?">
@@ -19,14 +19,14 @@
 <style>
 /* Layout: the cast sits up in a soft Seattle sky (clouds drifting, a little sun peeking in); a light sheet below holds one rounded speech bubble per answer. */
 :root {
-  --sky-a: #d9e3e9;
-  --sky-b: #e2e9ed;
-  --sky-c: #e9eef0;
-  --cloud: #f1f5f6;
-  --cloud-shade: #e2e9ed;
+  --sky-a: #c5d3dd;
+  --sky-b: #d1dce3;
+  --sky-c: #dde5ea;
+  --cloud: #edf2f5;
+  --cloud-shade: #e2e9ee;
   --sun: transparent;
   --chip: rgba(30, 48, 60, 0.06);
-  --band: #e2e9ed;
+  --band: #d1dce3;
   --band-ink: #1d2a32;
   --band-muted: #66757f;
   --deep: #2a1d18;
@@ -385,6 +385,28 @@ button { font: inherit; color: inherit; }
 .ns .ns-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--ns-ink); cursor: pointer; display: grid; place-items: center; }
 .ns .ns-close:hover { background: color-mix(in srgb, var(--ns-ink) 8%, transparent); }
 
+/* simpler lockup: pager lines, then a + and the chips, all left-aligned */
+.compose { gap: 12px; }
+.pager { justify-content: flex-start; gap: 10px; padding: 0; }
+.marks { gap: 5px; }
+.marks button { width: 16px; height: 3px; border-radius: 2px; background: var(--ink); opacity: .16; margin-block: 8px; }
+.marks button.on { width: 30px; background: var(--ink); opacity: .8; }
+.pg { width: 28px; height: 28px; border-radius: 8px; }
+.starters { align-items: center; }
+.starters .more-q { flex: none; width: 40px; height: 40px; min-height: 40px; padding: 0; justify-content: center; border-radius: 50%; background: var(--ink); color: var(--stage); }
+.starters .more-q:hover { background: var(--ink); transform: rotate(90deg); }
+.starters .more-q { transition: transform .3s cubic-bezier(.3,1.4,.5,1); }
+.qmenu .bar { margin-top: 2px; }
+.qmenu .qm-head h2 { font-size: 22px; }
+.fine { margin: 0; text-align: left; }
+.ev-av { background: color-mix(in srgb, var(--band-ink) 10%, var(--surface)) !important; color: var(--band-ink); }
+.ev-av svg { opacity: .78; }
+/* clouds: soft edges and a drift you can actually see on a phone */
+.cloud { filter: blur(2.5px); }
+.cloud.c1 { animation-duration: 70s; animation-delay: -20s; }
+.cloud.c2 { animation-duration: 55s; animation-delay: -40s; }
+.cloud.c3 { animation-duration: 95s; animation-delay: -70s; }
+.cloud.c5 { animation-duration: 85s; animation-delay: -10s; }
 @media (max-width: 719px) {
   .pg { display: none; }
   .pager { padding-block: 2px 8px; }
@@ -405,8 +427,8 @@ button { font: inherit; color: inherit; }
   .qline { width: 100%; max-width: 900px; margin-inline: auto; }
   .card, .card.aside { flex-basis: calc(33.333% - 8px); max-width: none; }
   .compose { margin-inline: 24px; }
-  .compose > * { width: 100%; max-width: 900px; margin-inline: auto; }
-  .starters { justify-content: safe center; }
+  .compose > * { width: 100%; }
+
   .thread { padding-left: max(24px, calc((100% - 760px) / 2)); padding-right: max(24px, calc((100% - 760px) / 2)); }
   .dm-h { padding-left: max(24px, calc((100% - 760px) / 2)); padding-right: max(24px, calc((100% - 760px) / 2)); }
   .scrim { align-items: center; justify-content: center; }
@@ -455,11 +477,6 @@ button { font: inherit; color: inherit; }
         <button class="nudge" id="q-next" type="button" aria-label="Later question" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
       </div>
       <div class="rounds" id="rounds" aria-live="polite"></div>
-      <div class="pager gut">
-        <button class="pg" id="pg-prev" type="button" aria-label="Previous answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-        <div class="marks" id="marks"></div>
-        <button class="pg" id="pg-next" type="button" aria-label="Next answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
-      </div>
     </div>
 
     <div class="view" id="dm" hidden>
@@ -468,17 +485,24 @@ button { font: inherit; color: inherit; }
     </div>
   </section>
 
-  <form class="compose gut" id="compose">
+  <div class="compose gut" id="compose">
+    <div class="pager" id="pager">
+        <button class="pg" id="pg-prev" type="button" aria-label="Previous answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        <div class="marks" id="marks"></div>
+        <button class="pg" id="pg-next" type="button" aria-label="Next answer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
     <div class="starters" id="starters"></div>
+    <div class="bar-home" id="bar-home" hidden>
     <div class="bar">
       <label for="q" class="vh">Your question</label>
       <textarea id="q" rows="1" maxlength="300" placeholder="Ask the afterlife anything…"></textarea>
-      <button class="send" id="send" type="submit" aria-label="Send" disabled>
+      <button class="send" id="send" type="button" aria-label="Send" disabled>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
       </button>
     </div>
+    </div>
     <p class="fine">Parody. Made-up quotes, not real advice. <button type="button" id="madeby">Made by Nino Studio</button></p>
-  </form>
+  </div>
 </div>
 
 <script>
@@ -1296,11 +1320,10 @@ button { font: inherit; color: inherit; }
     const ev = el('button', 'who sel'); ev.type = 'button'; ev.dataset.id = 'group';
     ev.setAttribute('aria-label', 'Everyone: the group chat');
     const t = el('span', 'tile');
-    const ea = el('span', 'av'); ea.style.background = '#eab49a';
-    ea.innerHTML = '<svg viewBox="0 0 80 80" aria-hidden="true">' +
-      '<circle cx="24" cy="34" r="8" fill="#4f735c"/><path d="M8 66 Q9 46 24 45 Q39 46 40 66Z" fill="#4f735c"/>' +
-      '<circle cx="56" cy="34" r="8" fill="#6f8fa8"/><path d="M40 66 Q41 46 56 45 Q71 46 72 66Z" fill="#6f8fa8"/>' +
-      '<circle cx="40" cy="38" r="9.5" fill="#2a1d18"/><path d="M20 80 Q21 53 40 52 Q59 53 60 80Z" fill="#2a1d18"/></svg>';
+    const ea = el('span', 'av ev-av');
+    ea.innerHTML = '<svg viewBox="0 0 80 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">' +
+      '<circle cx="40" cy="33" r="7"/><path d="M27 54 C28 46 34 43 40 43 C46 43 52 46 53 54"/>' +
+      '<circle cx="23" cy="37" r="5" opacity=".55"/><circle cx="57" cy="37" r="5" opacity=".55"/></svg>';
     t.appendChild(ea);
     ev.append(t, el('span', 'nm', 'Everyone'));
     ev.onclick = () => go('group');
@@ -1500,7 +1523,7 @@ button { font: inherit; color: inherit; }
       }, 1100);
     }
     const group = view === 'group';
-    $('#salon').hidden = !group; $('#dm').hidden = group;
+    $('#salon').hidden = !group; $('#dm').hidden = group; $('#pager').hidden = !group;
     if (!group) {
       renderDmHead(view);
       const t = thread(view);
@@ -1526,6 +1549,7 @@ button { font: inherit; color: inherit; }
   async function ask(textIn) {
     const q = $('#q');
     const text = (textIn != null ? textIn : q.value).trim();
+    if (text) closeSheets();
     if (!text || state.busy) return;
     q.value = ''; autosize(); $('#send').disabled = true; state.busy = true;
     const topic = topicOf(text);
@@ -1561,7 +1585,7 @@ button { font: inherit; color: inherit; }
   }
 
   // ---------- share ----------
-  function closeSheets() { document.querySelectorAll('.scrim').forEach((s) => s.remove()); }
+  function closeSheets() { const bar = document.querySelector('.bar'); if (bar && bar.closest('.scrim')) $('#bar-home').appendChild(bar); document.querySelectorAll('.scrim').forEach((s) => s.remove()); }
   function openShare(c) {
     closeSheets();
     const a = A[c.id], text = c.lines.join(' ');
@@ -1715,19 +1739,20 @@ button { font: inherit; color: inherit; }
   function autosize() { q.style.height = 'auto'; q.style.height = Math.min(q.scrollHeight, 110) + 'px'; }
   q.addEventListener('input', () => { autosize(); $('#send').disabled = !q.value.trim() || state.busy; });
   q.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(); } });
-  $('#compose').addEventListener('submit', (e) => { e.preventDefault(); ask(); });
+  $('#send').addEventListener('click', () => ask());
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheets(); });
   function openQMenu() {
     closeSheets();
-    const scrim = el('div', 'scrim'); scrim.onclick = (e) => { if (e.target === scrim) scrim.remove(); };
-    const s2 = el('div', 'sheet qmenu'); s2.setAttribute('role', 'dialog'); s2.setAttribute('aria-modal', 'true'); s2.setAttribute('aria-label', 'Ready-made questions');
+    const scrim = el('div', 'scrim'); scrim.onclick = (e) => { if (e.target === scrim) closeSheets(); };
+    const s2 = el('div', 'sheet qmenu'); s2.setAttribute('role', 'dialog'); s2.setAttribute('aria-modal', 'true'); s2.setAttribute('aria-label', 'Ask a question');
     const head = el('div', 'qm-head');
-    head.append(el('h2', null, 'Pick a question'), btn('Surprise me', 'qm-surprise', () => {
-      const all = QMENU.flatMap((g) => g[1]); closeSheets(); ask(all[Math.floor(Math.random() * all.length)]);
+    const group = state.view === 'group';
+    head.append(el('h2', null, group ? 'Ask the afterlife' : 'Message ' + A[state.view].short), btn('Surprise me', 'qm-surprise', () => {
+      const all = QMENU.flatMap((g) => g[1]); ask(all[Math.floor(Math.random() * all.length)]); closeSheets();
     }));
     s2.appendChild(head);
-    const who = state.view === 'group' ? 'Everyone online answers.' : 'Only this artist answers.';
-    s2.appendChild(el('p', 'note', who + ' Or close this and type your own.'));
+    s2.appendChild($('.bar'));
+    s2.appendChild(el('p', 'note', group ? 'Type your own, or pick one below. Everyone online answers.' : 'Type your own, or pick one below.'));
     QMENU.forEach(([label, qs]) => {
       const g = el('section', 'qm-group');
       g.appendChild(el('h3', null, label));
@@ -1735,12 +1760,13 @@ button { font: inherit; color: inherit; }
       qs.forEach((qq) => row.appendChild(btn(qq, '', () => { closeSheets(); ask(qq); })));
       g.appendChild(row); s2.appendChild(g);
     });
-    s2.appendChild(btn('Back to the chat', 'qm-back', closeSheets));
     scrim.appendChild(s2); $('#app').appendChild(scrim);
-    s2.querySelector('button').focus();
+    autosize();
+    if (window.matchMedia('(hover: hover)').matches) q.focus(); else s2.querySelector('textarea').focus({ preventScroll: true });
   }
   const moreB = btn('', 'more-q', openQMenu);
-  moreB.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>More questions';
+  moreB.setAttribute('aria-label', 'Ask your own question or see more');
+  moreB.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   $('#starters').appendChild(moreB);
   STARTERS.forEach((s) => $('#starters').appendChild(btn(s, '', () => ask(s))));
   $('#pg-prev').onclick = () => { const r = rounds[cur]; goCard(r, activeIdx(r) - 1); };
