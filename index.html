@@ -40,7 +40,7 @@
   --muted: #555a5e;
   --line: #ddd8d1;
   --scrim: rgba(10, 20, 18, 0.5);
-  --mix: 13%;
+  --mix: 21%;
 
   /* each artist's color: portrait background and bubble tint */
   /* Seattle: market marigold, Sound blue, Japanese Garden moss, sockeye, rhododendron, madrona, ferry wake, Douglas fir */
@@ -56,7 +56,7 @@
     --sky-a: #1e272d; --sky-b: #182025; --sky-c: #13191d; --cloud: #222c32; --cloud-shade: #1c252a; --sun: transparent; --chip: rgba(255, 255, 255, 0.08);
     --band: #182025; --band-ink: #e9eef0; --band-muted: #9aa8b0; --deep: #33241e; --deep-ink: #f3ebe2; --deep-muted: #c4b3a7; --gold: #eab49a;
     --stage: #12171a; --surface: #1a2126; --ink: #eef1f2; --muted: #a3adb3; --line: #2b3439;
-    --scrim: rgba(0, 0, 0, 0.6); --mix: 18%;
+    --scrim: rgba(0, 0, 0, 0.6); --mix: 25%;
     color-scheme: dark;
   }
 }
@@ -64,7 +64,7 @@
   --sky-a: #1e272d; --sky-b: #182025; --sky-c: #13191d; --cloud: #222c32; --cloud-shade: #1c252a; --sun: transparent; --chip: rgba(255, 255, 255, 0.08);
     --band: #182025; --band-ink: #e9eef0; --band-muted: #9aa8b0; --deep: #33241e; --deep-ink: #f3ebe2; --deep-muted: #c4b3a7; --gold: #eab49a;
   --stage: #12171a; --surface: #1a2126; --ink: #eef1f2; --muted: #a3adb3; --line: #2b3439;
-  --scrim: rgba(0, 0, 0, 0.6); --mix: 18%;
+  --scrim: rgba(0, 0, 0, 0.6); --mix: 25%;
   color-scheme: dark;
 }
 
@@ -353,6 +353,11 @@ button { font: inherit; color: inherit; }
 .card.nino .card-b p:not(.medium) { color: var(--ink); }
 .card.nino .nino-links a { border: 0; background: color-mix(in srgb, var(--gold) 18%, var(--surface)); }
 .card.nino .nino-links a:first-child { background: color-mix(in srgb, var(--gold) 38%, var(--surface)); color: var(--ink); }
+/* one continuous sky: blue at the top fading to near-white at the bottom, no panel edge */
+.sky { background: linear-gradient(180deg, var(--sky-a) 0%, var(--sky-b) 22%, var(--sky-c) 40%, var(--stage) 72%); }
+.stage, .compose { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.cloud.c4, .cloud.c6 { display: none; }
+.card { box-shadow: 0 1px 2px rgba(20, 35, 45, 0.04), 0 8px 24px -14px rgba(20, 35, 45, 0.18); }
 @media (max-width: 719px) {
   .pg { display: none; }
   .pager { padding-block: 2px 8px; }
