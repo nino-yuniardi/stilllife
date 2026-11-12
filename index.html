@@ -139,7 +139,7 @@ button { font: inherit; color: inherit; }
   background: color-mix(in srgb, var(--tc) var(--mix), var(--surface));
   animation: pop .5s cubic-bezier(.3,1.35,.5,1) both;
 }
-.card::before { content: ""; position: absolute; top: -9px; left: 30px; width: 22px; height: 10px; background: inherit; clip-path: polygon(0 100%, 22% 0, 100% 100%); }
+.card::before { content: ""; position: absolute; top: -9px; left: 30px; width: 22px; height: 10px; background: inherit; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
 @keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
 .card-h { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
 .mini { flex: none; width: 44px; height: 44px; }
@@ -361,7 +361,7 @@ button { font: inherit; color: inherit; }
 /* tone-on-tone outline on each speech bubble, tail included */
 .card { --edge: color-mix(in srgb, var(--tc) 42%, var(--surface)); border: 1px solid var(--edge); }
 .card::before { top: -10px; left: 29px; width: 24px; height: 11px; background: var(--edge); }
-.card::after { content: ""; position: absolute; top: -8.4px; left: 30.6px; width: 20.8px; height: 9.6px; background: inherit; border: 0; clip-path: polygon(0 100%, 22% 0, 100% 100%); pointer-events: none; }
+.card::after { content: ""; position: absolute; top: -8.4px; left: 30.6px; width: 20.8px; height: 9.6px; background: inherit; border: 0; clip-path: polygon(0 100%, 50% 0, 100% 100%); pointer-events: none; }
 .card.aside::after { display: none; }
 .card.nino { --edge: color-mix(in srgb, var(--gold) 34%, var(--surface)); }
 
@@ -400,9 +400,12 @@ button { font: inherit; color: inherit; }
 .qmenu .qm-head h2 { font-size: 22px; }
 .fine { margin: 0; text-align: left; }
 .ev-av { background: color-mix(in srgb, var(--band-ink) 10%, var(--surface)) !important; color: var(--band-ink); }
-.ev-av svg { opacity: .78; }
+.ev-av svg { opacity: 1; }
 /* clouds: soft edges and a drift you can actually see on a phone */
 .cloud { filter: blur(2.5px); }
+.cloud { left: var(--x, 0); }
+@keyframes drift { from { transform: translateX(calc(-1 * var(--x, 0px) - 300px)); } to { transform: translateX(calc(100vw - var(--x, 0px) + 40px)); } }
+.cloud.c1 { --x: 8vw; } .cloud.c2 { --x: 62vw; } .cloud.c3 { --x: 34vw; } .cloud.c5 { --x: 70vw; }
 .cloud.c1 { animation-duration: 70s; animation-delay: -20s; }
 .cloud.c2 { animation-duration: 55s; animation-delay: -40s; }
 .cloud.c3 { animation-duration: 95s; animation-delay: -70s; }
@@ -436,7 +439,6 @@ button { font: inherit; color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dove { display: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
@@ -1321,9 +1323,6 @@ button { font: inherit; color: inherit; }
     ev.setAttribute('aria-label', 'Everyone: the group chat');
     const t = el('span', 'tile');
     const ea = el('span', 'av ev-av');
-    ea.innerHTML = '<svg viewBox="0 0 80 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">' +
-      '<circle cx="40" cy="33" r="7"/><path d="M27 54 C28 46 34 43 40 43 C46 43 52 46 53 54"/>' +
-      '<circle cx="23" cy="37" r="5" opacity=".55"/><circle cx="57" cy="37" r="5" opacity=".55"/></svg>';
     t.appendChild(ea);
     ev.append(t, el('span', 'nm', 'Everyone'));
     ev.onclick = () => go('group');
@@ -1339,7 +1338,22 @@ button { font: inherit; color: inherit; }
       castEl.appendChild(b);
     });
   }
+  // Everyone = a pie made of whoever is online, in their colors
+  function paintEveryone() {
+    const ea = castEl.querySelector('.ev-av'); if (!ea) return;
+    const ids = castOrder.filter((id) => online.has(id)), n = ids.length || 1;
+    let svg = '<svg viewBox="0 0 80 80" aria-hidden="true">';
+    ids.forEach((id, k) => {
+      const a0 = (k / n) * Math.PI * 2 - Math.PI / 2, a1 = ((k + 1) / n) * Math.PI * 2 - Math.PI / 2;
+      const p = (a) => (40 + 40 * Math.cos(a)).toFixed(2) + ' ' + (40 + 40 * Math.sin(a)).toFixed(2);
+      svg += '<path d="M40 40 L' + p(a0) + ' A40 40 0 ' + (a1 - a0 > Math.PI ? 1 : 0) + ' 1 ' + p(a1) + 'Z" style="fill:var(--c-' + id + ')"/>';
+      svg += '<line x1="40" y1="40" x2="' + p(a0).split(' ')[0] + '" y2="' + p(a0).split(' ')[1] + '" stroke="var(--band)" stroke-width="2.4"/>';
+    });
+    svg += '<circle cx="40" cy="40" r="13" style="fill:var(--band)"/></svg>';
+    ea.innerHTML = svg;
+  }
   function updateCast() {
+    paintEveryone();
     let speaking = null;
     if (state.view === 'group' && rounds[cur] && rounds[cur].cards.length) speaking = rounds[cur].cards[activeIdx(rounds[cur])].id;
     castEl.querySelectorAll('.who').forEach((b) => {
@@ -1418,7 +1432,7 @@ button { font: inherit; color: inherit; }
     c.done = true;
     const md = el('p', 'medium'); md.appendChild(el('b', null, 'Medium')); md.appendChild(document.createTextNode(A[c.id].medium)); c.body.appendChild(md);
     const f = el('div', 'card-f');
-    f.append(btn('Share', '', () => openShare(c)), btn('DM ' + A[c.id].short + ' →', 'solid', () => go(c.id)));
+    f.append(btn('DM ' + A[c.id].short + ' →', 'solid', () => go(c.id)));
     c.foot.appendChild(f);
     c.foot.hidden = false;
   }
@@ -1483,6 +1497,7 @@ button { font: inherit; color: inherit; }
   function setOnline(id, on, note) {
     if (online.has(id) === on) return;
     if (on) online.add(id); else online.delete(id);
+    paintEveryone();
     const b = castEl.querySelector('[data-id="' + id + '"]');
     if (b) {
       b.classList.toggle('away', !on);
@@ -1694,7 +1709,7 @@ button { font: inherit; color: inherit; }
     });
   }
   function doveVisit() {
-    if (reduce || doveBusy || document.hidden || appEl.classList.contains('reading')) return scheduleDove();
+    if (doveBusy || document.hidden || appEl.classList.contains('reading')) return scheduleDove();
     const ts = doveTargets();
     if (!ts.length) return scheduleDove();
     const b = ts[Math.floor(Math.random() * ts.length)];
@@ -1703,6 +1718,12 @@ button { font: inherit; color: inherit; }
     const tx = tr.left - ar.left + tr.width / 2 - DW / 2 + 3, ty = tr.top - ar.top - DH * 0.82;
     const fromLeft = Math.random() < 0.5, dir = fromLeft ? 1 : -1;
     const sx = fromLeft ? -90 : ar.width + 90, sy = -50 + Math.random() * 40;
+    if (reduce) {
+      doveEl.classList.add('perched'); doveEl.style.opacity = 1;
+      const f = doveAnimate([{ transform: T(tx, ty, 0, dir), opacity: 0 }, { transform: T(tx, ty, 0, dir), opacity: 1 }], { duration: 700, easing: 'ease-out' });
+      f.onfinish = () => { perched = { tx, ty, dir }; perchT = setTimeout(doveLeave, 6000 + Math.random() * 4000); };
+      return;
+    }
     doveEl.classList.remove('perched'); doveEl.classList.add('flying'); doveEl.style.opacity = 1;
     const a = doveAnimate([
       { transform: T(sx, sy, -8, dir) },
@@ -1720,6 +1741,11 @@ button { font: inherit; color: inherit; }
     if (!perched) return;
     clearTimeout(perchT);
     const { tx, ty } = perched; perched = null;
+    if (reduce) {
+      const f = doveAnimate([{ transform: T(tx, ty, 0, 1), opacity: 1 }, { transform: T(tx, ty, 0, 1), opacity: 0 }], { duration: 600, easing: 'ease-in' });
+      f.onfinish = () => { doveEl.style.opacity = 0; doveEl.classList.remove('perched'); doveBusy = false; scheduleDove(); };
+      return;
+    }
     const ar = appEl.getBoundingClientRect();
     const out = Math.random() < 0.5 ? 1 : -1, ex = out > 0 ? ar.width + 100 : -100;
     doveEl.classList.remove('perched'); doveEl.classList.add('flying');
@@ -1732,7 +1758,7 @@ button { font: inherit; color: inherit; }
   }
   castEl.addEventListener('scroll', () => { if (perched) doveLeave(); }, { passive: true });
   window.addEventListener('resize', () => { if (perched) doveLeave(); });
-  if (!reduce) scheduleDove(3500);
+  scheduleDove(3500);
 
   // ---------- composer ----------
   const q = $('#q');
