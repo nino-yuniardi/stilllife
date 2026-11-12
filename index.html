@@ -241,17 +241,17 @@ button { font: inherit; color: inherit; }
 
 /* reading mode: an eased, staggered fold. The names fade first, the portraits shrink in a left-to-right wave,
    the title lifts away and the composer sinks; reversing plays it back the other way. */
-.app { --ease: cubic-bezier(.22, 1, .36, 1); }
-.mast { max-height: 120px; overflow: hidden; transition: max-height .55s var(--ease), padding .55s var(--ease), opacity .35s ease, transform .55s var(--ease); }
-.cast { transition: padding .55s var(--ease); }
-.who { transition: width .5s var(--ease), gap .5s var(--ease); transition-delay: calc(var(--i, 0) * 28ms); }
-.tile { transition: width .5s var(--ease), height .5s var(--ease); transition-delay: calc(var(--i, 0) * 28ms); }
+.app { --ease: cubic-bezier(.2, .9, .3, 1); --bounce: cubic-bezier(.34, 1.5, .6, 1); }
+.mast { max-height: 120px; overflow: hidden; transition: max-height .4s var(--ease), padding .4s var(--ease), opacity .25s ease, transform .45s var(--bounce); }
+.cast { transition: padding .4s var(--ease); }
+.who { transition: width .45s var(--bounce), gap .4s var(--ease); transition-delay: calc(var(--i, 0) * 22ms); }
+.tile { transition: width .45s var(--bounce), height .45s var(--bounce); transition-delay: calc(var(--i, 0) * 22ms); }
 .who .nm { max-height: 18px; overflow: hidden; transition: max-height .4s var(--ease), opacity .2s ease; }
-.ondot { transition: transform .4s var(--ease); transform-origin: bottom right; }
-.qline { transition: padding .5s var(--ease); }
+.ondot { transition: transform .4s var(--bounce); transform-origin: bottom right; }
+.qline { transition: padding .4s var(--ease); }
 .qline .eyebrow { display: block; max-height: 20px; overflow: hidden; transition: max-height .4s var(--ease), opacity .25s ease; }
-.asked { transition: font-size .5s var(--ease); }
-.compose { max-height: 220px; overflow: hidden; transition: max-height .55s var(--ease), padding .55s var(--ease), opacity .3s ease, transform .55s var(--ease), border-top-width .55s; }
+.asked { transition: font-size .42s var(--bounce); }
+.compose { max-height: 240px; overflow: hidden; transition: max-height .4s var(--ease), padding .4s var(--ease), opacity .25s ease, transform .45s var(--bounce), border-top-width .4s; }
 .card { transition: box-shadow .5s ease; }
 
 .app.reading .mast { max-height: 0; padding-top: 0; opacity: 0; transform: translateY(-14px); }
@@ -439,7 +439,7 @@ button { font: inherit; color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .cloud, .eyes, .live i, .who, .who.typing .av, .dove *, .dots i, .card, .msg, .ink { animation: none !important; }
 }
 </style>
 
@@ -1341,15 +1341,11 @@ button { font: inherit; color: inherit; }
   // Everyone = a pie made of whoever is online, in their colors
   function paintEveryone() {
     const ea = castEl.querySelector('.ev-av'); if (!ea) return;
-    const ids = castOrder.filter((id) => online.has(id)), n = ids.length || 1;
+    const ids = castOrder.filter((id) => online.has(id));
+    const n = Math.max(ids.length, 1), step = 40 / (n + 0.6);
     let svg = '<svg viewBox="0 0 80 80" aria-hidden="true">';
-    ids.forEach((id, k) => {
-      const a0 = (k / n) * Math.PI * 2 - Math.PI / 2, a1 = ((k + 1) / n) * Math.PI * 2 - Math.PI / 2;
-      const p = (a) => (40 + 40 * Math.cos(a)).toFixed(2) + ' ' + (40 + 40 * Math.sin(a)).toFixed(2);
-      svg += '<path d="M40 40 L' + p(a0) + ' A40 40 0 ' + (a1 - a0 > Math.PI ? 1 : 0) + ' 1 ' + p(a1) + 'Z" style="fill:var(--c-' + id + ')"/>';
-      svg += '<line x1="40" y1="40" x2="' + p(a0).split(' ')[0] + '" y2="' + p(a0).split(' ')[1] + '" stroke="var(--band)" stroke-width="2.4"/>';
-    });
-    svg += '<circle cx="40" cy="40" r="13" style="fill:var(--band)"/></svg>';
+    ids.forEach((id, k) => { svg += '<circle cx="40" cy="40" r="' + (40 - k * step).toFixed(2) + '" style="fill:var(--c-' + id + ')"/>'; });
+    svg += '<circle cx="40" cy="40" r="' + (40 - n * step).toFixed(2) + '" style="fill:var(--band)"/></svg>';
     ea.innerHTML = svg;
   }
   function updateCast() {
