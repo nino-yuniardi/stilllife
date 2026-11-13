@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 :root {
   --bg: #f4f2ee; --surface: #fbfaf7; --ink: #111; --muted: #6b6b69; --line: #e2dfd9;
@@ -158,6 +158,27 @@ textarea:focus { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); 
 @keyframes fade { from { opacity: 0; } }
 @keyframes up { from { transform: translateY(30px); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* About sheet: same as the artists room */
+.ns { --ns-bg: #f2efea; --ns-ink: #121212; --ns-body: #625c56; --ns-olive: #5c6a3a; --ns-line: #ddd6cc;
+  position: relative; background: var(--ns-bg); color: var(--ns-ink); gap: 0; padding-block: 34px calc(26px + env(safe-area-inset-bottom, 0px)); padding-inline: 28px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ns { --ns-bg: #1a1816; --ns-ink: #f2efea; --ns-body: #b9b1a7; --ns-olive: #a9b884; --ns-line: #34302b; } }
+:root[data-theme="dark"] .ns { --ns-bg: #1a1816; --ns-ink: #f2efea; --ns-body: #b9b1a7; --ns-olive: #a9b884; --ns-line: #34302b; }
+.ns .ns-eyebrow { margin: 0 0 14px; font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--ns-olive); }
+.ns h2 { margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 300; font-size: clamp(32px, 9vw, 40px); line-height: 1.04; letter-spacing: -0.02em; text-transform: none; }
+.ns .ns-sub { margin: 10px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 300; font-style: italic; font-size: 19px; color: var(--ns-body); }
+.ns .ns-body { margin: 18px 0 0; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ns-body); }
+.ns .ns-body + .ns-body { margin-top: 10px; }
+.ns .ns-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.ns .ns-ctas a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 17px; border-radius: 8px; border: 1px solid var(--ns-ink); text-decoration: none; color: var(--ns-ink);
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; transition: background .2s, color .2s; }
+.ns .ns-ctas a:first-child, .ns .ns-ctas a:hover { background: var(--ns-ink); color: var(--ns-bg); }
+.ns .ns-fine { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--ns-line); }
+.ns .ns-fine .ns-eyebrow { margin-bottom: 10px; }
+.ns .ns-fine p:not(.ns-eyebrow) { margin: 0 0 8px; font-family: Inter, system-ui, sans-serif; font-size: 13.5px; line-height: 1.6; color: var(--ns-body); }
+.ns .ns-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--ns-ink); cursor: pointer; display: grid; place-items: center; }
+.ns .ns-close:hover { background: color-mix(in srgb, var(--ns-ink) 8%, transparent); }
+.sheet.ns { max-width: 560px; }
 </style>
 </head>
 <body>
@@ -1179,13 +1200,26 @@ textarea:focus { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); 
     });
   }
   function openAbout() {
-    const s = sheet('About');
-    s.append(el('h2', null, 'Made by a living designer.'), el('p', 'sub', 'The only one in this chat with a pulse.'));
-    s.appendChild(el('p', null, 'I’m Nino, a designer and painter in Seattle. Nearly thirty years of designing products, at Microsoft, Amazon and Oracle among others.'));
-    const c = el('div', 'ctas');
-    NINO_LINKS.forEach(([label, href]) => { const a = el('a', null, label); a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } c.appendChild(a); });
-    s.appendChild(c);
-    s.appendChild(el('p', 'fine', 'This is a comedy. These designers never said any of this. The jokes are built on real facts from their lives, but every word is made up. Nothing here is professional, financial, legal or medical advice.'));
+    const s2 = sheet('About Nino Studio'); s2.classList.add('ns');
+    const x = el('button', 'ns-close'); x.type = 'button'; x.setAttribute('aria-label', 'Back to the chat'); x.onclick = closeSheets;
+    x.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+    s2.appendChild(x);
+    s2.appendChild(el('p', 'ns-eyebrow', 'Nino Studio · Seattle'));
+    s2.appendChild(el('h2', null, 'Made by a living designer.'));
+    s2.appendChild(el('p', 'ns-sub', 'The only one in this chat with a pulse.'));
+    s2.appendChild(el('p', 'ns-body', 'I’m Nino, a designer and painter in Seattle. Nearly thirty years of designing products, at Microsoft, Amazon and Oracle among others.'));
+    s2.appendChild(el('p', 'ns-body', 'Curious what a living designer is making?'));
+    const ctas = el('div', 'ns-ctas');
+    [['See my design work', 'https://nino.studio/pages/design'], ['LinkedIn', 'https://www.linkedin.com/in/ninoy'], ['The dead artists', '/']].forEach(([label, href]) => {
+      const a = el('a', null, label); a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } ctas.appendChild(a);
+    });
+    s2.appendChild(ctas);
+    const fine = el('div', 'ns-fine');
+    fine.appendChild(el('p', 'ns-eyebrow', 'The fine print'));
+    fine.appendChild(el('p', null, 'This is a comedy. These designers never said any of this. The jokes are built on real facts from their lives, but every word is made up.'));
+    fine.appendChild(el('p', null, 'Please don’t make the logo bigger because a dead designer told you to. Nothing here is professional, financial, legal or medical advice.'));
+    s2.appendChild(fine);
+    ctas.querySelector('a').focus();
   }
   document.querySelectorAll('.about-btn').forEach((b) => { b.onclick = openAbout; });
   $('#plus').onclick = openQMenu;
