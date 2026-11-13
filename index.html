@@ -1695,8 +1695,8 @@ button { font: inherit; color: inherit; }
     s2.appendChild(el('p', 'ns-body', 'I’m Nino, a painter in Seattle. I made this because the greats figured out creative life the hard way. You don’t have to.'));
     s2.appendChild(el('p', 'ns-body', 'Want feedback from a living artist? Come paint with us.'));
     const ctas = el('div', 'ns-ctas');
-    [['Explore the art', 'https://nino.studio'], ['Spice Art Club', 'https://nino.studio/pages/spice-art-club'], ['Instagram', 'https://www.instagram.com/ninoyuniardi']].forEach(([label, href]) => {
-      const a = el('a', null, label); a.href = href; a.target = '_blank'; a.rel = 'noopener'; ctas.appendChild(a);
+    [['Explore the art', 'https://nino.studio'], ['Spice Art Club', 'https://nino.studio/pages/spice-art-club'], ['Instagram', 'https://www.instagram.com/ninoyuniardi'], ['The dead designers', '/designers']].forEach(([label, href]) => {
+      const a = el('a', null, label); a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } ctas.appendChild(a);
     });
     s2.appendChild(ctas);
     const fine = el('div', 'ns-fine');
