@@ -57,8 +57,8 @@ p { text-wrap: pretty; }
 .avw { position: relative; flex: none; display: block; }
 .dot { position: absolute; right: 1px; bottom: 1px; width: 26%; height: 26%; min-width: 9px; min-height: 9px; border-radius: 50%; background: var(--online); border: 2px solid var(--bg); }
 .away .av { filter: grayscale(1); opacity: .55; }
-.group-av { display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: var(--bg); flex: none; }
-.group-av svg { width: 52%; height: 52%; }
+.group-av { display: block; border-radius: 50%; overflow: hidden; flex: none; }
+.group-av svg { display: block; width: 100%; height: 100%; }
 
 /* ---------- list (the designers) ---------- */
 .list-h { padding: 22px 20px 10px; }
@@ -976,6 +976,15 @@ textarea:focus { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); 
     if (withDot && !online.has(id)) w.classList.add('away');
     return w;
   }
+  // Everyone = rings made of whoever is online, in their colours (same as the artists room)
+  function rings(size) {
+    const ids = IDS.filter((id) => online.has(id));
+    const n = Math.max(ids.length, 1), step = 40 / (n + 0.6);
+    let svg = '<svg viewBox="0 0 80 80" aria-hidden="true">';
+    ids.forEach((id, k) => { svg += '<circle cx="40" cy="40" r="' + (40 - k * step).toFixed(2) + '" style="fill:var(--c-' + id + ')"/>'; });
+    svg += '<circle cx="40" cy="40" r="' + (40 - n * step).toFixed(2) + '" style="fill:var(--surface)"/></svg>';
+    const a = el('span', 'group-av'); a.style.width = a.style.height = size + 'px'; a.innerHTML = svg; return a;
+  }
   const GROUP_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
 
   const order = IDS.slice().sort(() => Math.random() - .5);
@@ -1030,7 +1039,7 @@ textarea:focus { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); 
   // ---------- list ----------
   function renderList() {
     const rg = $('#row-group'); rg.innerHTML = '';
-    const ga = el('span', 'group-av'); ga.style.width = ga.style.height = '52px'; ga.innerHTML = GROUP_ICON;
+    const ga = rings(52);
     const t = el('span', 'tx'); t.append(el('b', null, 'Everyone'), el('span', null, 'Group chat · ' + online.size + ' online'));
     rg.append(ga, t); rg.setAttribute('aria-current', state.view === 'group');
     const grid = $('#grid'); grid.innerHTML = '';
@@ -1048,10 +1057,8 @@ textarea:focus { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); 
     const w = $('#who'); w.innerHTML = '';
     const t = el('div', 'tx');
     if (state.view === 'group') {
-      const st = el('span', 'stack');
-      [...online].slice(0, 3).forEach((id) => st.appendChild(av(id, 30)));
       t.append(el('b', null, 'Dead Designers'), el('span', null, online.size + ' online'));
-      w.append(st, t);
+      w.append(rings(40), t);
     } else {
       const id = state.view;
       t.append(el('b', null, A[id].name), el('span', null, (online.has(id) ? 'Online · ' + A[id].on : 'Away · ' + A[id].off)));
