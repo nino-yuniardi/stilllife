@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>What Would Dead Designers Do?</title>
 <meta name="description" content="Ask anything about design, AI or life. Paul Rand, Massimo Vignelli, Coco Chanel and friends answer from the afterlife. A parody by Nino Studio.">
-<meta name="theme-color" content="#c5d3dd">
+<meta name="theme-color" content="#f3f3f1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232a1d18'/%3E%3Cellipse cx='32' cy='18' rx='13' ry='4' fill='none' stroke='%23eab49a' stroke-width='3'/%3E%3Ccircle cx='32' cy='36' r='11' fill='%23eab49a'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What Would Dead Designers Do?">
@@ -43,8 +43,8 @@
   --mix: 21%;
 
   /* each designer's color: portrait background and bubble tint */
-  --c-pr: #5a7bb5; --c-sb: #c9714f; --c-mv: #b8504f; --c-mg: #d39aa0;
-  --c-ce: #b98f5c; --c-rl: #4f8c86; --c-sj: #93a6b8; --c-cc: #cbbfa8;
+  --c-pr: #8d9094; --c-sb: #b3aca5; --c-mv: #6e6e6c; --c-mg: #cbc6c2;
+  --c-ce: #a69f95; --c-rl: #7e8584; --c-sj: #9da2a8; --c-cc: #d6d3cd;
 
   --thick: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
   --thin: "Instrument Serif", "Iowan Old Style", Georgia, serif;
@@ -427,6 +427,26 @@ button { font: inherit; color: inherit; }
   .pg { display: none; }
   .pager { padding-block: 2px 8px; }
 }
+
+
+/* ---------- Designers room: black and white, black-turtleneck studio ---------- */
+:root {
+  --sky-a: #f3f3f1; --sky-b: #f3f3f1; --sky-c: #f3f3f1; --stage: #f3f3f1; --surface: #ffffff;
+  --ink: #111111; --muted: #666664; --line: #dcdcd8; --chip: rgba(0,0,0,.06);
+  --band: #f3f3f1; --band-ink: #111111; --band-muted: #6b6b69; --gold: #d0312d;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --sky-a: #0b0b0b; --sky-b: #0b0b0b; --sky-c: #0b0b0b; --stage: #0b0b0b; --surface: #161616;
+  --ink: #f2f2f0; --muted: #9a9a96; --line: #2a2a2a; --chip: rgba(255,255,255,.08);
+  --band: #0b0b0b; --band-ink: #f2f2f0; --band-muted: #8a8a86; --gold: #e5534b;
+} }
+.sky .cloud { display: none !important; }
+.meta { --tone: #111111; --tone-soft: #6b6b69; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .meta { --tone: #f2f2f0; --tone-soft: #8a8a86; } }
+.card.nino { background: color-mix(in srgb, var(--ink) 5%, var(--surface)); --edge: color-mix(in srgb, var(--ink) 18%, var(--surface)); }
+.card.nino .nino-links a { background: color-mix(in srgb, var(--ink) 7%, var(--surface)); }
+.card.nino .nino-links a:first-child { background: var(--ink); color: var(--stage); }
+.mast .title .thick { letter-spacing: -0.02em; }
 
 @media (min-width: 720px) {
   .app { max-width: 980px; }
@@ -993,13 +1013,194 @@ button { font: inherit; color: inherit; }
   };
   Object.keys(DX).forEach((topic) => Object.keys(DX[topic]).forEach((id) => { L[id][topic] = DX[topic][id]; }));
 
+
+  // ---------- Second (and third) answers: ask the same thing again, get something fresh ----------
+  const DV2 = {
+    clients: {
+      pr: ['Make it bigger? Certainly. I’ll make the invoice bigger too.', 'A logo is a signature, not a billboard. Nobody asks you to sign your name bigger.'],
+      sb: ['Bigger? Fine. Make it so big it becomes the background. Now it’s a pattern. Now it’s art.', 'Then show both. They’ll pick the original and think it was their idea.'],
+      mv: ['Bigger? Then the margins must grow. Then the page. Then the building. Where does it end?', 'Proportion is not negotiable. Lunch is negotiable.'],
+      mg: ['Ask them what feeling they want. “Bigger” is never the feeling.', 'Usually it’s “I want to be noticed.” Solve that, and the logo can stay the size it is.'],
+      ce: ['Charles: Make a prototype at their size. Ray: Then put it next to ours.', 'Charles: Let them see both. Ray: People decide with their eyes, not their opinions.'],
+      rl: ['Make it bigger, streamlined, with a little chrome stripe. They will forget they asked.', 'Distraction is a design tool. Use it responsibly.'],
+      sj: ['We put a small Apple logo on the back of the laptop and lit it up. People saw it across the airport.', 'Bigger isn’t louder. Glowing is louder.'],
+      cc: ['Bigger logo? Chéri, the most elegant labels are the smallest.', 'If a brand must shout, it is not confident. Tell them that, kindly.']
+    },
+    type: {
+      pr: ['Comic Sans has one job: a birthday invitation for a seven-year-old. It does that job very well.', 'Use the right tool for the job. Even a silly one.'],
+      sb: ['Comic Sans on a horror movie title? Now that would be terrifying.', 'Actually, that might work. Don’t tell anyone I said so.'],
+      mv: ['There are thousands of typefaces and most of them are garbage. Comic Sans is the garbage that got famous.', 'Use Helvetica. Or Bodoni. Or go home.'],
+      mg: ['Comic Sans was made for a cartoon dog in a piece of software. It was never supposed to leave the dog.', 'Let it go back to the dog.'],
+      ce: ['Charles: If a child picks it, it’s charming. Ray: If a law firm picks it, it’s a confession.', 'Charles: Context is everything. Ray: Mostly the law firm part.'],
+      rl: ['Comic Sans has no aerodynamics. It wobbles.', 'Streamlined letters go places. Comic Sans goes to the bake sale.'],
+      sj: ['The Mac had beautiful fonts in 1984. Then other computers came along with… choices.', 'Taste is the difference.'],
+      cc: ['Comic Sans is a feather boa at a funeral, chéri.', 'Fun for a minute. Remembered for years.']
+    },
+    darkmode: {
+      pr: ['Black and white were good enough for the IBM manuals. They’re good enough for your app.', 'The real choice is contrast. Pick enough of it.'],
+      sb: ['Light mode for comedies, dark mode for thrillers.', 'What genre is your app?'],
+      mv: ['I designed in black, white and red my entire life. Modes are for people who can’t decide.', 'Decide.'],
+      mg: ['I drew on white paper for seventy years. My eyes vote light.', 'But I’d draw on a napkin in a dark bar too. Ideas don’t care.'],
+      ce: ['Ray: Our house had walls of glass. Light mode all day. Charles: Then night came, and dark mode was free.', 'Charles: Let the world do the switching.'],
+      rl: ['Dark mode with one chrome accent. Like a locomotive at night.', 'Very dramatic. Very streamlined.'],
+      sj: ['The original Mac showed black text on a white screen, like paper. That was the radical idea.', 'Make it feel like something people already understand. Then make it magic.'],
+      cc: ['Day dress, evening dress. Light mode, dark mode.', 'A woman needs both, chéri. So does your phone.']
+    },
+    deadline: {
+      pr: ['Deadlines are a gift. Infinite time produces infinite options, and I hate options.', 'Friday it is.'],
+      sb: ['No premiere ever moved for me. I learned to love Friday.', 'Storyboard Monday, cut Wednesday, panic Thursday.'],
+      mv: ['Make a schedule on a grid. Monday think. Tuesday decide. The rest, execute.', 'Friday: espresso.'],
+      mg: ['My fastest work was often my best. The slow ones I overthought.', 'Trust the first good idea. Then check it once.'],
+      ce: ['Charles: Tell them what they get Friday and what comes later. Ray: Expectations are a design material.', 'Ray: Then deliver a little more than you promised.'],
+      rl: ['Promise Monday, deliver Friday, everyone is happy.', 'Never the other way around.'],
+      sj: ['We showed the first iPhone on stage when it barely worked. I followed a very careful path through the demo.', 'Deadlines are real. Plan your demo.'],
+      cc: ['A deadline is a corset, chéri. Uncomfortable, but it gives you a shape.', 'I got rid of corsets. Not deadlines.']
+    },
+    death: {
+      pr: ['Being dead has advantages. No more client meetings.', 'The disadvantage: no more invoices.'],
+      sb: ['Up here they play my titles before every sunset.', 'Nice gig. Very quiet audience.'],
+      mv: ['The afterlife has excellent wayfinding. Someone finally hired a professional.', 'Not my map. But close.'],
+      mg: ['People still put I ♥ NY on everything. I enjoy watching from up here.', 'The mugs have traveled further than I ever did.'],
+      ce: ['Charles: The lounge chair up here is very comfortable. Ray: It should be. He’s been testing it for decades.', 'Ray: Some things you design for eternity by accident.'],
+      rl: ['I am still the best-dressed man on this cloud.', 'There is competition. Mostly from Dalí, next door with the artists.'],
+      sj: ['No phones up here. I have mixed feelings about that.', 'It’s very calm. I keep wanting to add something.'],
+      cc: ['I lived at the Ritz. Now I live in the clouds. A small upgrade.', 'The view is better. The service is slower.']
+    },
+    coffee: {
+      pr: ['Coffee in a plain white cup. Decoration on a cup distracts from the coffee.', 'Same with logos.'],
+      sb: ['Black coffee, like a theater before the titles roll.', 'Then popcorn for act two.'],
+      mv: ['An Italian does not discuss coffee. An Italian drinks coffee.', 'Standing up. In ten seconds. Then back to the grid.'],
+      mg: ['Coffee in the morning, tea in the afternoon, a pencil all day.', 'The pencil is the one I can’t give up.'],
+      ce: ['Charles: Ray made tea a ritual, with the right cup and the right tray. Ray: A tray is a tiny stage.', 'Charles: Make small things a little special. Ray: That’s most of life.'],
+      rl: ['A good espresso machine is the most beautiful machine in any kitchen.', 'Chrome, curves, steam. A locomotive that makes coffee.'],
+      sj: ['Tea. Hot water and leaves.', 'The best products are like tea: very few ingredients, done right.'],
+      cc: ['Coffee at the Ritz, served on silver.', 'Presentation matters, chéri. Especially for coffee.']
+    },
+    love: {
+      pr: ['Present yourself like a logo: one option, very confident.', 'If they want to see alternatives, keep walking.'],
+      sb: ['Love is a title sequence. The music starts before the words.', 'Get the feeling right first. Then say something.'],
+      mv: ['Find someone who appreciates a good grid and tolerates your opinions about chairs.', 'Lella did. That is why we lasted.'],
+      mg: ['Draw them something. A heart, a doodle, anything by hand.', 'Nobody ever fell in love with a template.'],
+      ce: ['Charles: We sent each other drawings in letters. Ray: Some with tiny chairs.', 'Charles: Make things for each other. Ray: Even tiny chairs.'],
+      rl: ['Romance is like streamlining. Everything should flow.', 'Except arguments. Those should stop, very aerodynamically.'],
+      sj: ['I met my wife at a talk I gave at Stanford, and skipped a meeting to take her to dinner.', 'Skip the meeting. Always skip the meeting.'],
+      cc: ['Be classy and fabulous, chéri. Anyone worth it will notice.', 'Don’t change for anyone. Edit, maybe. Never change.']
+    },
+    pricing: {
+      pr: ['Never discount a good idea. Discount a bad one, then throw it away.', 'Raise your price every time a client costs you sleep.'],
+      sb: ['My logos lasted decades. Charge for the decades, not the day.', 'If it will be on every truck in America, it is not a small job.'],
+      mv: ['A clear price is good design. Hidden fees are bad typography.', 'One number, one line, Helvetica.'],
+      mg: ['Sometimes take a small piece of the company. I did with Brooklyn Brewery. Good beer, good deal.', 'Not always. But sometimes the best fee is ownership.'],
+      ce: ['Charles: Price for the person who loves it. Ray: And for all the plywood you broke getting there.', 'Ray: Include the broken plywood.'],
+      rl: ['I charged a lot because my designs sold a lot. Design paid for itself.', 'Show the client the sales chart first. Then the invoice.'],
+      sj: ['People pay more for something that feels great. That’s not a theory, it’s a business.', 'Make it great, then price it with confidence.'],
+      cc: ['Expensive is a feeling, chéri. Make them feel it before they see the price.', 'Then never apologize for the number.']
+    },
+    logo: {
+      pr: ['The UPS shield had a little package with a bow on top. Simple, a little witty, done.', 'Wit in a logo is like salt. A pinch.'],
+      sb: ['My logos usually lived for decades. That’s the real brief: make it last.', 'If it looks trendy today, it looks old tomorrow.'],
+      mv: ['Use the company name, in Helvetica, spaced correctly. Already better than most logos.', 'Decoration is a confession of weakness.'],
+      mg: ['The DC Comics bullet. The Brooklyn Brewery B. Each one is a little drawing with a story.', 'Ask what the story is before you draw anything.'],
+      ce: ['Charles: Our real mark was the work itself. Ray: The work was the brand.', 'Ray: Make the work recognizable and the mark gets easy.'],
+      rl: ['The Shell logo is a shell. Literal, simple, unforgettable.', 'Sometimes the obvious idea is right. Just make it beautiful.'],
+      sj: ['People made up a hundred stories about the bite in the Apple logo.', 'Give people a simple shape and they’ll write the myth for you.'],
+      cc: ['Two Cs, back to back. I could draw it with my eyes closed. That’s the test.', 'If you can’t draw your logo from memory, simplify.']
+    },
+    food: {
+      pr: ['A sandwich, cut once, diagonally. The diagonal is the design.', 'Two triangles. One decision.'],
+      sb: ['Popcorn for dinner is valid if a good movie is involved.', 'I’m not your mother. I’m a title designer.'],
+      mv: ['Risotto. Discipline in a pan. You stir, you wait, you do not improvise.', 'Like a good grid.'],
+      mg: ['A bagel. Round, honest, New York.', 'The hole is the best-designed part.'],
+      ce: ['Ray: A picnic. Lay everything on a nice blanket and call it an exhibition. Charles: We did that a lot.', 'Charles: Eat outside if you can. Ray: Bring the good cups.'],
+      rl: ['Something you can eat fast. I was always rushing to the next client.', 'Don’t be like me. Sit down.'],
+      sj: ['The same salad, every day. Fewer decisions.', 'Spend your decisions on the work, not the menu.'],
+      cc: ['Something small and beautiful on a white plate, chéri.', 'And never eat standing up.']
+    },
+    gooddesign: {
+      pr: ['Good design is obvious once you see it. Before you see it, it seems impossible.', 'That gap is the whole job.'],
+      sb: ['Good design makes an audience feel the whole movie in two minutes.', 'Compression. That’s the craft.'],
+      mv: ['Good design is timeless. If it needs a date on it, it isn’t good design.', 'Ask yourself: will this embarrass me in twenty years?'],
+      mg: ['Good design changes how you feel about something you already knew.', 'Everyone knew New York. I just helped them love it again.'],
+      ce: ['Charles: Good design is useful, honest and lasts. Ray: And people want to touch it.', 'Charles: If they run a hand across it, you did something right.'],
+      rl: ['Good design looks good, works well and sells. Three out of three.', 'Two out of three is art. One out of three is a hobby.'],
+      sj: ['Simple can be harder than complex. You have to work hard to get your thinking clean.', 'Once you get there, you can move mountains.'],
+      cc: ['Good design gives freedom. I gave women trousers and pockets.', 'If it doesn’t let you move, it isn’t good.']
+    },
+    designdead: {
+      pr: ['Every ten years someone writes that design is dead. Those articles are usually badly designed.', 'Read them and laugh.'],
+      sb: ['Sound was supposed to kill movies. Then color. Then TV.', 'Every time, the people with ideas got more work, not less.'],
+      mv: ['When everyone can make something, the person who can judge becomes rare.', 'Be rare.'],
+      mg: ['Design isn’t a set of skills. It’s a way of caring about people.', 'Machines don’t care yet. Your job is safe until they do.'],
+      ce: ['Charles: Ray, is design dead? Ray: We’re dead, Charles. Design seems fine.', 'Charles: Fair point.'],
+      rl: ['People said machines would design machines. Then they hired me to design the machines.', 'Someone will be hired to design what comes next. Why not you?'],
+      sj: ['Design isn’t dying. The lazy version of it is.', 'The people crazy enough to think they can change things are the ones who do.'],
+      cc: ['Fashion has died a hundred times, chéri. It always comes back in a better dress.', 'So will you.']
+    },
+    aithink: {
+      pr: ['It makes a hundred options. I make one decision. Guess which one the client pays for.', 'The decision is the product.'],
+      sb: ['It can make a picture move. Can it make an audience hold its breath? Not yet.', 'Breath is the measure.'],
+      mv: ['A machine without discipline is a very fast mess.', 'Discipline must come from you. It will not arrive in a software update.'],
+      mg: ['I’m curious about it. Curiosity kept me working until I was 91.', 'Be curious. Don’t be impressed. Those are different things.'],
+      ce: ['Charles: We’d have made a film about it. Zoom into a chip, ten times closer each step. Ray: Then zoom back out to a person.', 'Ray: The person is the important part.'],
+      rl: ['It is the most advanced thing since the jet engine. The acceptable part is still under construction.', 'Be the one who makes it acceptable.'],
+      sj: ['The question I’d ask: does it make people more creative, or less?', 'Build the version that makes them more.'],
+      cc: ['It writes, it draws, it designs. Can it walk into a room, chéri?', 'Presence cannot be generated.']
+    },
+    aibeat: {
+      pr: ['It beats me at volume. I never valued volume.', 'One great logo outlives a thousand good ones.'],
+      sb: ['Let’s have a title-off. It gets a warehouse of computers. I get scissors.', 'My money’s on the scissors.'],
+      mv: ['It may win the game. It will lose the argument. I never lost an argument.', 'Ask Lella. Actually, don’t.'],
+      mg: ['Maybe it beats me at drawing. Drawing was never the point.', 'Seeing was the point. Can it see a city the way a homesick kid does?'],
+      ce: ['Charles: Beat us at making a chair, or at making a chair people love for seventy years? Ray: The second one is harder.', 'Charles: Much harder. Ray: Much.'],
+      rl: ['A machine beat Loewy? I designed the machines that beat other machines.', 'Locomotives, cars, a space station. Bring it on.'],
+      sj: ['At some things, probably. Fine. A bicycle beats me at speed too.', 'I still choose where to ride.'],
+      cc: ['It can copy my suit stitch for stitch.', 'It still won’t look like Chanel coming down the mirrored staircase on rue Cambon.']
+    },
+    ai: {
+      pr: ['It will replace designers who only make things. Not the ones who decide things.', 'Decide something today.'],
+      sb: ['Every new tool replaced someone who refused to learn it.', 'Learn it. Then go back to having ideas.'],
+      mv: ['It will replace the people who use twelve fonts. Good riddance.', 'Discipline survives everything.'],
+      mg: ['When computers arrived, I watched people panic. The ones who kept drawing were fine.', 'Keep drawing.'],
+      ce: ['Charles: Tools replace tasks, not curiosity. Ray: And never taste.', 'Charles: Stay curious. Ray: Stay tasteful.'],
+      rl: ['Cars replaced horses. Someone still had to design the car.', 'Be the one designing the car.'],
+      sj: ['Some jobs, yes. The question is whether you’re making the tool or being replaced by it.', 'Make the tool.'],
+      cc: ['They said machines would replace seamstresses. They replaced boredom, chéri. Not craft.', 'Craft stays.']
+    }
+  };
+  const DV3 = {
+    clients: {
+      pr: ['Show them the logo on a business card, a truck and a postage stamp. If it works on all three, it’s the right size.', 'Clients trust trucks.'],
+      sb: ['Show it on a big screen, in a dark room. Everything looks big on a big screen.', 'Nobody asks again.'],
+      mv: ['Bring a ruler to the meeting. People respect a ruler.', 'Point at the grid and say, “The grid has decided.” Nobody argues with the grid.'],
+      mg: ['Say yes, then make everything around it quieter. The logo will look bigger without changing.', 'Design is often about what you turn down, not up.'],
+      ce: ['Ray: Give it more empty space around it. Charles: Space makes things feel important.', 'Ray: Like one chair in an empty room. Charles: Everybody looks at the chair.'],
+      rl: ['Most Advanced Yet Acceptable: give them ten percent bigger. They feel heard. You still sleep.', 'Compromise, streamlined.'],
+      sj: ['Ask who it’s for. If the answer is the CEO’s mother, make it bigger.', 'If it’s for customers, keep it simple and ship.'],
+      cc: ['A woman doesn’t wear her name across her chest, chéri. Well. Some do. That was later, and not my idea.', 'Restraint is the luxury.']
+    },
+    type: {
+      pr: ['Typography is the clothing of words. Most words walk around in pajamas.', 'Dress them.'],
+      sb: ['My titles talked with type. Thin for suspense, heavy for danger.', 'The font is the music before the music starts.'],
+      mv: ['A designer’s life is a fight against ugliness. Typography is the front line.', 'Kerning is where wars are won.'],
+      mg: ['I designed a few typefaces myself, like Baby Teeth and Glaser Stencil. Each one for a feeling.', 'Pick type for the feeling first, then for reading. Both, eventually.'],
+      ce: ['Ray: Make words look like someone cared about them. Charles: She hand-lettered beautifully.', 'Charles: I wrote neatly on envelopes. Ray: That’s not the same, Charles.'],
+      rl: ['Shell, Exxon: big, simple letters you can read at seventy miles an hour.', 'Design your type for the highway, even if it lives on a phone.'],
+      sj: ['Beautiful fonts were a big deal in 1984. People forget that.', 'The details you fight for become what everyone takes for granted. That’s the goal.'],
+      cc: ['Simple letters, black on white. The No. 5 label is barely there.', 'That is why everyone remembers it.']
+    }
+  };
+  Object.keys(DV2).forEach((topic) => Object.keys(DV2[topic]).forEach((id) => {
+    L[id][topic] = DV3[topic] ? [L[id][topic], DV2[topic][id], DV3[topic][id]] : [L[id][topic], DV2[topic][id]];
+  }));
+
   // Ready-made questions, grouped, for the + menu
   const QMENU = [
+    ['Client life', ['The client wants the logo bigger.', 'Can you make it pop?', 'My boss wants it by Friday.', 'How much should I charge?', 'Should I go freelance?', 'How do I get promoted?']],
+    ['Taste', ['Is Comic Sans ever okay?', 'Dark mode or light mode?', 'What color should my brand be?', 'What do you think of design trends?', 'How do I make a good logo?', 'What is good design?', 'What are your design principles?']],
+    ['About them', ['What’s it like being dead?', 'Who are you?', 'Any regrets?', 'What’s your favorite thing you designed?', 'Coffee or tea?']],
+    ['Life stuff', ['Any dating advice?', 'What should I make for dinner?', 'I’m so tired.', 'I feel like an impostor.', 'I’m stuck. No ideas.']],
+    ['Getting started', ['How do I build a portfolio?', 'Do I need design school?', 'Figma or Sketch?', 'How do I know a design is done?']],
     ['AI and the future', ['Is the design profession dead because of AI?', 'What do you think of AI?', 'Can AI beat you?', 'Will AI replace designers?']],
-    ['Design life', ['The client wants the logo bigger.', 'My boss wants it by Friday.', 'Should I go freelance?', 'How much should I charge?', 'How do I get promoted?', 'How do I build a portfolio?', 'Do I need design school?', 'Figma or Sketch?', 'How do I know a design is done?', 'I’m stuck. No ideas.']],
-    ['Taste', ['What is good design?', 'What are your design principles?', 'Is Comic Sans ever okay?', 'What color should my brand be?', 'Dark mode or light mode?', 'What do you think of design trends?', 'How do I make a good logo?']],
-    ['About them', ['Who are you?', 'What’s it like being dead?', 'Any regrets?', 'What’s your favorite thing you designed?', 'Coffee or tea?']],
-    ['Life stuff', ['I feel like an impostor.', 'I’m so tired.', 'Any dating advice?', 'What should I make for dinner?']],
     ['Your turn', ['Ask me anything.', 'Hi!']]
   ];
 
@@ -1041,7 +1242,7 @@ button { font: inherit; color: inherit; }
   const GREET = /^\s*(hi|hello|hey|hiya|yo|hola|bonjour|howdy|good (morning|afternoon|evening))\b/i;
   const topicOf = (t) => { for (const [k, re] of TOPICS) if (re.test(t)) return k; if (GREET.test(t) && t.length < 40) return 'greet'; return 'any'; };
   const bag = {};
-  const REPEAT = {"pr": "I already gave you one answer. I don’t do options.", "sb": "We’ve seen this scene already. Let’s cut to something new.", "mv": "You asked this already. Consistency is good. Repetition is not.", "mg": "We drew this one already. Here’s a fresh napkin.", "ce": "Charles: You asked us this. Ray: He remembers everything. I remember the colors.", "rl": "This question has already been streamlined.", "sj": "We covered this. Let’s move on to one more thing.", "cc": "Chéri, never wear the same answer twice."};
+  const REPEAT = {"pr": ["I already gave you one answer. I don’t do options.", "Again? Same answer, same price.", "You keep asking. I keep being right."], "sb": ["We’ve seen this scene already. Let’s cut to something new.", "Rewind? Fine. The ending doesn’t change.", "Déjà vu. Very Hitchcock of you."], "mv": ["You asked this already. Consistency is good. Repetition is not.", "Same question, same grid, same answer.", "Again? Mamma mia. Fine."], "mg": ["We drew this one already. Here’s a fresh napkin.", "Second time is a reprint. Here’s something new.", "I ♥ repetition. Not really."], "ce": ["Charles: You asked us this. Ray: He remembers everything. I remember the colors.", "Ray: Again? Charles: Let’s make a toy out of it.", "Charles: Same question. Ray: New chair, then."], "rl": ["This question has already been streamlined.", "Asked before. Here is the newer model.", "Again? Now with less drag."], "sj": ["We covered this. Let’s move on to one more thing.", "Same question, different keynote.", "You’re holding it wrong. Ask me something new."], "cc": ["Chéri, never wear the same answer twice.", "That answer is last season.", "Again? Take one question off."]};
   const seenT = {};
   function wild(id) {
     if (!bag[id] || !bag[id].length) bag[id] = L[id].any.map((_, i) => i).sort(() => Math.random() - .5);
@@ -1057,7 +1258,9 @@ button { font: inherit; color: inherit; }
     const variants = Array.isArray(v[0]) ? v : [v];
     const key = id + ':' + topic, n = seenT[key] || 0;
     if (n < variants.length) { seenT[key] = n + 1; return variants[n]; }
-    return [REPEAT[id]].concat(wild(id));
+    seenT[key] = n + 1;
+    const rp = REPEAT[id];
+    return [Array.isArray(rp) ? rp[(n - variants.length) % rp.length] : rp].concat(wild(id));
   }
 
   const BANTER = [
@@ -1076,18 +1279,19 @@ button { font: inherit; color: inherit; }
   ];
 
   const STARTERS = [
-    'Is the design profession dead because of AI?',
-    'What do you think of AI?',
-    'Can AI beat you?',
-    'What is good design?',
     'The client wants the logo bigger.',
-    'My boss wants it by Friday.',
-    'Should I go freelance?',
-    'How much should I charge?',
     'Is Comic Sans ever okay?',
     'Dark mode or light mode?',
+    'My boss wants it by Friday.',
+    'Can you make it pop?',
     'What’s it like being dead?',
-    'Any dating advice?'
+    'Coffee or tea?',
+    'Any dating advice?',
+    'How much should I charge?',
+    'What is good design?',
+    'Is the design profession dead because of AI?',
+    'Can AI beat you?',
+    'What do you think of AI?'
   ];
 
   // ---------- helpers ----------
@@ -1596,7 +1800,7 @@ button { font: inherit; color: inherit; }
   const sampleQ = 'Is the design profession dead because of AI?';
   const r0 = newRound(sampleQ);
   const firstTwo = castOrder.slice(0, 4);
-  firstTwo.forEach((id) => { const c = addCard(r0, id); seenT[id + ':designdead'] = 1; L[id].designdead.forEach((line) => { addPara(c.body, line, false); c.lines.push(line); }); finishCard(c); });
+  firstTwo.forEach((id) => { const c = addCard(r0, id); seenT[id + ':designdead'] = 1; const sv = L[id].designdead; (Array.isArray(sv[0]) ? sv[0] : sv).forEach((line) => { addPara(c.body, line, false); c.lines.push(line); }); finishCard(c); });
   const b0 = pickBanter(firstTwo);
   if (b0) { const c = addCard(r0, b0[0], { aside: true }); addPara(c.body, b0[2], false); c.lines.push(b0[2]); }
   updatePager(); updateCast();
