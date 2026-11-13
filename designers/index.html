@@ -449,8 +449,15 @@ button { font: inherit; color: inherit; }
 .card.nino .nino-links a:first-child { background: var(--ink); color: var(--stage); }
 .mast .title .thick { letter-spacing: -0.02em; }
 .mast { max-height: var(--h, 170px); }
-.subtitle { margin: 8px 0 0; font-family: var(--thin); font-style: italic; font-size: 17px; line-height: 1.2; color: var(--band-muted); }
-@media (min-width: 1000px) { .subtitle { font-size: 19px; } }
+.subtitle { margin: 10px 0 0; font-family: var(--sans); font-style: normal; font-weight: 500; font-size: 15px; line-height: 1.3; color: var(--band-muted); }
+/* one family in the lockup: the grotesk, in two weights; red only on "do?" */
+.title .thin { font-family: var(--thick); font-style: normal; font-weight: 600; letter-spacing: -0.015em; text-transform: uppercase; font-size: 15px; margin-bottom: 14px; color: var(--band-muted); }
+.mast .live { top: 10px; }
+.title .tail { font-family: var(--thick); font-style: normal; font-weight: 800; letter-spacing: -0.03em; text-transform: uppercase; }
+@media (min-width: 1000px) {
+  .subtitle { font-size: 16px; }
+  .title .thin { font-size: 17px; }
+}
 .card-f .btn.solid, .card-f .btn.link, .card-f .btn:last-child:not(:first-child) { background: none !important; border: 0; color: #c2571a; padding-left: 0; padding-right: 0; min-height: 36px; font-weight: 700; }
 .card-f .btn.solid:hover, .card-f .btn:last-child:not(:first-child):hover { background: none !important; color: #a3460f; text-decoration: underline; text-underline-offset: 4px; }
 .card.aside { background: color-mix(in srgb, var(--tc) 28%, var(--surface)); border: 1.5px dashed color-mix(in srgb, var(--ink) 35%, var(--tc)); }
