@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>What Would Dead Designers Do?</title>
 <meta name="description" content="Ask anything about design, AI or life. Paul Rand, Massimo Vignelli, Coco Chanel and friends answer from the afterlife. A parody by Nino Studio.">
-<meta name="theme-color" content="#f3f3f1">
+<meta name="theme-color" content="#f4f2ee">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232a1d18'/%3E%3Cellipse cx='32' cy='18' rx='13' ry='4' fill='none' stroke='%23eab49a' stroke-width='3'/%3E%3Ccircle cx='32' cy='36' r='11' fill='%23eab49a'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What Would Dead Designers Do?">
@@ -43,9 +43,9 @@
   --mix: 21%;
 
   /* each designer's color: portrait background and bubble tint */
-  --c-pr: #8d9094; --c-sb: #b3aca5; --c-mv: #6e6e6c; --c-mg: #cbc6c2;
-  --c-ce: #a69f95; --c-rl: #7e8584; --c-sj: #9da2a8; --c-cc: #d6d3cd;
-  --c-fw: #9b9389; --c-mr: #77797c; --c-es: #c9bfc2;
+  --c-pr: #a39683; --c-sb: #c2ab8f; --c-mv: #857b6e; --c-mg: #cdb69f;
+  --c-ce: #b49877; --c-rl: #978f7f; --c-sj: #aaa293; --c-cc: #d4c3a7;
+  --c-fw: #a98f72; --c-mr: #7f786f; --c-es: #c6aea4;
 
   --thick: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
   --thin: "Instrument Serif", "Iowan Old Style", Georgia, serif;
@@ -432,12 +432,12 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Designers room: black and white, black-turtleneck studio ---------- */
 :root {
-  --sky-a: #f3f3f1; --sky-b: #f3f3f1; --sky-c: #f3f3f1; --stage: #f3f3f1; --surface: #ffffff;
+  --sky-a: #f4f2ee; --sky-b: #f4f2ee; --sky-c: #f4f2ee; --stage: #f4f2ee; --surface: #fbfaf7; --mix: 30%;
   --ink: #111111; --muted: #666664; --line: #dcdcd8; --chip: rgba(0,0,0,.06);
-  --band: #f3f3f1; --band-ink: #111111; --band-muted: #6b6b69; --gold: #d0312d;
+  --band: #f4f2ee; --band-ink: #111111; --band-muted: #6b6b69; --gold: #d0312d;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --sky-a: #0b0b0b; --sky-b: #0b0b0b; --sky-c: #0b0b0b; --stage: #0b0b0b; --surface: #161616;
+  --sky-a: #0b0b0b; --sky-b: #0b0b0b; --sky-c: #0b0b0b; --stage: #0b0b0b; --surface: #161616; --mix: 30%;
   --ink: #f2f2f0; --muted: #9a9a96; --line: #2a2a2a; --chip: rgba(255,255,255,.08);
   --band: #0b0b0b; --band-ink: #f2f2f0; --band-muted: #8a8a86; --gold: #e5534b;
 } }
