@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<meta name="theme-color" content="#f4f2ee">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{OG_DESC}}">
+<meta property="og:image" content="{{OG}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f4f2ee; --surface: #fbfaf7; --ink: #111; --muted: #6b6b69; --line: #e2dfd9;
+  --red: #d0312d; --orange: #c2571a; --online: #8fb982;
+  --ui: "Inter", system-ui, sans-serif;
+  --thick: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --thin: "Instrument Serif", Georgia, serif;
+  --c-pr: #d4a849; --c-sb: #c2533f; --c-mv: #6f8fa8; --c-mg: #cf93a6; --c-ce: #8fa77f; --c-rl: #5f8c96;
+  --c-sj: #a8a29a; --c-cc: #c9a27a; --c-fw: #b5674a; --c-mr: #4f735c; --c-es: #e07a9f;
+  --bub: 20%;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0b0b; --surface: #161616; --ink: #f2f2f0; --muted: #8f8f8b; --line: #262626; --red: #e5534b; --orange: #f08a4b; --bub: 24%;
+  color-scheme: dark;
+} }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--ui); -webkit-font-smoothing: antialiased; }
+body { overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+p { text-wrap: pretty; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- shell: one pane on phones, two panes on wide screens ---------- */
+.app { height: 100dvh; display: flex; max-width: 1180px; margin: 0 auto; padding-top: env(safe-area-inset-top, 0px); }
+.pane { display: flex; flex-direction: column; min-width: 0; height: 100%; }
+.list { flex: 1; }
+.chat { flex: 1; }
+.app[data-show="chat"] .list { display: none; }
+.app[data-show="list"] .chat { display: none; }
+@media (min-width: 900px) {
+  .app .list, .app .chat { display: flex !important; }
+  .list { flex: 0 0 340px; border-right: 1px solid var(--line); }
+  .back { display: none !important; }
+}
+
+/* ---------- avatars ---------- */
+.av { display: block; border-radius: 50%; overflow: hidden; background: var(--tc); flex: none; position: relative; }
+.av svg { display: block; width: 100%; height: 100%; }
+.avw { position: relative; flex: none; display: block; }
+.dot { position: absolute; right: 1px; bottom: 1px; width: 26%; height: 26%; min-width: 9px; min-height: 9px; border-radius: 50%; background: var(--online); border: 2px solid var(--bg); }
+.away .av { filter: grayscale(1); opacity: .55; }
+.group-av { display: block; border-radius: 50%; overflow: hidden; flex: none; }
+.group-av svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- list (the cast) ---------- */
+.list-h { padding: 22px 20px 10px; }
+.lock { margin: 0; line-height: .95; }
+.lock .thin { display: block; font: italic 400 22px/1 var(--thin); color: var(--muted); margin-bottom: 6px; }
+.lock .thick { font: 800 36px/1 var(--thick); letter-spacing: -0.03em; text-transform: uppercase; }
+.lock .tail { font: italic 400 36px/1 var(--thin); color: var(--red); }
+.list-scroll { flex: 1; overflow-y: auto; padding: 8px 20px 28px; }
+.row-group { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px; border: 0; border-radius: 18px; background: var(--surface); text-align: left; }
+.row-group .tx b { display: block; font-size: 16px; }
+.row-group .tx span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+.row-group[aria-current="true"] { box-shadow: inset 0 0 0 2px var(--ink); }
+.sec { margin: 26px 0 12px; font: 700 11px/1 var(--ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 10px; }
+.tile { display: flex; flex-direction: column; align-items: center; gap: 8px; border: 0; background: none; padding: 4px 0; text-align: center; }
+.tile .avw { width: 72px; height: 72px; }
+.tile .av { width: 72px; height: 72px; transition: transform .25s cubic-bezier(.3,1.4,.5,1); }
+.tile:hover .av { transform: translateY(-2px) scale(1.03); }
+.tile b { font-size: 14px; line-height: 1.15; }
+.tile .st { font-size: 11.5px; color: var(--muted); line-height: 1.25; max-width: 104px; }
+.tile[aria-current="true"] .av { box-shadow: 0 0 0 2.5px var(--bg), 0 0 0 4.5px var(--ink); }
+.list-foot { margin-top: 30px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.list-foot button { border: 0; background: none; padding: 0; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---------- chat header ---------- */
+.chat-h { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); min-height: 64px; }
+.back { flex: none; width: 40px; height: 40px; margin-left: -6px; border: 0; background: none; border-radius: 50%; display: grid; place-items: center; }
+.back:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
+.chat-h .who { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.chat-h .who > .tx { min-width: 0; flex: 1; }
+.chat-h .who .tx b { display: block; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-h .who .tx span { display: block; font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stack { display: flex; flex: none; }
+.stack .av { width: 30px !important; height: 30px !important; border: 2px solid var(--bg); }
+.stack .av + .av { margin-left: -11px; }
+.info { flex: none; border: 0; background: none; font-size: 13px; font-weight: 700; padding: 8px; color: var(--muted); }
+
+/* ---------- messages ---------- */
+.msgs { flex: 1; overflow-y: auto; padding: 18px 16px 12px; display: flex; flex-direction: column; gap: 4px; scroll-behavior: smooth; }
+.intro { text-align: left; padding: 6px 2px 20px; }
+.intro .lock .thin { font-size: 20px; }
+.intro .lock .thick { font-size: 30px; }
+.intro .lock .tail { font-size: 30px; }
+.intro p { margin: 10px 0 0; max-width: 320px; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.sys { align-self: center; margin: 12px 0 6px; font-size: 12px; color: var(--muted); text-align: center; max-width: 320px; }
+.me { align-self: flex-end; max-width: 82%; margin: 14px 0 6px; padding: 10px 14px; border-radius: 20px 20px 6px 20px; background: var(--ink); color: var(--bg); font-size: 15.5px; line-height: 1.35; }
+.say { display: grid; grid-template-columns: 34px 1fr; column-gap: 8px; margin-top: 10px; animation: rise .35s cubic-bezier(.3,1.3,.5,1) both; }
+.say .avw { grid-row: 1 / span 9; align-self: end; width: 34px; height: 34px; position: sticky; bottom: 0; }
+.say .av { width: 34px; height: 34px; }
+.say .nm { grid-column: 2; font-size: 12px; font-weight: 700; color: var(--muted); margin: 0 0 4px 12px; }
+.msgs.dm .say .nm { display: none; }
+.say .nm em { font-style: normal; font-weight: 500; }
+.bub { grid-column: 2; justify-self: start; max-width: min(90%, 520px); margin-bottom: 3px; padding: 11px 15px; border-radius: 20px; background: color-mix(in srgb, var(--tc) var(--bub), var(--surface)); line-height: 1.38; font-size: 16px; animation: rise .35s cubic-bezier(.3,1.3,.5,1) both; }
+.bub:last-child { border-bottom-left-radius: 6px; }
+.bub.cut { background: none; border: 1.5px dashed color-mix(in srgb, var(--ink) 30%, var(--tc)); }
+.typing { display: inline-flex; gap: 4px; padding: 15px 16px; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); opacity: .35; animation: bob 1s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes bob { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-4px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+.links { grid-column: 2; display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 4px 0 0 14px; }
+.links a { color: var(--orange); font-weight: 700; font-size: 14px; text-decoration: none; }
+.links a:hover { text-decoration: underline; }
+.nino-av { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--red); color: #fff; font: 800 15px/1 var(--thick); }
+
+/* every reply uses one typeface: Inter, like the portfolio */
+
+/* ---------- composer ---------- */
+.foot { border-top: 1px solid var(--line); padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 0; border-radius: 999px; padding: 8px 14px; font-size: 13.5px; font-weight: 600; background: color-mix(in srgb, var(--ink) 6%, transparent); }
+.chip:hover { background: color-mix(in srgb, var(--ink) 11%, transparent); }
+.bar { display: flex; align-items: flex-end; gap: 8px; }
+.plus, .send { flex: none; width: 42px; height: 42px; border-radius: 50%; border: 0; display: grid; place-items: center; }
+.plus { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.plus:hover { background: color-mix(in srgb, var(--ink) 14%, transparent); }
+.send { background: var(--ink); color: var(--bg); }
+.send:disabled { opacity: .25; cursor: default; }
+textarea { flex: 1; min-width: 0; resize: none; border: 1px solid var(--line); border-radius: 21px; padding: 10px 16px; min-height: 42px; max-height: 120px; font: 16px/1.35 var(--ui); background: var(--surface); color: var(--ink); outline: none; }
+textarea:focus { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); }
+
+/* ---------- sheets ---------- */
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: flex-end; justify-content: center; z-index: 20; animation: fade .2s ease both; }
+.sheet { width: 100%; max-width: 560px; max-height: 82dvh; overflow-y: auto; background: var(--bg); border-radius: 24px 24px 0 0; padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); animation: up .32s cubic-bezier(.3,1.2,.5,1) both; }
+@media (min-width: 700px) { .scrim { align-items: center; } .sheet { border-radius: 24px; } }
+.sheet h2 { margin: 0 0 4px; font: 800 24px/1.1 var(--thick); letter-spacing: -0.02em; }
+.sheet .sub { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+.sheet h3 { margin: 20px 0 8px; font: 700 11px/1 var(--ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.qchips { display: flex; flex-wrap: wrap; gap: 8px; }
+.sheet .surprise { border: 0; border-radius: 999px; padding: 10px 16px; background: var(--ink); color: var(--bg); font-weight: 700; }
+.sheet .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sheet p { line-height: 1.5; font-size: 15px; }
+.sheet .fine { font-size: 13px; color: var(--muted); }
+.sheet .ctas { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 14px 0; }
+.sheet .ctas a { color: var(--orange); font-weight: 700; text-decoration: none; }
+@keyframes fade { from { opacity: 0; } }
+@keyframes up { from { transform: translateY(30px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* About sheet: same as the artists room */
+.ns { --ns-bg: #f2efea; --ns-ink: #121212; --ns-body: #625c56; --ns-olive: #5c6a3a; --ns-line: #ddd6cc;
+  position: relative; background: var(--ns-bg); color: var(--ns-ink); gap: 0; padding-block: 34px calc(26px + env(safe-area-inset-bottom, 0px)); padding-inline: 28px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ns { --ns-bg: #1a1816; --ns-ink: #f2efea; --ns-body: #b9b1a7; --ns-olive: #a9b884; --ns-line: #34302b; } }
+:root[data-theme="dark"] .ns { --ns-bg: #1a1816; --ns-ink: #f2efea; --ns-body: #b9b1a7; --ns-olive: #a9b884; --ns-line: #34302b; }
+.ns .ns-eyebrow { margin: 0 0 14px; font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--ns-olive); }
+.ns h2 { margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 300; font-size: clamp(32px, 9vw, 40px); line-height: 1.04; letter-spacing: -0.02em; text-transform: none; }
+.ns .ns-sub { margin: 10px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 300; font-style: italic; font-size: 19px; color: var(--ns-body); }
+.ns .ns-body { margin: 18px 0 0; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ns-body); }
+.ns .ns-body + .ns-body { margin-top: 10px; }
+.ns .ns-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.ns .ns-ctas a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 17px; border-radius: 8px; border: 1px solid var(--ns-ink); text-decoration: none; color: var(--ns-ink);
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; transition: background .2s, color .2s; }
+.ns .ns-ctas a:first-child, .ns .ns-ctas a:hover { background: var(--ns-ink); color: var(--ns-bg); }
+.ns .ns-fine { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--ns-line); }
+.ns .ns-fine .ns-eyebrow { margin-bottom: 10px; }
+.ns .ns-fine p:not(.ns-eyebrow) { margin: 0 0 8px; font-family: Inter, system-ui, sans-serif; font-size: 13.5px; line-height: 1.6; color: var(--ns-body); }
+.ns .ns-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--ns-ink); cursor: pointer; display: grid; place-items: center; }
+.ns .ns-close:hover { background: color-mix(in srgb, var(--ns-ink) 8%, transparent); }
+.sheet.ns { max-width: 560px; }
+</style>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div class="app" id="app" data-show="chat">
+  <aside class="pane list" aria-label="Chats">
+    <div class="list-h">
+      <h1 class="lock"><span class="thin">What would</span><span class="thick">{{THICK}}</span> <span class="tail">do?</span></h1>
+    </div>
+    <div class="list-scroll">
+      <button class="row-group" id="row-group" type="button"></button>
+      <p class="sec">Message one privately</p>
+      <div class="grid" id="grid"></div>
+      <p class="list-foot">Parody, not advice. Every joke is built on a real fact; every word is made up. Made by <button type="button" class="about-btn">Nino Studio</button>, the only {{KIND}} here with a pulse.</p>
+    </div>
+  </aside>
+  <main class="pane chat">
+    <header class="chat-h">
+      <button class="back" id="back" type="button" aria-label="All {{KINDS}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="who" id="who"></div>
+      <button class="info about-btn" type="button">About</button>
+    </header>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="foot">
+      <div class="chips" id="chips"></div>
+      <div class="bar">
+        <button class="plus" id="plus" type="button" aria-label="More questions"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        <label for="q" class="vh">Your message</label>
+        <textarea id="q" rows="1" maxlength="300" placeholder="Ask the afterlife anything…"></textarea>
+        <button class="send" id="send" type="button" aria-label="Send" disabled><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></button>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+(function () {
+/*DATA*/
+
+  // ---------- helpers ----------
+  const $ = (s) => document.querySelector(s);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  function el(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function tint(n, id) { n.style.setProperty('--tc', 'var(--c-' + id + ')'); return n; }
+  function face(id, size, withDot) {
+    const w = el('span', 'avw'); w.style.width = w.style.height = size + 'px';
+    const a = av(id, size); w.appendChild(a);
+    if (withDot && online.has(id)) w.appendChild(el('span', 'dot'));
+    if (withDot && !online.has(id)) w.classList.add('away');
+    return w;
+  }
+  // Everyone = rings made of whoever is online, in their colours (same as the artists room)
+  function rings(size) {
+    const ids = IDS.filter((id) => online.has(id));
+    const n = Math.max(ids.length, 1), step = 40 / (n + 0.6);
+    let svg = '<svg viewBox="0 0 80 80" aria-hidden="true">';
+    ids.forEach((id, k) => { svg += '<circle cx="40" cy="40" r="' + (40 - k * step).toFixed(2) + '" style="fill:var(--c-' + id + ')"/>'; });
+    svg += '<circle cx="40" cy="40" r="' + (40 - n * step).toFixed(2) + '" style="fill:var(--surface)"/></svg>';
+    const a = el('span', 'group-av'); a.style.width = a.style.height = size + 'px'; a.innerHTML = svg; return a;
+  }
+  const GROUP_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+
+  const order = IDS.slice().sort(() => Math.random() - .5);
+  const online = new Set(order.slice(0, 5));
+  const state = { view: 'group', busy: false };
+  const threads = {};
+  const app = $('#app'), msgsEl = $('#msgs');
+  let rounds = 0, ninoShown = false;
+
+  // ---------- threads ----------
+  function thread(view) {
+    if (threads[view]) return threads[view];
+    const t = el('div'); t.style.display = 'contents'; threads[view] = t;
+    if (view === 'group') {
+      const intro = el('div', 'intro');
+      intro.innerHTML = '<h2 class="lock"><span class="thin">What would</span><span class="thick">{{THICK}}</span> <span class="tail">do?</span></h2>';
+      intro.appendChild(el('p', null, {{INTRO}}));
+      t.appendChild(intro);
+    } else {
+      t.appendChild(el('p', 'sys', 'A private chat with ' + A[view].name + '. Still parody.'));
+      if (online.has(view)) { say(t, view, [A[view].hi], false); t._hi = true; }
+    }
+    return t;
+  }
+  function show(view) {
+    msgsEl.innerHTML = ''; msgsEl.classList.toggle('dm', view !== 'group'); msgsEl.appendChild(thread(view));
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }
+  let lastSpeaker = null;
+  function say(t, id, lines, animate, opts) {
+    opts = opts || {};
+    const g = tint(el('div', 'say'), id);
+    g.style.animation = animate ? '' : 'none';
+    g.appendChild(face(id, 34, false));
+    const nm = el('p', 'nm f-' + id, A[id].name);
+    if (opts.cut) { nm.appendChild(document.createTextNode(' ')); nm.appendChild(el('em', null, 'cutting in')); }
+    g.appendChild(nm);
+    lines.forEach((line) => { const b = el('div', 'bub f-' + id + (opts.cut ? ' cut' : ''), line); if (!animate) b.style.animation = 'none'; g.appendChild(b); });
+    t.appendChild(g); return g;
+  }
+  function typingRow(t, id) {
+    const g = tint(el('div', 'say'), id);
+    g.appendChild(face(id, 34, false)); g.appendChild(el('p', 'nm', A[id].short));
+    const b = el('div', 'bub typing'); b.setAttribute('aria-label', A[id].short + ' is typing'); b.innerHTML = '<i></i><i></i><i></i>';
+    g.appendChild(b); t.appendChild(g); return g;
+  }
+  function me(t, text) { const m = el('div', 'me', text); t.appendChild(m); return m; }
+  function sys(t, text) { t.appendChild(el('p', 'sys', text)); }
+  const near = () => msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight < 140;
+  const toBottom = () => { msgsEl.scrollTop = msgsEl.scrollHeight; };
+
+  // ---------- list ----------
+  function renderList() {
+    const rg = $('#row-group'); rg.innerHTML = '';
+    const ga = rings(52);
+    const t = el('span', 'tx'); t.append(el('b', null, 'Everyone'), el('span', null, 'Group chat · ' + online.size + ' online'));
+    rg.append(ga, t); rg.setAttribute('aria-current', state.view === 'group');
+    const grid = $('#grid'); grid.innerHTML = '';
+    const sorted = IDS.slice().sort((a, b) => (online.has(b) - online.has(a)));
+    sorted.forEach((id) => {
+      const b = tint(el('button', 'tile'), id); b.type = 'button';
+      b.append(face(id, 72, true), el('b', null, A[id].short), el('span', 'st', online.has(id) ? A[id].on : 'Away, ' + A[id].off));
+      b.setAttribute('aria-current', state.view === id);
+      b.setAttribute('aria-label', A[id].name + (online.has(id) ? ', online' : ', away') + '. Message privately.');
+      b.onclick = () => go(id);
+      grid.appendChild(b);
+    });
+  }
+  function renderHead() {
+    const w = $('#who'); w.innerHTML = '';
+    const t = el('div', 'tx');
+    if (state.view === 'group') {
+      t.append(el('b', null, '{{THICK}}'), el('span', null, online.size + ' online'));
+      w.append(rings(40), t);
+    } else {
+      const id = state.view;
+      t.append(el('b', null, A[id].name), el('span', null, (online.has(id) ? 'Online · ' + A[id].on : 'Away · ' + A[id].off)));
+      w.append(face(id, 40, true), t);
+    }
+    $('#q').placeholder = state.view === 'group' ? 'Ask the afterlife anything…' : 'Message ' + A[state.view].short + '…';
+  }
+  function go(view) {
+    state.view = view; closeSheets();
+    app.dataset.show = 'chat';
+    renderHead(); renderList(); show(view);
+    if (view !== 'group' && !online.has(view)) {
+      setTimeout(() => {
+        if (state.view !== view || online.has(view)) return;
+        setOnline(view, true);
+        const t = thread(view); sys(t, A[view].short + ' saw you knocking and came online.');
+        if (!t._hi) { t._hi = true; say(t, view, [A[view].hi], true); }
+        toBottom();
+      }, 1100);
+    }
+  }
+  $('#row-group').onclick = () => go('group');
+  $('#back').onclick = () => { app.dataset.show = 'list'; renderList(); };
+
+  // ---------- presence ----------
+  function setOnline(id, on) {
+    if (online.has(id) === on) return;
+    if (on) online.add(id); else online.delete(id);
+    renderList(); renderHead();
+  }
+  function presenceTick() {
+    const keep = new Set([state.view]);
+    const canLeave = [...online].filter((id) => !keep.has(id));
+    const away = IDS.filter((id) => !online.has(id));
+    if (online.size > 4 && canLeave.length && (online.size >= 7 || Math.random() < .5)) setOnline(canLeave[Math.floor(Math.random() * canLeave.length)], false);
+    else if (away.length) setOnline(away[Math.floor(Math.random() * away.length)], true);
+    setTimeout(presenceTick, 10000 + Math.random() * 9000);
+  }
+  setTimeout(presenceTick, 8000);
+
+  // ---------- asking ----------
+  const ALIAS = {{ALIAS}};
+  function responders(text) {
+    const out = IDS.filter((id) => ALIAS[id].test(text)).slice(0, 3);
+    const pool = [...online].sort(() => Math.random() - .5).concat(IDS.filter((id) => !online.has(id)).sort(() => Math.random() - .5));
+    for (const id of pool) { if (out.length >= 3) break; if (!out.includes(id)) out.push(id); }
+    return out;
+  }
+  function pickBanter(answered) {
+    const ok = BANTER.filter(([from, to]) => !answered.includes(from) && (to === null || answered.includes(to)));
+    return ok.length ? ok[Math.floor(Math.random() * ok.length)] : null;
+  }
+  // Follow the conversation: show each new reply from its first line. Stop following once the reader scrolls.
+  let following = true;
+  ['wheel', 'touchmove'].forEach((ev) => msgsEl.addEventListener(ev, () => { if (state.busy) following = false; }, { passive: true }));
+  function reveal(node) {
+    if (!following || !node) return;
+    const r = node.getBoundingClientRect(), m = msgsEl.getBoundingClientRect();
+    const tall = r.height > m.height - 48;
+    const dy = tall ? r.top - m.top - 12 : r.bottom - m.bottom + 14;
+    if (dy > 0) msgsEl.scrollBy({ top: dy, behavior: 'smooth' });
+  }
+  async function reply(t, id, lines, opts) {
+    const ty = typingRow(t, id); reveal(ty);
+    await wait(700 + Math.min(lines.join(' ').length * 6, 1500));
+    ty.remove(); reveal(say(t, id, lines, true, opts));
+    await wait(Math.min(400 + lines.join(' ').length * 18, 3800));
+  }
+  async function ask(textIn) {
+    const q = $('#q');
+    const text = (textIn != null ? textIn : q.value).trim();
+    closeSheets();
+    if (!text || state.busy) return;
+    q.value = ''; autosize(); $('#send').disabled = true; state.busy = true;
+    const topic = topicOf(text);
+    const view = state.view, t = thread(view);
+    following = true; me(t, text); toBottom();
+    if (view === 'group') {
+      const who = responders(text);
+      for (const id of who) { if (!online.has(id)) { setOnline(id, true); sys(t, A[id].short + ' joined the chat'); } }
+      for (const id of who) { await reply(t, id, linesFor(id, topic)); await wait(250); }
+      if (topic !== 'crisis' && topic !== 'greet' && Math.random() < 0.6) {
+        const b = pickBanter(who);
+        if (b) { if (!online.has(b[0])) setOnline(b[0], true); await reply(t, b[0], [b[2]], { cut: true }); }
+      }
+      rounds++;
+      if (rounds === 2 && !ninoShown) { ninoShown = true; await wait(700); ninoMsg(t); reveal(t.lastElementChild); }
+    } else {
+      t._hi = true; setOnline(view, true);
+      await reply(t, view, linesFor(view, topic));
+    }
+    state.busy = false; $('#send').disabled = !q.value.trim();
+  }
+
+  // ---------- the living one ----------
+  const NINO_LINKS = {{LINKS}};
+  function ninoMsg(t) {
+    const g = el('div', 'say'); g.style.setProperty('--tc', 'var(--red)');
+    const w = el('span', 'avw'); w.style.width = w.style.height = '34px'; w.appendChild(el('span', 'nino-av', 'N'));
+    g.append(w, el('p', 'nm', 'Nino Yuniardi · alive'));
+    {{NINO_CHAT}}.forEach((l) => g.appendChild(el('div', 'bub', l)));
+    const links = el('div', 'links');
+    NINO_LINKS.forEach(([label, href]) => { const a = el('a', null, label); a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } links.appendChild(a); });
+    g.appendChild(links); t.appendChild(g);
+  }
+
+  // ---------- sheets ----------
+  function closeSheets() { document.querySelectorAll('.scrim').forEach((s) => s.remove()); }
+  function sheet(label) {
+    closeSheets();
+    const scrim = el('div', 'scrim'); scrim.onclick = (e) => { if (e.target === scrim) closeSheets(); };
+    const s = el('div', 'sheet'); s.setAttribute('role', 'dialog'); s.setAttribute('aria-modal', 'true'); s.setAttribute('aria-label', label);
+    scrim.appendChild(s); app.appendChild(scrim); return s;
+  }
+  function openQMenu() {
+    const s = sheet('Pick a question');
+    const row = el('div', 'row');
+    const sur = el('button', 'surprise', 'Surprise me'); sur.type = 'button';
+    sur.onclick = () => { const all = QMENU.flatMap((g) => g[1]); ask(all[Math.floor(Math.random() * all.length)]); };
+    row.append(el('h2', null, state.view === 'group' ? 'Ask the afterlife' : 'Ask ' + A[state.view].short), sur);
+    s.append(row, el('p', 'sub', 'Pick one, or close this and type your own.'));
+    QMENU.forEach(([label, qs]) => {
+      s.appendChild(el('h3', null, label));
+      const c = el('div', 'qchips');
+      qs.forEach((qq) => { const b = el('button', 'chip', qq); b.type = 'button'; b.onclick = () => ask(qq); c.appendChild(b); });
+      s.appendChild(c);
+    });
+  }
+  function openAbout() {
+    const s2 = sheet('About Nino Studio'); s2.classList.add('ns');
+    const x = el('button', 'ns-close'); x.type = 'button'; x.setAttribute('aria-label', 'Back to the chat'); x.onclick = closeSheets;
+    x.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+    s2.appendChild(x);
+    s2.appendChild(el('p', 'ns-eyebrow', 'Nino Studio · Seattle'));
+    s2.appendChild(el('h2', null, {{ABOUT_H}}));
+    s2.appendChild(el('p', 'ns-sub', 'The only one in this chat with a pulse.'));
+    {{ABOUT_BODY}}.forEach((p) => s2.appendChild(el('p', 'ns-body', p)));
+    const ctas = el('div', 'ns-ctas');
+    NINO_LINKS.forEach(([label, href]) => {
+      const a = el('a', null, label); a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } ctas.appendChild(a);
+    });
+    s2.appendChild(ctas);
+    const fine = el('div', 'ns-fine');
+    fine.appendChild(el('p', 'ns-eyebrow', 'The fine print'));
+    {{FINE}}.forEach((p) => fine.appendChild(el('p', null, p)));
+    s2.appendChild(fine);
+    ctas.querySelector('a').focus();
+  }
+  document.querySelectorAll('.about-btn').forEach((b) => { b.onclick = openAbout; });
+  $('#plus').onclick = openQMenu;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheets(); });
+
+  // ---------- composer ----------
+  const q = $('#q');
+  function autosize() { q.style.height = 'auto'; q.style.height = Math.min(q.scrollHeight, 120) + 'px'; }
+  q.addEventListener('input', () => { autosize(); $('#send').disabled = !q.value.trim() || state.busy; });
+  q.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(); } });
+  $('#send').onclick = () => ask();
+  STARTERS.forEach((s) => { const b = el('button', 'chip', s); b.type = 'button'; b.onclick = () => ask(s); $('#chips').appendChild(b); });
+
+  // ---------- opening: the group chat is already going ----------
+  const g0 = thread('group');
+  const sampleQ = {{SAMPLE_Q}}, sampleT = {{SAMPLE_T}};
+  const first = [...online].slice(0, 3);
+  me(g0, sampleQ);
+  first.forEach((id) => { seenT[id + ':' + sampleT] = 1; const sv = L[id][sampleT]; say(g0, id, (Array.isArray(sv[0]) ? sv[0] : sv).slice(), false); });
+  const b0 = pickBanter(first);
+  if (b0) { online.add(b0[0]); say(g0, b0[0], [b0[2]], false, { cut: true }); }
+  if (window.matchMedia('(min-width: 900px)').matches) app.dataset.show = 'chat';
+  renderHead(); renderList(); show('group');
+  msgsEl.scrollTop = 0;
+})();
+</script>
+</body>
+</html>
