@@ -448,6 +448,9 @@ button { font: inherit; color: inherit; }
 .card.nino .nino-links a { background: color-mix(in srgb, var(--ink) 7%, var(--surface)); }
 .card.nino .nino-links a:first-child { background: var(--ink); color: var(--stage); }
 .mast .title .thick { letter-spacing: -0.02em; }
+.mast { max-height: var(--h, 170px); }
+.subtitle { margin: 8px 0 0; font-family: var(--thin); font-style: italic; font-size: 17px; line-height: 1.2; color: var(--band-muted); }
+@media (min-width: 1000px) { .subtitle { font-size: 19px; } }
 .card-f .btn.solid, .card-f .btn.link, .card-f .btn:last-child:not(:first-child) { background: none !important; border: 0; color: #c2571a; padding-left: 0; padding-right: 0; min-height: 36px; font-weight: 700; }
 .card-f .btn.solid:hover, .card-f .btn:last-child:not(:first-child):hover { background: none !important; color: #a3460f; text-decoration: underline; text-underline-offset: 4px; }
 .card.aside { background: color-mix(in srgb, var(--tc) 28%, var(--surface)); border: 1.5px dashed color-mix(in srgb, var(--ink) 35%, var(--tc)); }
@@ -502,6 +505,7 @@ button { font: inherit; color: inherit; }
   <div class="band">
     <header class="mast gut">
       <h1 class="title"><span class="thin">What would</span><span class="thick"><span class="dead">Dead</span> Designers</span> <span class="tail">do?</span></h1>
+      <p class="subtitle">Advice from the afterlife, by the greats.</p>
       <span class="live"><i></i><span id="live-n">4</span>&nbsp;online</span>
     </header>
     <nav class="cast gut" id="cast" aria-label="Designers. Tap one to message them privately."></nav>
