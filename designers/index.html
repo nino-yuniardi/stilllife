@@ -482,6 +482,16 @@ button { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .cloud, .eyes, .live i, .who, .who.typing .av, .dove *, .dots i, .card, .msg, .ink { animation: none !important; }
 }
+
+/* ---------- simpler layout ---------- */
+.qline .eyebrow { display: none !important; }
+.card-h .mini { display: none; }
+.card-h { padding-bottom: 8px; }
+.card-h .label { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 13px; }
+@media (max-width: 719px) {
+  .qline .nudge { display: none !important; }
+  .meta .fine { font-size: 11px; }
+}
 </style>
 
 <script defer src="/_vercel/insights/script.js"></script>
@@ -1438,7 +1448,7 @@ button { font: inherit; color: inherit; }
     const t = el('div');
     if (opts.aside) t.appendChild(el('span', 'cutin', 'Cutting in'));
     t.appendChild(el('h3', null, a.name));
-    t.appendChild(el('p', 'label', a.origin + ', ' + a.years));
+    t.appendChild(el('p', 'label', a.years));
     head.append(mini(id), t);
     const body = el('div', 'card-b');
     const foot = el('div'); foot.hidden = true;
