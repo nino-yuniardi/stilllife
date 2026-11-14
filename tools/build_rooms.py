@@ -55,12 +55,12 @@ ROOMS = {
         about_h='Made by a living artist.',
         about_body=['I’m Nino, a painter in Seattle. I made this because the greats figured out creative life the hard way. You don’t have to.', 'Want feedback from a living artist? Come paint with us.'],
         fine=['This is a comedy. These artists never said any of this. The jokes are built on real facts from their lives, but every word is made up.', 'Please don’t quit your job, cut off an ear or tape fruit to a wall because a dead painter told you to. Nothing here is professional, financial, legal or medical advice.'],
-        # a soft Seattle sky, the artists room's own colours
+        # a warm paper ground, the artists room's own colours
         theme=dict(
-            light='--bg: #e9eef1; --surface: #fbfcfc; --ink: #16181a; --muted: #5d666c; --line: #d3dce1;',
-            dark='--bg: #12171a; --surface: #1a2126; --ink: #eef1f2; --muted: #a3adb3; --line: #2b3439;',
+            light='--bg: #f3eee6; --surface: #fdfbf7; --ink: #1a1714; --muted: #655d53; --line: #e0d7ca;',
+            dark='--bg: #171412; --surface: #221d19; --ink: #f2eeea; --muted: #b1a79c; --line: #352d27;',
             colors='--c-vg: #d4a849; --c-pp: #6f8fa8; --c-cm: #8fa77f; --c-fk: #d2826b;\n  --c-aw: #cf93a6; --c-sd: #a5543f; --c-jp: #a8a29a; --c-br: #4f735c;',
-            meta='#e9eef1',
+            meta='#f3eee6',
         ),
     ),
 }

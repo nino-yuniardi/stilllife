@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>What Would Dead Artists Do?</title>
 <meta name="description" content="A group chat with the art greats. Van Gogh, Frida, Picasso, Monet and friends answer from the afterlife. A parody by Nino Studio.">
-<meta name="theme-color" content="#e9eef1">
+<meta name="theme-color" content="#f3eee6">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What Would Dead Artists Do?">
 <meta property="og:description" content="A group chat with the art greats. A parody by Nino Studio.">
@@ -16,18 +16,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 :root {
-  --bg: #e9eef1; --surface: #fbfcfc; --ink: #16181a; --muted: #5d666c; --line: #d3dce1;
+  --bg: #f3eee6; --surface: #fdfbf7; --ink: #1a1714; --muted: #655d53; --line: #e0d7ca;
   --red: #d0312d; --orange: #c2571a; --online: #8fb982;
   --ui: "Inter", system-ui, sans-serif;
   --thick: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
   --thin: "Instrument Serif", Georgia, serif;
   --c-vg: #d4a849; --c-pp: #6f8fa8; --c-cm: #8fa77f; --c-fk: #d2826b;
   --c-aw: #cf93a6; --c-sd: #a5543f; --c-jp: #a8a29a; --c-br: #4f735c;
-  --bub: 20%;
+  --bub: 36%;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #12171a; --surface: #1a2126; --ink: #eef1f2; --muted: #a3adb3; --line: #2b3439; --orange: #f08a4b; --bub: 24%;
+  --bg: #171412; --surface: #221d19; --ink: #f2eeea; --muted: #b1a79c; --line: #352d27; --orange: #f08a4b; --bub: 32%;
   color-scheme: dark;
 } }
 * { box-sizing: border-box; }
@@ -114,7 +114,7 @@ p { text-wrap: pretty; }
 .say .nm { grid-column: 2; font-size: 12px; font-weight: 700; color: var(--muted); margin: 0 0 4px 12px; }
 .msgs.dm .say .nm { display: none; }
 .say .nm em { font-style: normal; font-weight: 500; }
-.bub { grid-column: 2; justify-self: start; max-width: min(90%, 520px); margin-bottom: 3px; padding: 11px 15px; border-radius: 20px; background: color-mix(in srgb, var(--tc) var(--bub), var(--surface)); line-height: 1.38; font-size: 16px; animation: rise .35s cubic-bezier(.3,1.3,.5,1) both; }
+.bub { grid-column: 2; justify-self: start; max-width: min(90%, 520px); margin-bottom: 3px; padding: 11px 15px; border-radius: 20px; background: color-mix(in srgb, var(--tc) var(--bub), var(--surface)); border: 1px solid color-mix(in srgb, var(--tc) 58%, var(--bg)); line-height: 1.38; font-size: 16px; animation: rise .35s cubic-bezier(.3,1.3,.5,1) both; }
 .bub:last-child { border-bottom-left-radius: 6px; }
 .bub.cut { background: none; border: 1.5px dashed color-mix(in srgb, var(--ink) 30%, var(--tc)); }
 .typing { display: inline-flex; gap: 4px; padding: 15px 16px; }
