@@ -48,6 +48,10 @@ p { text-wrap: pretty; }
   .app .list, .app .chat { display: flex !important; }
   .list { flex: 0 0 340px; border-right: 1px solid var(--line); }
   .back { display: none !important; }
+  /* the title already sits at the top of the list, so don't repeat it in the chat */
+  .intro .lock { display: none; }
+  .intro { padding: 0 0 6px; text-align: center; }
+  .intro p { margin: 0 auto; }
 }
 
 /* ---------- avatars ---------- */
